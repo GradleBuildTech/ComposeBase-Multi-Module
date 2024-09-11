@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = libs.plugins.mainNamespace.get().toString()
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk =libs.versions.compileSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -61,5 +61,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Retrofit
+    implementation(libs.retrofit.core)
+
+    //Navigation
+    implementation(libs.compose.navigation)
+
+    //moshi
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi.kotlin.codegen)
 
 }

@@ -13,9 +13,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Duration
 import javax.inject.Singleton
 
+
+///✨===============================================
+///[NetworkModule] provides the [Retrofit] instance.
+///This is used to provide the [Retrofit] instance in the [NetworkModule].
+///✨===============================================
+
 @Module
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
+
+    ///[provideRetrofit] provides the [Retrofit] instance.
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
@@ -25,6 +33,7 @@ internal object NetworkModule {
             .build()
     }
 
+    ///[providesHttpClient] provides the [OkHttpClient] instance.
     @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
@@ -38,6 +47,7 @@ internal object NetworkModule {
             .build()
     }
 
+    ///[providesLoggingInterceptor] provides the [HttpLoggingInterceptor] instance.
     @Singleton
     @Provides
     fun providesLoggingInterceptor(): HttpLoggingInterceptor {
