@@ -1,6 +1,9 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id(libs.plugins.daggerHilt.get().toString())
+    id(libs.plugins.ksp.get().toString())
+
 }
 
 android {
@@ -36,6 +39,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":network"))
+
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -43,4 +51,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Retrofit
+    implementation(libs.retrofit.core)
+
+    //moshi
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi.kotlin.codegen)
 }
