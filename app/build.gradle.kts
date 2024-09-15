@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+//    val properties = projectConfigurations()
     namespace = libs.plugins.mainNamespace.get().toString()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
@@ -20,6 +21,14 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+//        projectConfigurations.forEach {p ->
+//            buildConfigField("String", p.key, "\"${p.value}\"")
+//        }
+//        projectConfigurations().forEach { key, value ->
+//            buildConfigField("String", key.toString(), "\"${value}\"")
+//        }
+
     }
 
     buildTypes {
@@ -30,7 +39,25 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
     }
+    flavorDimensions += "env"
+    productFlavors {
+        ///[dev, prod] -> foreach
+//        repeat(listOf("dev", "prod").size) {
+//            create(listOf("dev", "prod")[it]) {
+//                dimension = "env"
+//                applicationIdSuffix = ".${listOf("dev", "prod")[it]}"
+//                versionNameSuffix = "-${listOf("dev", "prod")[it]}"
+//                buildConfigField("String", "BASE_URL", "\"${properties["BASE_URL"]}\"")
+//            }
+//        }
+    }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

@@ -1,7 +1,6 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 //buildScript {
-//    apply(from = "functions.gradle.kts")
 //    apply(from = "variables.gradle.kts")
 
 
@@ -9,6 +8,10 @@
 //    extra["compose_ui_version"] = "1.3.3"
 //
 //}
+
+buildscript {
+    apply(from = "functions.gradle.kts")
+}
 
 plugins {
     id("com.android.application") version "8.5.1" apply false

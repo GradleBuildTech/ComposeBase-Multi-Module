@@ -25,10 +25,9 @@ val getCurrentFlavor: () -> String = {
     flavor
 }
 
-val computeVersionName: (Int, Int, Int) -> String = { major, minor, patch ->
-    "%d.%d.%d".format(major, minor, patch)
+
+val projectConfigurations: () -> Properties = {
+    val getCurrentFlavor = getCurrentFlavor()
+    loadPropertiesFromFile("$getCurrentFlavor.properties")
 }
 
-val computeVersionCode: (Int, Int, Int) -> Int = { major, minor, patch ->
-    (major * 1000000) + (minor * 100000) + (patch * 10000)
-}
