@@ -1,16 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id(libs.plugins.ksp.get().toString())
+    id(libs.plugins.daggerHilt.get().toString())
 }
 
 android {
-    namespace = "com.example.navigation"
-    compileSdk = 34
+    namespace = libs.plugins.mainNamespace.get().toString()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.example.navigation"
-        minSdk = 24
-        targetSdk = 34
+        applicationId = libs.plugins.mainNamespace.get().toString()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +38,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":auth"))
+    implementation(project(":core"))
+
+    //Region D.I Dependency Injection
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.core)
+
+    implementation(libs.compose.navigation)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
