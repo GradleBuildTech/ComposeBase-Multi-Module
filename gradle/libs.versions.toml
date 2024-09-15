@@ -19,6 +19,8 @@ composeBom = "2024.04.01"
 appcompat = "1.6.1"
 material = "1.10.0"
 kotlinCompilerExtensionVersion = "1.5.1"
+kotlinGradlePluginVersion = "1.8.20"
+toolsBuildGradleVersion = "8.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +46,9 @@ retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "ret
 retrofit-moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 retrofit-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+#org.jetbrains.kotlin:kotlin-graddle-plugin
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePluginVersion" }
+toolsBuildGradle = { module = "com.android.tools.build:gradle", version.ref = "toolsBuildGradleVersion" }
 
 pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "pager" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
@@ -58,6 +63,8 @@ networkNamespace = { id = "com.example.network" }
 authNamespace = { id = "com.example.auth" }
 coreNamesSpace = { id = "com.example.core" }
 navigationNameSpace = { id = "com.example.navigation" }
+buildMainGradleNameSpace = { id = "com.example.buildMainGradle" }
+guardNameSpace = { id = "com.example.guard" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }
@@ -65,4 +72,5 @@ ksp = { id = "com.google.devtools.ksp" }
 
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 

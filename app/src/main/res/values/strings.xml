@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ComposeBase</string>
+    <string name="title_features">Module Title</string>
 </resources>
