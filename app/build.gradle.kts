@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
     packaging {
         resources {
@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":navigation"))
+    implementation(project(":auth"))
+
 
     //region D.I Dependency Injection
     ksp(libs.hilt.compiler)
