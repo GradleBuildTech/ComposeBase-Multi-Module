@@ -3,11 +3,13 @@ package com.example.network.di
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.core.utils.Constants
+import com.example.network.interceptor.TokenInterceptor
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,6 +28,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
 
+    ///[headerInterceptor] is an [Interceptor] that adds the header to the request.
+    ///This is used to add the header to the request.
+    /// Example: Content-Type: application/json,
+    /// Special Auth => Implement in TokenInterceptor
+    private val _headerInterceptor = Interceptor { chain ->
+        val original = chain.request()
+
+        val request = original.newBuilder()
+            .header("Content-Type", "application/json")
+            .method(original.method, original.body)
+            .build()
+
+        chain.proceed(request)
+    }
+
+
     ///[provideRetrofit] provides the [Retrofit] instance.
     @Singleton
     @Provides
@@ -42,15 +60,20 @@ internal object NetworkModule {
     @Singleton
     @Provides
     fun providesHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        tokenInterceptor: TokenInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(_headerInterceptor)
+            .addInterceptor(tokenInterceptor)
             .addNetworkInterceptor(loggingInterceptor)
             .connectTimeout(Duration.ofSeconds(30))
             .readTimeout(Duration.ofSeconds(30))
             .build()
     }
 
+    ///[moshi] provides the [Moshi] instance.
+    ///This is used to provide the [Moshi] instance. => Code converter
     @Singleton
     @Provides
     fun moshi(): Moshi {

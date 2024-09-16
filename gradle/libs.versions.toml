@@ -68,12 +68,14 @@ coreNamesSpace = { id = "com.example.core" }
 navigationNameSpace = { id = "com.example.navigation" }
 buildMainGradleNameSpace = { id = "com.example.buildMainGradle" }
 guardNameSpace = { id = "com.example.guard" }
+localNameSpace = { id = "com.example.local" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }
 ksp = { id = "com.google.devtools.ksp" }
 
 android-application = { id = "com.android.application", version.ref = "agp" }
+#noinspection SimilarGradleDependency
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 
