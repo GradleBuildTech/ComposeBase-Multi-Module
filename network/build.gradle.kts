@@ -42,9 +42,15 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.core)
 
+    //Moshi
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
+
     //Retrofit
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.retrofit.core)
+    implementation(libs.retrofit.moshi.converter)
     implementation(libs.retrofit.gson.converter)
 
     implementation(libs.androidx.core.ktx)

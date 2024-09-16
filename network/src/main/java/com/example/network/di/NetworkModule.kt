@@ -3,6 +3,7 @@ package com.example.network.di
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.core.utils.Constants
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.Duration
 import javax.inject.Singleton
 
@@ -27,9 +29,10 @@ internal object NetworkModule {
     ///[provideRetrofit] provides the [Retrofit] instance.
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -48,6 +51,12 @@ internal object NetworkModule {
             .build()
     }
 
+    @Singleton
+    @Provides
+    fun moshi(): Moshi {
+        return Moshi.Builder().build()
+    }
+
     ///[providesLoggingInterceptor] provides the [HttpLoggingInterceptor] instance.
     @Singleton
     @Provides
@@ -56,4 +65,5 @@ internal object NetworkModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
+
 }

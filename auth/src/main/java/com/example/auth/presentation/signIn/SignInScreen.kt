@@ -11,7 +11,6 @@ import com.example.auth.presentation.signIn.controller.SignInViewModel
 fun SignInScreen(
     signInViewModel: SignInViewModel = hiltViewModel()
 ) {
-
     Box(modifier = Modifier.fillMaxSize()) {
         // SignInContent()
     }
