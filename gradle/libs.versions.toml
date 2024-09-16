@@ -4,6 +4,7 @@ kotlin = "1.9.0"
 minSdk = "24"
 compileSdk = "34"
 hilt = "2.47"
+hiltNavigationCompose = "1.1.0"
 okhttp = "4.10.0"
 moshi = "1.14.0"
 retrofit = "2.9.0"
@@ -41,6 +42,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 hilt-core = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
@@ -57,6 +59,7 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+#noinspection SimilarGradleDependency
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 mainNamespace = { id = "com.example.composebase" }
 networkNamespace = { id = "com.example.network" }
