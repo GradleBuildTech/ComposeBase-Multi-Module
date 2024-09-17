@@ -1,6 +1,8 @@
 package com.example.network.extensions
 
 import com.example.core.models.GenericException
+import com.example.core.models.error.ErrorCode
+import com.example.core.models.response.DataResponse
 import retrofit2.Response
 
 
@@ -21,13 +23,26 @@ fun <T> Response<T>.handleResponse(): T {
 /**
  * Handle the API call
  */
-suspend fun <T> handleCall(call: suspend () -> Response<T>): T {
+inline fun <reified T> handleCall(call: () -> Response<T>): DataResponse<T> {
     return try {
-        call.invoke().handleResponse()
+        call.invoke().handReturnDatResponse()
     } catch (e: Exception) {
-        throw GenericException(
-            message = e.message,
-            hasUserFriendlyMessage = false
+        DataResponse.Error(
+            errorCode = ErrorCode.DEFAULT,
+            message = e.message
         )
     }
 }
+
+inline fun <reified T> Response<T>.handReturnDatResponse(): DataResponse<T> {
+    return when (this) {
+        is T -> DataResponse.Success(this)
+        else -> {
+            DataResponse.Error(
+                code = this.code(),
+                message = this.message()
+            )
+        }
+    }
+}
+

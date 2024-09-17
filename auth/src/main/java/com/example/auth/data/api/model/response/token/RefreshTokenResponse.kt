@@ -1,4 +1,4 @@
-package com.example.auth.data.api.model
+package com.example.auth.data.api.model.response.token
 
 import android.media.session.MediaSession.Token
 import com.squareup.moshi.JsonClass
