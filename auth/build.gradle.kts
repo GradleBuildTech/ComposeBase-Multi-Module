@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
+    implementation(project(":local"))
 
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.core)

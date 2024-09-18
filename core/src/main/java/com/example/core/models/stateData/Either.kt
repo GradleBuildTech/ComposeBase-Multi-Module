@@ -7,6 +7,6 @@ sealed class Either<out L, out R> {
     fun isLeft(): Boolean = this is Left<L>
     fun isRight(): Boolean = this is Right<R>
 
-    fun <L> leftValue(): Any? = (this as? Left<*>)?.value
-    fun <R> rightValue(): Any? = (this as? Right<*>)?.value
+    fun <L> leftValue(): L? = (this as? Left<L>)?.value
+    fun <R> rightValue(): R? = (this as? Right<R>)?.value
 }

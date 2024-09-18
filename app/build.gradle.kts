@@ -83,6 +83,7 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":navigation"))
     implementation(project(":auth"))
+    implementation(project(":local"))
 
 
     //region D.I Dependency Injection

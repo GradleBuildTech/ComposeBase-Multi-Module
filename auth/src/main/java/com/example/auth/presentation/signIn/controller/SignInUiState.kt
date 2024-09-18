@@ -4,5 +4,6 @@ import javax.annotation.concurrent.Immutable
 
 @Immutable
 data class SigInUiState(
-    val state: SignInStateData
+    val state: SignInStateData,
+    val errorMessage: String = ""
 )
