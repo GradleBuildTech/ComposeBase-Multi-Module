@@ -4,6 +4,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TokenResponse(
-    val access: ChildToModel?,
-    val refresh: ChildToModel?
+    var access: ChildToModel? = null,
+    var refresh: ChildToModel? = null
 )

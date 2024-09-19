@@ -1,5 +1,6 @@
 package com.example.network.extensions
 
+import android.util.Log
 import com.example.core.models.GenericException
 import com.example.core.models.error.ErrorCode
 import com.example.core.models.response.DataResponse
@@ -27,6 +28,7 @@ inline fun <reified T> handleCall(call: () -> Response<T>): DataResponse<T> {
     return try {
         call.invoke().handReturnDatResponse()
     } catch (e: Exception) {
+        Log.d("handleCall", e.message.toString())
         DataResponse.Error(
             errorCode = ErrorCode.DEFAULT,
             message = e.message

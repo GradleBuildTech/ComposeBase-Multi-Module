@@ -33,7 +33,7 @@ abstract class StateAndEventViewModel<UiState, Event>(initialState: UiState) : V
         _uiState.update { _uiState.value.update() }
     }
 
-    protected fun setEvent(event: Event) {
+    fun onEvent(event: Event) {
         viewModelScope.launch { events.emit(event) }
     }
 }

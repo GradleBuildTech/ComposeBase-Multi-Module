@@ -2,6 +2,8 @@ package com.example.network.di
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.core.models.moshi.MyKotlinJsonAdapterFactory
+import com.example.core.models.moshi.MyStandardJsonAdapters
 import com.example.core.utils.Constants
 import com.example.network.interceptor.TokenInterceptor
 import com.squareup.moshi.Moshi
@@ -43,15 +45,14 @@ internal object NetworkModule {
         chain.proceed(request)
     }
 
-
     ///[provideRetrofit] provides the [Retrofit] instance.
     @Singleton
     @Provides
-    fun provideRetrofit(moshi: Moshi): Retrofit {
+    fun provideRetrofit(moshi: Moshi, providesHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(Constants.BASE_URL)
+            .client(providesHttpClient)
             .build()
     }
 
@@ -60,8 +61,8 @@ internal object NetworkModule {
     @Singleton
     @Provides
     fun providesHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        tokenInterceptor: TokenInterceptor
+        tokenInterceptor: TokenInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(_headerInterceptor)
@@ -77,7 +78,10 @@ internal object NetworkModule {
     @Singleton
     @Provides
     fun moshi(): Moshi {
-        return Moshi.Builder().build()
+        return Moshi.Builder()
+            .add(MyKotlinJsonAdapterFactory())
+            .add(MyStandardJsonAdapters.FACTORY)
+            .build()
     }
 
     ///[providesLoggingInterceptor] provides the [HttpLoggingInterceptor] instance.
