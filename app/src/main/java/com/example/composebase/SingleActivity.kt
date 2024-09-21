@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
 import com.example.auth.presentation.signIn.SignInScreen
 import com.example.composebase.ui.theme.ComposeBaseTheme
+import com.example.guard.auth.AuthGuardController
+import com.example.guard.auth.AuthStateData
 import com.example.navigation.AppNavigation
 import com.example.navigation.Navigator
 import com.example.navigation.graph.DetailScreens
@@ -17,9 +20,13 @@ class SingleActivity: ComponentActivity() {
     @Inject
     lateinit var navigator: Navigator
 
+    @Inject
+    lateinit var authGuardController: AuthGuardController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val autState = authGuardController.uiState.collectAsState()
             ComposeBaseTheme {
                 AppNavigation(
                     navigator = navigator,
@@ -27,7 +34,8 @@ class SingleActivity: ComponentActivity() {
                     detailScreensWithGraph = DetailScreens(
                         detailMain = { Text(text ="Detail main") },
                         detailSearch = { Text(text = "Detail search") }
-                    )
+                    ),
+                    isAuthState = autState.value.state == AuthStateData.AUTH
                 )
             }
         }

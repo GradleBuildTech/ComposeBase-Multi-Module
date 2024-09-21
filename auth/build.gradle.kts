@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     id(libs.plugins.daggerHilt.get().toString())
     id(libs.plugins.ksp.get().toString())
-
 }
 
 android {

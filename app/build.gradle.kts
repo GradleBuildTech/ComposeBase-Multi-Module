@@ -84,6 +84,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":auth"))
     implementation(project(":local"))
+    implementation(project(":guard"))
 
 
     //region D.I Dependency Injection

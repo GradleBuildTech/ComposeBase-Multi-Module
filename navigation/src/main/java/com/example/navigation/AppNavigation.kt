@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.collectLatest
 fun AppNavigation(
     navigator: Navigator,
     signInScreen: @Composable () -> Unit,
-    detailScreensWithGraph: DetailScreens
+    detailScreensWithGraph: DetailScreens,
+    isAuthState: Boolean = false
 ) {
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
@@ -28,6 +29,16 @@ fun AppNavigation(
             }
         }
     }
+
+    LaunchedEffect(key1 = isAuthState) {
+        if (isAuthState) {
+//            navController.navigate(Destination.detailMain.route)
+        } else {
+            navController.navigate(Destination.signIn.route)
+        }
+
+    }
+
 
     NavHost(
         navController = navController,
