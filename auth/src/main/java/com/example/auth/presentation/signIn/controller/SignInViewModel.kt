@@ -1,10 +1,10 @@
 package com.example.auth.presentation.signIn.controller
 
 import androidx.lifecycle.viewModelScope
-import com.example.auth.domain.model.Token
-import com.example.auth.domain.usecase.SignInUseCase
 import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
+import com.example.domain.model.Token
+import com.example.domain.usecase.auth.SignInUseCase
 import com.example.local.dataStore.TokenLocalService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -69,6 +69,8 @@ navigationNameSpace = { id = "com.example.navigation" }
 buildMainGradleNameSpace = { id = "com.example.buildMainGradle" }
 guardNameSpace = { id = "com.example.guard" }
 localNameSpace = { id = "com.example.local" }
+domainNameSpace = { id = "com.example.domain" }
+dataaNameSpace = { id = "com.example.data" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }
