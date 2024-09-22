@@ -6,12 +6,19 @@ plugins {
 
 }
 
+val configProperties = BuildConfig.projectConfigurations(project)
+
+
 android {
     namespace = libs.plugins.networkNamespace.get().toString()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
+
+        configProperties.forEach { key, value ->
+            buildConfigField("String", key.toString(), "\"${value}\"")
+        }
     }
 
     buildTypes {
@@ -23,6 +30,8 @@ android {
             )
         }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -32,6 +41,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

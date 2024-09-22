@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = libs.plugins.buildMainGradleNameSpace.get().toString()
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    namespace = "com.example.gradleconfig"
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,7 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.kotlinGradlePlugin)
-    implementation(libs.toolsBuildGradle)
 }

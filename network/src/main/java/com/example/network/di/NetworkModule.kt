@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import com.example.core.models.moshi.MyKotlinJsonAdapterFactory
 import com.example.core.models.moshi.MyStandardJsonAdapters
 import com.example.core.utils.Constants
+import com.example.network.BuildConfig
 import com.example.network.interceptor.TokenInterceptor
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -51,7 +52,7 @@ internal object NetworkModule {
     fun provideRetrofit(moshi: Moshi, providesHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(BuildConfig.API_URL)
             .client(providesHttpClient)
             .build()
     }
