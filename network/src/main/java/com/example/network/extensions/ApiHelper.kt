@@ -6,7 +6,6 @@ import com.example.core.models.error.ErrorCode
 import com.example.core.models.response.DataResponse
 import retrofit2.Response
 
-
 /**
  * Handle the response from the API
  */
@@ -37,14 +36,13 @@ inline fun <reified T> handleCall(call: () -> Response<T>): DataResponse<T> {
 }
 
 inline fun <reified T> Response<T>.handReturnDatResponse(): DataResponse<T> {
-    return when (this) {
-        is T -> DataResponse.Success(this)
-        else -> {
-            DataResponse.Error(
-                code = this.code(),
-                message = this.message()
-            )
-        }
+    return try {
+        DataResponse.Success(handleResponse())
+    } catch (e: Exception) {
+        DataResponse.Error(
+            errorCode = ErrorCode.DEFAULT,
+            message = e.message
+        )
     }
 }
 

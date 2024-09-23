@@ -1,5 +1,6 @@
 package com.example.auth.presentation.signIn
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,13 +27,11 @@ fun SignInScreen(
     LaunchedEffect(uiState) {
         when (uiState.state) {
             SignInStateData.SUCCESS -> {
-                // navigate to home
+                Log.d("SignInScreen", "Sign in success");
             }
-
             SignInStateData.ERROR -> {
-                // show error message
+                Log.d("SignInScreen", "Sign in error ${uiState.errorMessage}");
             }
-
             else -> {
                 // do nothing
             }

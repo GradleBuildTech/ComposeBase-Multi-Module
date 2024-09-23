@@ -40,7 +40,7 @@ class SignInViewModel @Inject constructor(
                         setUiState {
                             copy(
                                 state = SignInStateData.ERROR,
-                                errorMessage = errorMessage
+                                errorMessage = either.leftValue<Exception>()?.message ?: ""
                             )
                         }
                     }
