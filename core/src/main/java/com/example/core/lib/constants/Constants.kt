@@ -1,4 +1,4 @@
-package com.example.core.utils
+package com.example.core.lib.constants
 
 // Change to BuildConfig in the future
 object Constants {

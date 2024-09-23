@@ -1,6 +1,6 @@
 package com.example.core.di
 
-import com.example.core.utils.IODispatcher
+import com.example.core.lib.utils.IODispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

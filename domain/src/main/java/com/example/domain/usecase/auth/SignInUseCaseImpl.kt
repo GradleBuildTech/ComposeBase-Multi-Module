@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import com.example.core.models.response.mapper.mapAndConverterToStateData
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
-import com.example.core.utils.IODispatcher
+import com.example.core.lib.utils.IODispatcher
 import com.example.data.dataSource.auth.AuthDataSource
 import com.example.data.model.request.auth.SignInRequest
 import com.example.domain.mapper.toDomain

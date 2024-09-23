@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.core.models.moshi.MyKotlinJsonAdapterFactory
 import com.example.core.models.moshi.MyStandardJsonAdapters
-import com.example.core.utils.Constants
+import com.example.local.dataStore.TokenLocalService
 import com.example.network.BuildConfig
 import com.example.network.interceptor.TokenInterceptor
 import com.squareup.moshi.Moshi
@@ -16,7 +16,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.Duration
 import javax.inject.Singleton
@@ -94,4 +93,13 @@ internal object NetworkModule {
         }
     }
 
+    ///[provideTokenInterceptor] provides the [TokenInterceptor] instance.
+    @Singleton
+    @Provides
+    fun provideTokenInterceptor(
+        tokenLocalService: TokenLocalService,
+        moshi: Moshi
+    ): TokenInterceptor {
+        return TokenInterceptor(tokenLocalService, moshi)
+    }
 }
