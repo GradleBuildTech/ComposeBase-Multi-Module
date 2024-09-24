@@ -7,7 +7,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@RequiresApi(Build.VERSION_CODES.O)
 object DesignSystem {
     val INSIDE_PADDING = 16.dp
     val OUTSIDE_PADDING = 24.dp
