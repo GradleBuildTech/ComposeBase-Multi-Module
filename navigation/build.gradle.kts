@@ -38,8 +38,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":auth"))
     implementation(project(":core"))
+    implementation(project(":feat:auth"))
 
     //Region D.I Dependency Injection
     ksp(libs.hilt.compiler)

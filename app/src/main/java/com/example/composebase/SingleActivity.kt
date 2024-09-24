@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
-import com.example.auth.presentation.signIn.SignInScreen
+import com.example.auth.signIn.SignInScreen
 import com.example.composebase.ui.theme.ComposeBaseTheme
 import com.example.guard.auth.AuthGuardController
 import com.example.guard.auth.AuthStateData

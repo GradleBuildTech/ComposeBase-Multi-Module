@@ -85,9 +85,9 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":navigation"))
-    implementation(project(":auth"))
     implementation(project(":local"))
     implementation(project(":guard"))
+    implementation(project(":feat:auth"))
 
 
     //region D.I Dependency Injection
