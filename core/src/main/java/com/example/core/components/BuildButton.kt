@@ -69,11 +69,13 @@ fun BuildButton(
     )
     val borderColorState = borderColor ?: color
 
+    val btnModifier = Modifier
+        .then(
+            if (enableWidth && width != null) Modifier.width(width) else Modifier.fillMaxWidth()
+        )
+
     Box(
-        modifier = Modifier
-            .then(
-                if (enableWidth && width != null) Modifier.width(width) else Modifier
-            )
+        modifier = btnModifier
             .then(
                 if (height != null) Modifier.height(height) else Modifier
             )
@@ -96,12 +98,18 @@ fun BuildButton(
             enabled = !loading
         ) {
             if (loading) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .size((height ?: 50.dp) * 0.6f),
-                    color = Color.White,
-                    strokeWidth = 2.dp
-                )
+                Row(
+                    modifier = btnModifier,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size((height ?: 50.dp) * 0.6f)
+                            .background(backgroundColor),
+                        color = Color.White,
+                        strokeWidth = 2.dp,
+                    )
+                }
             } else {
                 content()
             }

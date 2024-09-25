@@ -1,7 +1,5 @@
 package com.example.domain.usecase.auth
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.core.models.response.mapper.mapAndConverterToStateData
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
@@ -20,7 +18,6 @@ class SignInUseCaseImpl @Inject constructor(
     private val authDataSource: AuthDataSource,
     @IODispatcher private val ioDispatcher: CoroutineContext
 ) : SignInUseCase {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun signIn(username: String, password: String): Flow<Either<ExceptionState, Token?>> =
         flow {
             val response = authDataSource.signIn(

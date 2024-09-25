@@ -30,9 +30,7 @@ fun BuildOutlineTextField(
     borderRound: Dp? = null
 ) {
     OutlinedTextField(
-        modifier = modifier ?: Modifier
-            .fillMaxWidth()
-            .padding(DesignSystem.OUTSIDE_PADDING),
+        modifier = modifier ?: Modifier.fillMaxWidth(),
         placeholder = {
             Text(
                 text = hintText, style = hintStyle ?: DesignSystem.TITLE_SMALL_STYLE.copy(

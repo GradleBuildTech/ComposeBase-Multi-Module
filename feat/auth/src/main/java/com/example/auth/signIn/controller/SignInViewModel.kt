@@ -1,5 +1,6 @@
 package com.example.auth.signIn.controller
 import androidx.lifecycle.viewModelScope
+import com.example.core.navigation.AppDecorator
 import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
 import com.example.domain.model.Token
@@ -20,6 +21,7 @@ class SignInViewModel @Inject constructor(
     override suspend fun handleEvent(event: SignInUiEvent) {
         when (event) {
             is SignInUiEvent.SignIn -> handleLogin(event.username, event.password)
+            is SignInUiEvent.NavigateToHome -> navigateToHome()
         }
     }
 
@@ -29,7 +31,7 @@ class SignInViewModel @Inject constructor(
             signInUseCase.signIn(username, password)
                 .collect { either ->
                     if (either.isRight()) {
-                        val token = either.rightValue<Token>()
+                        val token = either.rightValue()
                         tokenLocalService.setToken(
                             accessToken = token?.accessToken ?: "",
                             refreshToken = token?.refreshToken ?: ""
@@ -39,11 +41,15 @@ class SignInViewModel @Inject constructor(
                         setUiState {
                             copy(
                                 state = SignInStateData.ERROR,
-                                errorMessage = either.leftValue<Exception>()?.message ?: ""
+                                errorMessage = either.leftValue()?.errorMessage ?: ""
                             )
                         }
                     }
                 }
         }
+    }
+
+    private fun navigateToHome() {
+        navigationService.navigateTo(AppDecorator.HOME)
     }
 }

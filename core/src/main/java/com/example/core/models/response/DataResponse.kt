@@ -15,7 +15,6 @@ sealed class DataResponse<T> {
             is Success<*> -> {
                 "Success[data=$data]"
             }
-
             is Error -> {
                 "Error[exception=$errorCode]"
             }
