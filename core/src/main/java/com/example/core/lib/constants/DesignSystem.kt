@@ -12,6 +12,9 @@ object DesignSystem {
     val OUTSIDE_PADDING = 24.dp
     val BUTTON_HEIGHT = 48.dp
     val SPACE_BETWEEN = 12.dp
+    val MEDIUM_SPACE_BETWEEN = 24.dp
+    val LARGE_SPACE_BETWEEN = 36.dp
+
 
     val BUTTON_CORNER_RADIUS = 8.dp
     val BUTTON_ELEVATION = 2.dp
