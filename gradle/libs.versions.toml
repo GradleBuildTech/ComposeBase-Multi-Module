@@ -22,6 +22,7 @@ material = "1.10.0"
 kotlinCompilerExtensionVersion = "1.5.1"
 kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,6 +58,8 @@ moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 #noinspection SimilarGradleDependency
@@ -69,6 +72,7 @@ navigationNameSpace = { id = "com.example.navigation" }
 buildMainGradleNameSpace = { id = "com.example.buildMainGradle" }
 guardNameSpace = { id = "com.example.guard" }
 localNameSpace = { id = "com.example.local" }
+featureNameSpace = { id = "com.example.feat" }
 domainNameSpace = { id = "com.example.domain" }
 dataaNameSpace = { id = "com.example.data" }
 
