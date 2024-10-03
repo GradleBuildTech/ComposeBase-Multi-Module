@@ -41,6 +41,34 @@ object DesignSystem {
         letterSpacing = 0.15.sp
     )
 
+    ///Subtitle small
+    val SUBTITLE_SMALL_STYLE = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp
+    )
+
+    ///Subtitle medium
+    val SUBTITLE_MEDIUM_STYLE = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp
+    )
+
+    ///Subtitle large
+    val SUBTITLE_LARGE_STYLE = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp
+    )
+
+    ///Body small
+    val BODY_SMALL_STYLE = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Normal,
+        letterSpacing = 0.1.sp
+    )
+
 
 
 

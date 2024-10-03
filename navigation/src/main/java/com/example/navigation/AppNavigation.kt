@@ -1,14 +1,18 @@
 package com.example.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.feat.home.HomeScreen
 import com.example.navigation.graph.DetailScreens
 import com.example.navigation.graph.detailGraph
 import kotlinx.coroutines.flow.collectLatest
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigation(
     navigator: Navigator,
@@ -48,5 +52,9 @@ fun AppNavigation(
         composable(Destination.signIn.route) {
             signInScreen()
         }
+        composable(Destination.home.route) {
+            HomeScreen()
+        }
+
     }
 }

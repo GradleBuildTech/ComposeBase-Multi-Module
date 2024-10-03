@@ -15,7 +15,7 @@ import androidx.navigation.NavBackStackEntry
 ///```
 
 
-abstract class WithoutArgsScreen() : NodeScreen, NavDestination<Unit> {
+abstract class WithoutArgsScreen : NodeScreen, NavDestination<Unit> {
     override val arguments: List<NamedNavArgument> get() = emptyList()
 
     override fun objectParser(entry: NavBackStackEntry) {}

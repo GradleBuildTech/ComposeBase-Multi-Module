@@ -5,9 +5,8 @@ plugins {
     id(libs.plugins.ksp.get().toString())
 }
 
-val configProperties = BuildConfig.projectConfigurations(project)
-
 android {
+//    val properties = projectConfigurations()
     namespace = libs.plugins.mainNamespace.get().toString()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
@@ -23,9 +22,12 @@ android {
             useSupportLibrary = true
         }
 
-        configProperties.forEach { key, value ->
-            buildConfigField("String", key.toString(), "\"${value}\"")
-        }
+//        projectConfigurations.forEach {p ->
+//            buildConfigField("String", p.key, "\"${p.value}\"")
+//        }
+//        projectConfigurations().forEach { key, value ->
+//            buildConfigField("String", key.toString(), "\"${value}\"")
+//        }
 
     }
 
@@ -42,22 +44,17 @@ android {
             isDebuggable = true
         }
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
-
     flavorDimensions += "env"
     productFlavors {
         ///[dev, prod] -> foreach
-        repeat(listOf("dev", "prod").size) {
-            create(listOf("dev", "prod")[it]) {
-                dimension = "env"
-                applicationIdSuffix = ".${listOf("dev", "prod")[it]}"
-                versionNameSuffix = "-${listOf("dev", "prod")[it]}"
-                buildConfigField("String", "BASE_URL", "\"${configProperties["BASE_URL"]}\"")
-            }
-        }
+//        repeat(listOf("dev", "prod").size) {
+//            create(listOf("dev", "prod")[it]) {
+//                dimension = "env"
+//                applicationIdSuffix = ".${listOf("dev", "prod")[it]}"
+//                versionNameSuffix = "-${listOf("dev", "prod")[it]}"
+//                buildConfigField("String", "BASE_URL", "\"${properties["BASE_URL"]}\"")
+//            }
+//        }
     }
 
 
