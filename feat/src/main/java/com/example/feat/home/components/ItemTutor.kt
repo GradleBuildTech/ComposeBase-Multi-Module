@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.DesignSystem
 import com.example.feat.R
 import com.example.feat.home.entity.TutorEntity
 import java.util.Locale
@@ -70,10 +71,7 @@ fun ItemTutor(
                 Column {
                     Text(
                         text = tutor.name ?: "",
-                        style = TextStyle(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp
-                        )
+                        style = DesignSystem.TITLE_SMALL_STYLE,
                     )
                     // Replace with your custom RatingWidget
                     Text(text = "${tutor.rating ?: 0.0}",)
@@ -82,10 +80,7 @@ fun ItemTutor(
             Text(
                 text = tutor.bio ?: "",
                 maxLines = 6,
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal
-                )
+                style = DesignSystem.SUBTITLE_SMALL_STYLE,
             )
             HorizontalDivider(
                 thickness = 0.3.dp,
@@ -117,10 +112,7 @@ fun ItemTutor(
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = tutor.country ?: "",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Normal
-                    ),
+                    style = DesignSystem.SUBTITLE_SMALL_STYLE,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                 )

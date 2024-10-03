@@ -27,6 +27,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.lib.constants.DesignSystem
 import com.example.core.utils.HandleTime
 import com.example.feat.R
 
@@ -52,11 +53,10 @@ fun HomeBanner(){
         ) {
             Text(
                 text = HandleTime.getMMMMEEEd(),
-                style = TextStyle(
+                style = DesignSystem.SUBTITLE_MEDIUM_STYLE.copy(
                     color = Color.White,
-                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                ),
+                )
             )
             Spacer(modifier = Modifier.height(5.dp))
             listOf(
@@ -66,11 +66,10 @@ fun HomeBanner(){
             ).forEach {
                 Text(
                     text = "\uD83D\uDC3C  $it",
-                    style = TextStyle(
+                    style = DesignSystem.SUBTITLE_SMALL_STYLE.copy(
                         color = Color.White,
-                        fontSize = 14.sp,
                         fontWeight = FontWeight.Medium,
-                    ),
+                    )
                 )
             }
         }

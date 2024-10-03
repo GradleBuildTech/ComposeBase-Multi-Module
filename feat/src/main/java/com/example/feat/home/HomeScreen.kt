@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.lib.constants.DesignSystem
 import com.example.feat.R
 import com.example.feat.home.components.HomeBanner
 import com.example.feat.home.components.HomeListEBooks
@@ -61,19 +62,17 @@ fun HomeScreen() {
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = " letTutor",
-                    style = TextStyle(
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
+                    style = DesignSystem.TITLE_LARGE_STYLE.copy(
                         color = colorResource(R.color.primaryColor),
+                        fontSize = 24.sp,
                     ),
                 )
             }
             Text(
                 text = "🌟 Welcome to LetTutor",
                 modifier = Modifier.padding(horizontal = 10.dp),
-                style = TextStyle(
+                style = DesignSystem.TITLE_MEDIUM_STYLE.copy(
                     color = colorResource(R.color.primaryColor),
-                    fontSize = 18.sp,
                     fontWeight = FontWeight.Medium
                 ),
             )

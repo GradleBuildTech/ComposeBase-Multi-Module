@@ -14,6 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.lib.constants.DesignSystem
 import com.example.feat.R
 
 @Composable
@@ -30,16 +31,12 @@ fun HeadingTitle(
     ) {
         Text(
             text = title,
-            style = TextStyle(
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold
-            ),
+            style = DesignSystem.TITLE_MEDIUM_STYLE,
         )
         Text(
             text = "See more",
-            style = TextStyle(
+            style = DesignSystem.SUBTITLE_SMALL_STYLE.copy(
                 color = colorResource(R.color.primaryColor),
-                fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             ),
             modifier = Modifier.clickable {

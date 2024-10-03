@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.DesignSystem
 import com.example.feat.home.entity.EBookEntity
 
 @Composable
@@ -64,18 +65,14 @@ fun ItemEBook(
                     text = eBook.name ?: "",
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
-                    style = TextStyle(
-                        fontSize = 16.sp,
+                    style = DesignSystem.TITLE_SMALL_STYLE.copy(
                         fontWeight = FontWeight.SemiBold,
                     )
                 )
                 Text(
                     text = eBook.description ?: "",
                     maxLines = 4,
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Normal,
-                    )
+                    style = DesignSystem.SUBTITLE_SMALL_STYLE
                 )
             }
         }

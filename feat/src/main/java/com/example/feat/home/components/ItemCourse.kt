@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.DesignSystem
 import com.example.feat.R
 import com.example.feat.home.entity.CourseEntity
 import java.util.Locale
@@ -72,19 +73,16 @@ fun ItemCourse(
                 text = course.name ?: "",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    fontSize = 16.sp,
+                style = DesignSystem.TITLE_SMALL_STYLE.copy(
+                    color = Color.White,
                     fontWeight = FontWeight.SemiBold,
-                    color = Color.White
-                )
+                ),
             )
             Text(
                 text = course.description ?: "",
                 maxLines = 3,
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.White
+                style = DesignSystem.SUBTITLE_SMALL_STYLE.copy(
+                    color = Color.White,
                 )
             )
             Spacer(modifier = Modifier.height(15.dp))
