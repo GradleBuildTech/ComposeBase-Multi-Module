@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    id(libs.plugins.daggerHilt.get().toString())
+    id(libs.plugins.ksp.get().toString())
 }
 
 android {
@@ -38,6 +40,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
+    implementation(project(":domain"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -62,6 +65,10 @@ dependencies {
 
     //coil - display network images
     implementation(libs.coil)
+
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.navigation.compose)
 
 
     debugImplementation(libs.androidx.ui.tooling)

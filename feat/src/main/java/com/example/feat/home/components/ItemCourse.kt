@@ -27,9 +27,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
+import com.example.domain.entity.CourseEntity
 import com.example.feat.R
-import com.example.feat.home.entity.CourseEntity
 import java.util.Locale
 
 @Composable
@@ -39,14 +40,13 @@ fun ItemCourse(
 ) {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
-    val itemCourseHeight = 220
+    val itemCourseHeight = Constants.COURSE_ITEM_HEIGHT
 
     Box(
         modifier = Modifier
             .width((screenWidth * 0.4).dp)
             .height(itemCourseHeight.dp)
-            .shadow(5.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp))
             .background(Color.Gray)
             .clickable { onClick(course) }
     ) {

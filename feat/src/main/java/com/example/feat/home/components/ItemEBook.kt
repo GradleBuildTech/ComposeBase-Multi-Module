@@ -25,8 +25,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
-import com.example.feat.home.entity.EBookEntity
+import com.example.domain.entity.EBookEntity
 
 @Composable
 fun ItemEBook(
@@ -35,12 +36,11 @@ fun ItemEBook(
 ){
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
-    val itemEBookHeight = 180
+    val itemEBookHeight = Constants.EBOOK_ITEM_HEIGHT
 
     Box(
         modifier = Modifier
-            .shadow(elevation = 5.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp))
             .background(Color.White)
             .width((screenWidth * 0.75).dp) // width of box
             .height(itemEBookHeight.dp) // height of box

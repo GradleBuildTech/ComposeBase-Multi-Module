@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,12 +27,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
+import com.example.domain.entity.TutorEntity
 import com.example.feat.R
-import com.example.feat.home.entity.TutorEntity
 import java.util.Locale
 
 @Composable
@@ -39,26 +43,28 @@ fun ItemTutor(
     onClick: (TutorEntity) -> Unit
 ){
     val configuration = LocalConfiguration.current
-
+    val itemTutorHeight = Constants.TUTOR_ITEM_HEIGHT
     val screenWidth = configuration.screenWidthDp
 
     Box(
         modifier = Modifier
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp))
+            .background(Color.White)
             .width((screenWidth * 0.55).dp) // width of box
+            .height(itemTutorHeight.dp)
             .clickable { onClick(tutor) }
     ) {
         Column(
             modifier = Modifier
-                .shadow(elevation = 5.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .background(Color.White)
                 .padding(10.dp) // padding inside box
-                .align(Alignment.BottomCenter),
+                .align(Alignment.BottomCenter)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
         ) {
             Row(
                 modifier = Modifier
                     .padding(vertical = 5.dp)
+                    .weight(1f)
             ) {
                 AsyncImage(
                     model = tutor.avatar ?: "",
@@ -79,16 +85,19 @@ fun ItemTutor(
             }
             Text(
                 text = tutor.bio ?: "",
-                maxLines = 6,
+                maxLines = 5,
                 style = DesignSystem.SUBTITLE_SMALL_STYLE,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.align(Alignment.Start)
+                    .weight(2f)
             )
             HorizontalDivider(
                 thickness = 0.3.dp,
                 color = Color.Black.copy(alpha = 0.5f),
-                modifier = Modifier.padding(vertical = 10.dp)
+                modifier = Modifier.padding(bottom = 10.dp)
             )
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
                     modifier = Modifier
