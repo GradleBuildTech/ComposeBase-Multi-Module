@@ -2,6 +2,7 @@ package com.example.core.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,5 +36,27 @@ abstract class StateAndEventViewModel<UiState, Event>(initialState: UiState) : V
 
     fun onEvent(event: Event) {
         viewModelScope.launch { events.emit(event) }
+    }
+
+    ///✨===============================================
+    ///[retry] is a suspend function that takes in a block and retries the block if it fails.
+    private suspend fun <T> retry(
+        times: Int,
+        initialDelayMillis: Long = 100,
+        maxDelayMillis: Long = 1000,
+        factor: Double = 2.0,
+        block: suspend () -> T
+    ): T {
+        var currentDelay = initialDelayMillis
+        repeat(times) {
+            try {
+                return block()
+            } catch (exception: Exception) {
+                exception.printStackTrace()
+            }
+            delay(currentDelay)
+            currentDelay = (currentDelay * factor).toLong().coerceAtMost(maxDelayMillis)
+        }
+        return block() // last attempt
     }
 }
