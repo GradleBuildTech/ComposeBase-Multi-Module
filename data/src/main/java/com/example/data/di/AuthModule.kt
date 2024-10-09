@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataSourceModule {
+class AuthModule {
     @Singleton
     @Provides
     fun providesAuthApi(retrofit: Retrofit): AuthApi {

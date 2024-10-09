@@ -1,4 +1,4 @@
-package com.example.feat.home.entity
+package com.example.domain.entity
 
 class CourseEntity (
     var id: String = "",

@@ -1,7 +1,6 @@
-package com.example.feat.home.entity
+package com.example.domain.entity
 
 import java.util.Date
-
 
 data class TutorEntity(
     var id : String,

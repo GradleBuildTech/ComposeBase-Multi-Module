@@ -1,4 +1,4 @@
-package com.example.feat.home.entity
+package com.example.domain.entity
 
 class EBookEntity(
     var id : String = "",
