@@ -1,4 +1,4 @@
-package com.example.feat.home.components
+package com.example.core.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.core.lib.constants.Constants
 
 @Composable
 fun HorizontalList(

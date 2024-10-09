@@ -10,6 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.core.components.HeadingTitle
+import com.example.core.components.HorizontalList
 import com.example.core.lib.constants.Constants
 import com.example.domain.entity.EBookEntity
 import com.example.feat.home.controller.HomeViewModel

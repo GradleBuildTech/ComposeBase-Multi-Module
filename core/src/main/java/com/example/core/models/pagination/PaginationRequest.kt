@@ -1,4 +1,6 @@
 package com.example.core.models.pagination
 
-class PaginationRequest {
-}
+data class PaginationRequest(
+    val page: Int,
+    val pageSize: Int
+)

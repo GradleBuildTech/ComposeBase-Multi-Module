@@ -1,6 +1,7 @@
 package com.example.domain.usecase.home
 
 import com.example.core.lib.utils.IODispatcher
+import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.response.mapper.mapAndConverterToStateData
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
@@ -23,11 +24,10 @@ class HomeUseCaseImpl @Inject constructor(
     private val eBookDataSource: EBookDataSource,
 ) : HomeUseCase {
     override fun fetchTutors(
-        page: Int,
-        pageSize: Int
+        paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<TutorEntity>>> =
         flow {
-            val response = tutorDataSource.fetchTutors(page = page, pageSize = pageSize)
+            val response = tutorDataSource.fetchTutors(paginationRequest = paginationRequest)
             val dataConvert = response.mapAndConverterToStateData {
                 it.toDomain()
             }
@@ -35,11 +35,10 @@ class HomeUseCaseImpl @Inject constructor(
         }
 
     override fun fetchRecommendedCourses(
-        page: Int,
-        pageSize: Int
+        paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<CourseEntity>>> =
         flow {
-            val response = courseDataSource.fetchCourses(page = page, pageSize = pageSize)
+            val response = courseDataSource.fetchCourses(paginationRequest = paginationRequest)
             val dataConvert = response.mapAndConverterToStateData {
                 it.toDomain()
             }
@@ -47,11 +46,10 @@ class HomeUseCaseImpl @Inject constructor(
         }
 
     override fun fetchEBooks(
-        page: Int,
-        pageSize: Int
+        paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<EBookEntity>>> =
         flow {
-            val response = eBookDataSource.fetchEBooks(page = page, pageSize = pageSize)
+            val response = eBookDataSource.fetchEBooks(paginationRequest = paginationRequest)
             val dataConvert = response.mapAndConverterToStateData {
                 it.toDomain()
             }
