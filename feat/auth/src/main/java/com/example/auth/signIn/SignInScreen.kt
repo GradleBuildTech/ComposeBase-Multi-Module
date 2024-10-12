@@ -57,7 +57,7 @@ fun SignInScreen(
         when (uiState.state) {
             SignInStateData.SUCCESS -> {
                 Log.d("com.example.auth.signIn.SignInScreen", "Sign in success")
-                signInViewModel.onEvent(SignInUiEvent.NavigateToHome)
+                signInViewModel.onEvent(SignInUiEvent.NavigateToMain)
             }
 
             SignInStateData.ERROR -> {

@@ -11,4 +11,10 @@ object Constants {
     const val TUTOR_ITEM_HEIGHT = 210.0
     const val COURSE_ITEM_HEIGHT = 220.0
     const val EBOOK_ITEM_HEIGHT = 180.0
+
+    const val HOME_TAB = "Home"
+    const val DOCUMENT_TAB = "Document"
+    const val SEARCH_TAB = "Search"
+    const val CALENDAR_TAB = "Calendar"
+    const val PROFILE_TAB = "Profile"
 }
