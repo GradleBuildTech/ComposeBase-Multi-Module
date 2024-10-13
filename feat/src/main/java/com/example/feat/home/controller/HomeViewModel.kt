@@ -58,6 +58,8 @@ class HomeViewModel @Inject constructor(
                     isLoading = false
                 )
             }
+        } else {
+            setUiState { copy(isLoading = false) }
         }
     }
 
