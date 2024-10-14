@@ -3,7 +3,7 @@ package com.example.core.models.stateData
 import com.example.core.models.error.ErrorCode
 
 
-data class ExceptionState(val errorCode: ErrorCode, val errorMessage: String) {
+data class ExceptionState(val errorCode: ErrorCode = ErrorCode.DEFAULT, val errorMessage: String) {
     companion object {
         fun unknownError() = ExceptionState(
             errorCode = ErrorCode.DEFAULT,

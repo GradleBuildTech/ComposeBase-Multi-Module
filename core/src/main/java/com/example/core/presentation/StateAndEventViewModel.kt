@@ -1,5 +1,6 @@
 package com.example.core.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.models.stateData.Either
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -78,17 +80,24 @@ abstract class StateAndEventViewModel<UiState, Event>(initialState: UiState) : V
 
         listResponse: (Either<ExceptionState, Any>, Int) -> Unit
     ) {
-        setUiState { _uiState.value.initialLoadState() }
-        val request = listRequest.map { req -> viewModelScope.async { req } }
+        setUiState { initialLoadState() }
+        val request = listRequest.map { req ->
+            viewModelScope.async {
+                req.catch { e ->
+                    emit(Either.Left(ExceptionState(errorMessage = e.message ?: "")))
+                }
+            }
+        }
 
         viewModelScope.launch {
             try {
                 ///✨===============================================
                 ///[awaitAll] is a suspend function that waits for all the given deferred values to complete.
                 val results = awaitAll(*request.toTypedArray())
+//                results.forEachIndexed { index, rp -> launch { rp.collect { listResponse(it, index) } }  }
                 results.forEachIndexed { index, rp -> rp.collect { listResponse(it, index) } }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("StateAndEventViewModel", "Error loading initial data", e)
                 setUiState { _uiState.value.errorLoadState(e.message ?: "") }
             }
         }
