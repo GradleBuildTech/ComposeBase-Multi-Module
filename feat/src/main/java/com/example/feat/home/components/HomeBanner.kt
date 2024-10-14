@@ -23,12 +23,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.core.lib.constants.DesignSystem
-import com.example.core.utils.HandleTime
+import com.example.core.lib.utils.HandleTime
 import com.example.feat.R
 
 @RequiresApi(Build.VERSION_CODES.O)
