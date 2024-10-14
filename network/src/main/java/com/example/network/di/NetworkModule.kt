@@ -1,7 +1,5 @@
 package com.example.network.di
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.core.models.moshi.MyKotlinJsonAdapterFactory
 import com.example.core.models.moshi.MyStandardJsonAdapters
 import com.example.local.dataStore.TokenLocalService
@@ -57,7 +55,6 @@ internal object NetworkModule {
     }
 
     ///[providesHttpClient] provides the [OkHttpClient] instance.
-    @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
     fun providesHttpClient(
