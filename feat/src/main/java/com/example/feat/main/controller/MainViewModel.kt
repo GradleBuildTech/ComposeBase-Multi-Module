@@ -10,7 +10,7 @@ class MainViewModel @Inject constructor() : StateAndEventViewModel<MainState, Ma
 ) {
     override suspend fun handleEvent(event: MainEvent) {
         when (event) {
-            is MainEvent.ChangeTab -> changeTab(newIndex = event.index)
+            is MainEvent.TabSelected -> changeTab(newIndex = event.index)
         }
     }
 

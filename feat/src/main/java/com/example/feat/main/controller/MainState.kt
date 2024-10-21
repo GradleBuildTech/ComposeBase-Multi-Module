@@ -1,23 +1,37 @@
 package com.example.feat.main.controller
 
+import com.example.core.components.bottom_navigation_bar.NavigationBarItemModel
 import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DrawableConst
 
 data class MainState(
     val currentIndex: Int = 0,
-    val tabs: List<String> = listOf(
-        Constants.HOME_TAB,
-        Constants.DOCUMENT_TAB,
-        Constants.SEARCH_TAB,
-        Constants.CALENDAR_TAB,
-        Constants.PROFILE_TAB,
-    ),
-    val icons: List<Int> = listOf(
-        DrawableConst.HOME_ICON,
-        DrawableConst.DOCUMENT_ICON,
-        DrawableConst.SEARCH_ICON,
-        DrawableConst.CALENDAR_ICON,
-        DrawableConst.PROFILE_ICON,
-    )
 
+    val tabs: List<NavigationBarItemModel> = listOf(
+        NavigationBarItemModel(
+            label = Constants.HOME_TAB,
+            idResourceIcon = DrawableConst.HOME_ICON,
+            screen = {},
+        ),
+        NavigationBarItemModel(
+            label = Constants.DOCUMENT_TAB,
+            idResourceIcon = DrawableConst.DOCUMENT_ICON,
+            screen = {},
+        ),
+        NavigationBarItemModel(
+            label = Constants.SEARCH_TAB,
+            idResourceIcon = DrawableConst.SEARCH_ICON,
+            screen = {},
+        ),
+        NavigationBarItemModel(
+            label = Constants.CALENDAR_TAB,
+            idResourceIcon = DrawableConst.CALENDAR_ICON,
+            screen = {},
+        ),
+        NavigationBarItemModel(
+            label = Constants.PROFILE_TAB,
+            idResourceIcon = DrawableConst.PROFILE_ICON,
+            screen = {},
+        ),
+    ),
 )

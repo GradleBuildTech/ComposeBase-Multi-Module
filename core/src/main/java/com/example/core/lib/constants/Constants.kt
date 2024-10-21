@@ -17,4 +17,7 @@ object Constants {
     const val SEARCH_TAB = "Search"
     const val CALENDAR_TAB = "Calendar"
     const val PROFILE_TAB = "Profile"
+
+    const val ICON_TAB_SIZE = 30.0
+    const val BACKGROUND_ICON_TAB_SIZE = 50.0
 }
