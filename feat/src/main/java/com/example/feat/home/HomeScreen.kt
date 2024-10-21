@@ -90,7 +90,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(10.dp))
             HorizontalItemView(
                 listData = uiState.tutors,
-                isLoading = uiState.isLoadingTutors,
+                isLoading = uiState.isLoading,
                 headingTitle = "\uD83D\uDC68\u200D\uD83C\uDFEB Top tutors",
                 showMoreItem = { /*TODO*/ },
                 limitItem = Constants.TUTOR_LIMIT_ITEM,
@@ -106,7 +106,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(20.dp))
             HorizontalItemView(
                 listData = uiState.recommendedCourses,
-                isLoading = uiState.isLoadingRecommendedCourses,
+                isLoading = uiState.isLoading,
                 headingTitle = "\uD83D\uDCBB Recommend courses",
                 showMoreItem = { /*TODO*/ },
                 limitItem = Constants.COURSE_LIMIT_ITEM,
@@ -122,7 +122,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(20.dp))
             HorizontalItemView(
                 listData = uiState.eBooks,
-                isLoading = uiState.isLoadingEBooks,
+                isLoading = uiState.isLoading,
                 headingTitle = "\uD83D\uDCD6 Free EBooks",
                 showMoreItem = { /*TODO*/ },
                 limitItem = Constants.EBOOK_LIMIT_ITEM,

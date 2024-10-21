@@ -4,16 +4,16 @@ plugins {
     id(libs.plugins.daggerHilt.get().toString())
     id(libs.plugins.ksp.get().toString())
 }
+val configProperties = BuildConfig.projectConfigurations(project)
 
 android {
-//    val properties = projectConfigurations()
     namespace = libs.plugins.mainNamespace.get().toString()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = libs.plugins.mainNamespace.get().toString()
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk =libs.versions.compileSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -22,12 +22,9 @@ android {
             useSupportLibrary = true
         }
 
-//        projectConfigurations.forEach {p ->
-//            buildConfigField("String", p.key, "\"${p.value}\"")
-//        }
-//        projectConfigurations().forEach { key, value ->
-//            buildConfigField("String", key.toString(), "\"${value}\"")
-//        }
+        configProperties.forEach { key, value ->
+            buildConfigField("String", key.toString(), "\"${value}\"")
+        }
 
     }
 
@@ -44,17 +41,22 @@ android {
             isDebuggable = true
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+
     flavorDimensions += "env"
     productFlavors {
-        ///[dev, prod] -> foreach
-//        repeat(listOf("dev", "prod").size) {
-//            create(listOf("dev", "prod")[it]) {
-//                dimension = "env"
-//                applicationIdSuffix = ".${listOf("dev", "prod")[it]}"
-//                versionNameSuffix = "-${listOf("dev", "prod")[it]}"
-//                buildConfigField("String", "BASE_URL", "\"${properties["BASE_URL"]}\"")
-//            }
-//        }
+        repeat(listOf("dev", "prod").size) {
+            create(listOf("dev", "prod")[it]) {
+                dimension = "env"
+                applicationIdSuffix = ".${listOf("dev", "prod")[it]}"
+                versionNameSuffix = "-${listOf("dev", "prod")[it]}"
+                buildConfigField("String", "BASE_URL", "\"${configProperties["BASE_URL"]}\"")
+            }
+        }
     }
 
 
