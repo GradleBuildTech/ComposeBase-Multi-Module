@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.core.lib.constants.Constants
 
 @Composable
 fun RowScope.BottomNavigationBarNone(
@@ -43,7 +44,7 @@ fun RowScope.BottomNavigationBarNone(
             animationSpec = tween(
                 durationMillis = durationMillis,
                 easing = easing
-            ), label = ""
+            ), label = Constants.NAVIGATION_BAR_NONE_ANIMATION
         )
 
         Column(

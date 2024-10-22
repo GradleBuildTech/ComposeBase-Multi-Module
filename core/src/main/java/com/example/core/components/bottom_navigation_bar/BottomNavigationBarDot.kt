@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.core.lib.constants.Constants
 
 @Composable
 fun RowScope.BottomNavigationBarDot(
@@ -48,7 +49,7 @@ fun RowScope.BottomNavigationBarDot(
             animationSpec = tween(
                 durationMillis = durationMillis,
                 easing = easing
-            ), label = ""
+            ), label = Constants.NAVIGATION_BAR_LABEL_ANIMATION
         )
 
         Box(

@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
 
 @Composable
@@ -48,7 +49,7 @@ fun BottomNavigationBarRow(
             animationSpec = tween(
                 durationMillis = durationMillis,
                 easing = easing
-            ), label = ""
+            ), label = Constants.NAVIGATION_BAR_ROW_ANIMATION
         )
 
         Row(

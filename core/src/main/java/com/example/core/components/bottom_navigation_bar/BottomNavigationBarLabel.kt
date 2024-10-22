@@ -52,7 +52,7 @@ fun RowScope.BottomNavigationBarLabel(
             animationSpec = tween(
                 durationMillis = durationMillis,
                 easing = easing
-            ), label = ""
+            ), label = Constants.NAVIGATION_BAR_LABEL_ANIMATION
         )
 
         Box(

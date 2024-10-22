@@ -20,4 +20,10 @@ object Constants {
 
     const val ICON_TAB_SIZE = 30.0
     const val BACKGROUND_ICON_TAB_SIZE = 50.0
+
+    const val NAVIGATION_BAR_DOT_ANIMATION = "BottomNavigationBarDotAnimation"
+    const val NAVIGATION_BAR_INDICATOR_ANIMATION = "BottomNavigationBarIndicatorAnimation"
+    const val NAVIGATION_BAR_ROW_ANIMATION = "BottomNavigationBarRowAnimation"
+    const val NAVIGATION_BAR_NONE_ANIMATION = "BottomNavigationBarNoneAnimation"
+    const val NAVIGATION_BAR_LABEL_ANIMATION = "BottomNavigationBarLabelAnimation"
 }
