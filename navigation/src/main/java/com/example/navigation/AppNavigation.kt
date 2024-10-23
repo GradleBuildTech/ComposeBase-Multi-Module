@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.feat.home.HomeScreen
+import com.example.feat.main.MainScreen
 import com.example.navigation.graph.DetailScreens
 import com.example.navigation.graph.detailGraph
 import kotlinx.coroutines.flow.collectLatest
@@ -54,6 +55,9 @@ fun AppNavigation(
         }
         composable(Destination.home.route) {
             HomeScreen()
+        }
+        composable(Destination.main.route) {
+            MainScreen()
         }
 
     }

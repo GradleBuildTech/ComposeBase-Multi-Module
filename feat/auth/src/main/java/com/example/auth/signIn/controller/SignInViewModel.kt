@@ -3,7 +3,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.navigation.AppDecorator
 import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
-import com.example.domain.model.Token
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.local.dataStore.TokenLocalService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,7 @@ class SignInViewModel @Inject constructor(
     override suspend fun handleEvent(event: SignInUiEvent) {
         when (event) {
             is SignInUiEvent.SignIn -> handleLogin(event.username, event.password)
-            is SignInUiEvent.NavigateToHome -> navigateToHome()
+            is SignInUiEvent.NavigateToMain -> navigateToMain()
         }
     }
 
@@ -49,7 +48,7 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    private fun navigateToHome() {
-        navigationService.navigateTo(AppDecorator.HOME)
+    private fun navigateToMain() {
+        navigationService.navigateTo(AppDecorator.MAIN)
     }
 }
