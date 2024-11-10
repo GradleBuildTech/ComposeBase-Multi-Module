@@ -49,6 +49,6 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun navigateToMain() {
-        navigationService.navigateTo(AppDecorator.MAIN)
+        navigationService.navigateTo(AppDecorator.HOME)
     }
 }
