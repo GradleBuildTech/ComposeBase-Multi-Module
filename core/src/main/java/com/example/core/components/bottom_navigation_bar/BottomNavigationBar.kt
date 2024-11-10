@@ -69,6 +69,7 @@ fun BottomNavigationBar(
             NavigationBarType.ROW -> BottomNavigationBarRow(
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
                 currentIndex = currentIndex,
                 bottomNavigationBarStyle = bottomNavigationStyle,
             )
@@ -76,6 +77,8 @@ fun BottomNavigationBar(
             NavigationBarType.INDICATOR -> BottomNavigationBarIndicator(
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
+
                 currentIndex = currentIndex,
                 bottomNavigationBarStyle = bottomNavigationStyle,
             )
@@ -83,6 +86,7 @@ fun BottomNavigationBar(
             NavigationBarType.DOT -> BottomNavigationBarDot(
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
                 currentIndex = currentIndex,
                 bottomNavigationBarStyle = bottomNavigationStyle,
             )
@@ -98,6 +102,7 @@ fun BottomNavigationBar(
                 BottomNavigationBarNone(
                     tabs = tabs,
                     modifier = Modifier,
+                    onItemClicked = onItemClicked,
                     currentIndex = currentIndex,
                     bottomNavigationBarStyle = bottomNavigationStyle,
                 )
