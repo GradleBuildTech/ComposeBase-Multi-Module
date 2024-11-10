@@ -27,6 +27,9 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feat" />
             <option value="$PROJECT_DIR$/feat/auth" />
+            <option value="$PROJECT_DIR$/feat/tutor" />
+            <option value="$PROJECT_DIR$/feat/tutor/listTutor" />
+            <option value="$PROJECT_DIR$/feat/tutor/tutorDetail" />
             <option value="$PROJECT_DIR$/gradleConfig" />
             <option value="$PROJECT_DIR$/guard" />
             <option value="$PROJECT_DIR$/local" />
