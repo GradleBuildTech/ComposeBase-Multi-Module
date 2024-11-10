@@ -1,4 +1,4 @@
-package com.example.core.components.bottom_navigation_bar
+package com.example.core.components.bottom_navigation_bar.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon

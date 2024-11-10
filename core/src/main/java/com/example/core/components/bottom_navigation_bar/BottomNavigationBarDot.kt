@@ -1,7 +1,5 @@
 package com.example.core.components.bottom_navigation_bar
 
-import androidx.compose.animation.core.EaseInOut
-import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -21,34 +19,31 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.core.components.bottom_navigation_bar.components.NavIcon
+import com.example.core.components.bottom_navigation_bar.dataClass.BottomNavigationBarStyle
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarItemModel
 import com.example.core.lib.constants.Constants
 
 @Composable
 fun RowScope.BottomNavigationBarDot(
-    selectedColor: Color,
-    unselectedColor: Color,
     modifier: Modifier = Modifier,
     tabs: List<NavigationBarItemModel> = emptyList(),
+    onItemClicked: (Int) -> Unit = {},
     currentIndex: Int = 0,
-    durationMillis: Int = 300,
-    easing: Easing = EaseInOut,
-    targetValueSelected: Float = 1f,
-    targetValueUnselected: Float = 0.8f,
-    onItemClicked: (Int) -> Unit = {}
+    bottomNavigationBarStyle: BottomNavigationBarStyle
 ) {
     tabs.forEachIndexed() { index, tab ->
         val isSelected = currentIndex == index
         val path = painterResource(id = tab.idResourceIcon)
         val animatedValue by animateFloatAsState(
-            targetValue = if (isSelected) targetValueSelected else targetValueUnselected,
+            targetValue = if (isSelected) bottomNavigationBarStyle.targetValueSelected else bottomNavigationBarStyle.targetValueUnselected,
             animationSpec = tween(
-                durationMillis = durationMillis,
-                easing = easing
+                durationMillis = bottomNavigationBarStyle.durationMillis,
+                easing = bottomNavigationBarStyle.easing
             ), label = Constants.NAVIGATION_BAR_LABEL_ANIMATION
         )
 
@@ -73,9 +68,9 @@ fun RowScope.BottomNavigationBarDot(
                     painter = remember { path },
                     label = tab.label,
                     colorTint = if (isSelected) remember {
-                        selectedColor
+                        bottomNavigationBarStyle.selectedColor
                     } else remember {
-                        unselectedColor
+                        bottomNavigationBarStyle.unselectedColor
                     },
                 )
                 if (isSelected) {
@@ -84,10 +79,9 @@ fun RowScope.BottomNavigationBarDot(
                         modifier = Modifier
                             .size(5.dp)
                             .clip(CircleShape)
-                            .background(remember { selectedColor })
+                            .background(remember { bottomNavigationBarStyle.selectedColor })
                     )
                 }
-
             }
         }
     }

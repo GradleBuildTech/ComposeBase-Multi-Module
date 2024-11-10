@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.R
 import com.example.core.components.bottom_navigation_bar.BottomNavigationBar
-import com.example.core.components.bottom_navigation_bar.NavigationBarType
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarType
 import com.example.feat.main.controller.MainEvent
 import com.example.feat.main.controller.MainViewModel
 

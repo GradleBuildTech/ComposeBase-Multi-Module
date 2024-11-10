@@ -17,6 +17,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.core.R
+import com.example.core.components.bottom_navigation_bar.dataClass.BottomNavigationBarStyle
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarItemModel
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarType
 
 @Composable
 fun BottomNavigationBar(
@@ -37,6 +40,18 @@ fun BottomNavigationBar(
     targetValueSelected: Float = 1f,
     targetValueUnselected: Float = 0.8f,
 ) {
+    val bottomNavigationStyle = BottomNavigationBarStyle(
+        type = type,
+        selectedColor = selectedColor,
+        unselectedColor = unselectedColor,
+        backgroundSelectedColor = backgroundSelectedColor,
+        backgroundUnSelectedColor = backgroundUnSelectedColor,
+        durationMillis = durationMillis,
+        easing = easing,
+        targetValueSelected = targetValueSelected,
+        targetValueUnselected = targetValueUnselected
+    )
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,73 +67,44 @@ fun BottomNavigationBar(
     ) {
         when (type) {
             NavigationBarType.ROW -> BottomNavigationBarRow(
-                selectedColor = selectedColor,
-                unselectedColor = unselectedColor,
-                backgroundSelectedColor = backgroundSelectedColor,
-                backgroundUnSelectedColor = backgroundUnSelectedColor,
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
                 currentIndex = currentIndex,
-                durationMillis = durationMillis,
-                easing = easing,
-                targetValueSelected = targetValueSelected,
-                targetValueUnselected = targetValueUnselected,
-                onItemClicked = onItemClicked
+                bottomNavigationBarStyle = bottomNavigationStyle,
             )
 
             NavigationBarType.INDICATOR -> BottomNavigationBarIndicator(
-                selectedColor = selectedColor,
-                unselectedColor = unselectedColor,
-                backgroundSelectedColor = backgroundSelectedColor,
-                backgroundUnSelectedColor = backgroundUnSelectedColor,
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
+
                 currentIndex = currentIndex,
-                durationMillis = durationMillis,
-                easing = easing,
-                targetValueSelected = targetValueSelected,
-                targetValueUnselected = targetValueUnselected,
-                onItemClicked = onItemClicked
+                bottomNavigationBarStyle = bottomNavigationStyle,
             )
 
             NavigationBarType.DOT -> BottomNavigationBarDot(
-                selectedColor = selectedColor,
-                unselectedColor = unselectedColor,
                 tabs = tabs,
                 modifier = Modifier,
+                onItemClicked = onItemClicked,
                 currentIndex = currentIndex,
-                durationMillis = durationMillis,
-                easing = easing,
-                targetValueSelected = targetValueSelected,
-                targetValueUnselected = targetValueUnselected,
-                onItemClicked = onItemClicked
+                bottomNavigationBarStyle = bottomNavigationStyle,
             )
 
             NavigationBarType.LABEL -> BottomNavigationBarLabel(
-                selectedColor = selectedColor,
-                unselectedColor = unselectedColor,
                 tabs = tabs,
                 modifier = Modifier,
                 currentIndex = currentIndex,
-                durationMillis = durationMillis,
-                easing = easing,
-                targetValueSelected = targetValueSelected,
-                targetValueUnselected = targetValueUnselected,
-                onItemClicked = onItemClicked
+                bottomNavigationBarStyle = bottomNavigationStyle,
             )
 
             else -> {
                 BottomNavigationBarNone(
-                    selectedColor = selectedColor,
-                    unselectedColor = unselectedColor,
                     tabs = tabs,
                     modifier = Modifier,
+                    onItemClicked = onItemClicked,
                     currentIndex = currentIndex,
-                    durationMillis = durationMillis,
-                    easing = easing,
-                    targetValueSelected = targetValueSelected,
-                    targetValueUnselected = targetValueUnselected,
-                    onItemClicked = onItemClicked
+                    bottomNavigationBarStyle = bottomNavigationStyle,
                 )
             }
         }

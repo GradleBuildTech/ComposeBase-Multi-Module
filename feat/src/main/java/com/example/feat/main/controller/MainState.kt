@@ -1,6 +1,6 @@
 package com.example.feat.main.controller
 
-import com.example.core.components.bottom_navigation_bar.NavigationBarItemModel
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarItemModel
 import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DrawableConst
 
