@@ -1,4 +1,4 @@
 package com.example.listtutor.controller
 
-class ListTutorEvent {
+sealed class ListTutorEvent {
 }

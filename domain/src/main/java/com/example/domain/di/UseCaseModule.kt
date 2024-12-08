@@ -8,6 +8,8 @@ import com.example.domain.usecase.auth.SignInUseCase
 import com.example.domain.usecase.auth.SignInUseCaseImpl
 import com.example.domain.usecase.home.HomeUseCase
 import com.example.domain.usecase.home.HomeUseCaseImpl
+import com.example.domain.usecase.tutor.ListTutorUseCase
+import com.example.domain.usecase.tutor.ListTutorUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +43,18 @@ object UseCaseModule {
             tutorDataSource = tutorDataSource,
             courseDataSource = courseDataSource,
             eBookDataSource = eBookDataSource,
+            ioDispatcher = dispatcher,
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideListTutorUseCase(
+        tutorDataSource: TutorDataSource,
+        dispatcher: CoroutineContext,
+    ) : ListTutorUseCase {
+        return ListTutorUseCaseImpl(
+            tutorDataSource = tutorDataSource,
             ioDispatcher = dispatcher,
         )
     }

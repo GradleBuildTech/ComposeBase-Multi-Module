@@ -75,6 +75,8 @@ localNameSpace = { id = "com.example.local" }
 featureNameSpace = { id = "com.example.feat" }
 domainNameSpace = { id = "com.example.domain" }
 dataaNameSpace = { id = "com.example.data" }
+listTutorialNameSpace = { id = "com.example.listtutor" }
+
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }
