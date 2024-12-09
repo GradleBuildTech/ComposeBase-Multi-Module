@@ -20,6 +20,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.core.R
 import com.example.core.components.bottom_navigation_bar.BottomNavigationBar
 import com.example.core.components.bottom_navigation_bar.NavigationBarType
@@ -31,55 +32,30 @@ fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
 ) {
     val uiState by mainViewModel.uiState.collectAsState()
+    val navController = rememberNavController();
+    mainViewModel.onEvent(MainEvent.SetNavController(navController))
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-        /// TODO: uncomment this to use bottom bar
-//        bottomBar = {
-//            BottomNavigationBar(
-//                tabs = uiState.tabs,
-//                onItemClicked = { index ->
-//                    mainViewModel.onEvent(MainEvent.TabSelected(index))
-//                },
-//                type = NavigationBarType.LABEL,
-//                currentIndex = uiState.currentIndex,
-//                paddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp)
-//            )
-//        }
+        bottomBar = {
+            BottomNavigationBar(
+                tabs = uiState.tabs,
+                onItemClicked = { index ->
+                    mainViewModel.onEvent(MainEvent.TabSelected(index))
+                },
+                type = NavigationBarType.LABEL,
+                currentIndex = uiState.currentIndex,
+                paddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp)
+            )
+        }
     ) { innerPadding ->
         /// TODO: for testing nav bar
         Box(
             modifier = Modifier.padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                val selectedColor = colorResource(id = R.color.primaryColor)
-                val unselectedColor = colorResource(id = R.color.black)
 
-                NavigationBarType.entries.forEach { type ->
-                    Spacer(modifier = Modifier.size(20.dp))
-                    Text(
-                        text = "BOTTOM NAVIGATION BAR: $type",
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                    Spacer(modifier = Modifier.size(10.dp))
-                    BottomNavigationBar(
-                        tabs = uiState.tabs,
-                        onItemClicked = { index ->
-                            mainViewModel.onEvent(MainEvent.TabSelected(index))
-                        },
-                        type = type,
-                        currentIndex = uiState.currentIndex,
-                        paddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp),
-                        selectedColor = selectedColor,
-                        unselectedColor = unselectedColor
-                    )
-                }
-            }
         }
     }
 }
