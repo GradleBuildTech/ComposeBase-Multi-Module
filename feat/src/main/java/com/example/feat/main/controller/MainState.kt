@@ -5,7 +5,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.core.components.bottom_navigation_bar.NavigationBarItemModel
+import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBarItemModel
 import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DrawableConst
 

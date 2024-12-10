@@ -12,7 +12,6 @@ import com.example.navigation.graph.DetailScreens
 import com.example.navigation.graph.detailGraph
 import kotlinx.coroutines.flow.collectLatest
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigation(
     navigator: Navigator,
