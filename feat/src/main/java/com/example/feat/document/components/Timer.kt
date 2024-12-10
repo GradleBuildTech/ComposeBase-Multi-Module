@@ -3,6 +3,7 @@ package com.example.feat.document.components
 import android.os.CountDownTimer
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
@@ -18,7 +19,7 @@ fun Timer(
     }
 
     val timeData = remember {
-        mutableStateOf(millisInFuture - currentTime)
+        mutableLongStateOf(millisInFuture - currentTime)
     }
 
     val countDownTimer = remember {

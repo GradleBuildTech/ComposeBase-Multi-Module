@@ -50,21 +50,20 @@ class DocumentViewModel @Inject constructor(
 
     private fun addFavoriteTutor(tutorId: String) {
         viewModelScope.launch {
+            val oldTutors = uiState.value.tutors
+            val newTutors = oldTutors.map {
+                if (it.id == tutorId) {
+                    it.copy(isFavorite = !(it.isFavorite ?: false))
+                } else {
+                    it
+                }
+            }
+            setUiState { copy(tutors = newTutors) }
+
             documentUseCase.addFavoriteTutor(tutorId)
                 .collect { either ->
-                    if (either.isRight()) {
-                        val isFavorite = either.rightValue()
-
-                        val tutors = uiState.value.tutors
-
-                        for (tutor in tutors) {
-                            if (tutor.id == tutorId) {
-                                tutor.isFavorite = isFavorite
-                                break
-                            }
-                        }
-
-                        setUiState { copy(tutors = tutors) }
+                    if(either.isLeft()) {
+                        setUiState { copy(tutors = oldTutors) }
                     }
                 }
         }
@@ -95,7 +94,6 @@ class DocumentViewModel @Inject constructor(
             val tutors = (either.rightValue() as TutorFavorites).tutors
             val favoriteTutors = (either.rightValue() as TutorFavorites).favoriteTutors
 
-            // check and update tutor
             for (tutor in tutors) {
                 tutor.isFavorite = favoriteTutors.any { it.secondId == tutor.id }
             }

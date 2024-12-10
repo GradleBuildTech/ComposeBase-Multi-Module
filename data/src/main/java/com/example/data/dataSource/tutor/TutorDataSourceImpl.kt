@@ -1,10 +1,8 @@
 package com.example.data.dataSource.tutor
 
-import com.example.core.models.pagination.Pagination
 import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.response.DataResponse
 import com.example.data.model.response.tutor.AddFavoriteTutorResponse
-import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
 import com.example.network.extensions.handleCall
 import javax.inject.Inject

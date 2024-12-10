@@ -41,7 +41,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":network"))
     implementation(project(":domain"))
-    implementation(project(":navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
