@@ -25,7 +25,7 @@ fun <T> Response<T>.handleResponse(): T {
  */
 inline fun <reified T> handleCall(call: () -> Response<T>): DataResponse<T> {
     return try {
-        call.invoke().handReturnDatResponse()
+        call.invoke().handReturnDataResponse()
     } catch (e: Exception) {
         Log.d("handleCall", e.message.toString())
         DataResponse.Error(
@@ -35,7 +35,7 @@ inline fun <reified T> handleCall(call: () -> Response<T>): DataResponse<T> {
     }
 }
 
-inline fun <reified T> Response<T>.handReturnDatResponse(): DataResponse<T> {
+inline fun <reified T> Response<T>.handReturnDataResponse(): DataResponse<T> {
     return try {
         DataResponse.Success(handleResponse())
     } catch (e: Exception) {

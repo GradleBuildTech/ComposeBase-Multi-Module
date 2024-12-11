@@ -7,7 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.feat.home.HomeScreen
+import com.example.feat.document.DocumentScreen
 import com.example.feat.main.MainScreen
 import com.example.navigation.graph.DetailScreens
 import com.example.navigation.graph.detailGraph
@@ -43,7 +43,6 @@ fun AppNavigation(
 
     }
 
-
     NavHost(
         navController = navController,
         startDestination = Destination.signIn.route
@@ -52,12 +51,11 @@ fun AppNavigation(
         composable(Destination.signIn.route) {
             signInScreen()
         }
-        composable(Destination.home.route) {
-            HomeScreen()
-        }
         composable(Destination.main.route) {
             MainScreen()
         }
-
+        composable(Destination.document.route) {
+            DocumentScreen()
+        }
     }
 }

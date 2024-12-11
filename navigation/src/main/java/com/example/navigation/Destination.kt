@@ -1,5 +1,6 @@
 package com.example.navigation
 
+import com.example.navigation.screens.Document
 import com.example.navigation.screens.Home
 import com.example.navigation.screens.Main
 import com.example.navigation.screens.SignIn
@@ -9,4 +10,5 @@ Destination {
     val signIn = SignIn
     val home = Home
     val main = Main
+    val document = Document
 }

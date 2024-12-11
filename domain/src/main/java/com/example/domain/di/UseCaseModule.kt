@@ -1,11 +1,15 @@
 package com.example.domain.di
 
 import com.example.data.dataSource.auth.AuthDataSource
+import com.example.data.dataSource.booking.BookingDataSource
 import com.example.data.dataSource.course.CourseDataSource
 import com.example.data.dataSource.eBook.EBookDataSource
 import com.example.data.dataSource.tutor.TutorDataSource
+import com.example.data.dataSource.user.UserDataSource
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.domain.usecase.auth.SignInUseCaseImpl
+import com.example.domain.usecase.document.DocumentUseCase
+import com.example.domain.usecase.document.DocumentUseCaseImpl
 import com.example.domain.usecase.home.HomeUseCase
 import com.example.domain.usecase.home.HomeUseCaseImpl
 import dagger.Module
@@ -42,6 +46,22 @@ object UseCaseModule {
             courseDataSource = courseDataSource,
             eBookDataSource = eBookDataSource,
             ioDispatcher = dispatcher,
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookingUseCase(
+        bookingDataSource: BookingDataSource,
+        dispatcher: CoroutineContext,
+        userDataSource: UserDataSource,
+        tutorDataSource: TutorDataSource,
+    ): DocumentUseCase {
+        return DocumentUseCaseImpl(
+            bookingDataSource = bookingDataSource,
+            userDataSource = userDataSource,
+            tutorDataSource = tutorDataSource,
+            ioDispatcher = dispatcher
         )
     }
 }

@@ -44,5 +44,6 @@ data class TutorEntity(
     var rating : Double?    = 0.0,
     var isNative : Boolean? = false,
     var price : Double? = 0.0,
-    var isOnline : Boolean?     = false
+    var isOnline : Boolean? = false,
+    var isFavorite : Boolean? = false,
 )
