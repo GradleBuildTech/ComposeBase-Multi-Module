@@ -5,10 +5,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.example.feat.R
 
@@ -35,21 +36,25 @@ fun TimeRichText(
             }
         }
 
-        val textSpans = contents.mapIndexed { index, element ->
-            val fontWeight = if (index in intArrayOf(0, 2, 4, 5, 7)) FontWeight.Normal else FontWeight.Bold
-            AnnotatedString(
-                text = element,
-                spanStyle = SpanStyle(
-                    fontSize = 16.sp,
-                    fontWeight = fontWeight,
-                    letterSpacing = 0.15.sp,
-                    color = colorResource(id = R.color.white)
-                )
-            )
+        val textSpans = buildAnnotatedString {
+            contents.forEachIndexed { index, element ->
+                val fontWeight =
+                    if (index in intArrayOf(0, 2, 4, 5, 7)) FontWeight.Normal else FontWeight.Bold
+                withStyle(
+                    style = SpanStyle(
+                        fontSize = 16.sp,
+                        fontWeight = fontWeight,
+                        letterSpacing = 0.15.sp,
+                        color = colorResource(id = R.color.white)
+                    )
+                ) {
+                    append(element)
+                }
+            }
         }
 
         Text(
-            text = textSpans.reduce { acc, annotatedString -> acc + annotatedString },
+            text = textSpans,
             textAlign = TextAlign.Center, // Center the text content
         )
     }

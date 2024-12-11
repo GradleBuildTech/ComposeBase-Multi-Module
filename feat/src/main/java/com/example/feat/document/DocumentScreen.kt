@@ -90,7 +90,7 @@ fun DocumentScreen(
                     Spacer(modifier = Modifier.width(20.dp))
                     Icon(
                         Icons.Default.FavoriteBorder,
-                        contentDescription = "Search",
+                        contentDescription = "Favorite",
                         modifier = Modifier.size(24.dp),
                         tint = Color.Black.copy(alpha = 0.7f)
                     )
