@@ -18,7 +18,8 @@ fun AppNavigation(
     navigator: Navigator,
     signInScreen: @Composable () -> Unit,
     detailScreensWithGraph: DetailScreens,
-    isAuthState: Boolean = false
+    isAuthState: Boolean = false,
+    bottomNavigationWrapper: @Composable () -> Unit
 ) {
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
@@ -54,8 +55,8 @@ fun AppNavigation(
         composable(Destination.main.route) {
             MainScreen()
         }
-        composable(Destination.document.route) {
-            DocumentScreen()
+        composable(Destination.bottomWrapper.route) {
+            bottomNavigationWrapper()
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 
 data class NavigationBarItemModel(
     val label: String,
+    val routeDestination: String = "",
     val idResourceIcon: Int,
     val screen: @Composable () -> Unit,
 )

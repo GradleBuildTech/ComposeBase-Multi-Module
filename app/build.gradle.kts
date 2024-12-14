@@ -87,6 +87,7 @@ dependencies {
     implementation(project(":local"))
     implementation(project(":guard"))
     implementation(project(":feat:auth"))
+    implementation(project(":feat"))
 
 
     //region D.I Dependency Injection

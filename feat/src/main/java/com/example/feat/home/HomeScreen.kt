@@ -45,7 +45,7 @@ import com.example.feat.home.controller.HomeViewModel
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel,
 ) {
     val uiState by homeViewModel.uiState.collectAsState()
     
@@ -138,10 +138,4 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
-}
-
-@Composable
-@Preview
-fun HomeScreenPreview() {
-    HomeScreen()
 }
