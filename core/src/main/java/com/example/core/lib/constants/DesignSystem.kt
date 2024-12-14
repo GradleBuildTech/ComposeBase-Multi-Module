@@ -19,6 +19,7 @@ object DesignSystem {
     val BUTTON_CORNER_RADIUS = 8.dp
     val BUTTON_ELEVATION = 2.dp
     val BUTTON_STROKE_WIDTH = 2.dp
+    val BOTTOM_SHEET_CORNER_RADIUS = 16.dp
 
     ///Title small
     val TITLE_SMALL_STYLE = TextStyle(

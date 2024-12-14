@@ -112,10 +112,6 @@ fun DocumentScreen(
                     Skeleton(
                         width = screenWidth.toDouble(),
                         height = 150.0,
-                        leftPadding = 10.0,
-                        rightPadding = 10.0,
-                        topPadding = 10.0,
-                        bottomPadding = 10.0,
                     )
                 }
             } else {
@@ -154,9 +150,7 @@ fun DocumentScreen(
                             size = uiState.tutors.size,
                             item = { index ->
                                 TutorCardView(
-                                    modifier = Modifier.padding(
-                                        10.dp,
-                                    ),
+                                    modifier = Modifier,
                                     tutor = uiState.tutors[index],
                                     onClick = { tutor ->
 

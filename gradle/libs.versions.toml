@@ -24,6 +24,7 @@ kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
 coil = "2.7.0"
 accompanistFlowlayout = "0.19.0"
+accompanistSwipeRefresh = "0.27.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +62,7 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 accompanistFlowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
+accompanistSwipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwipeRefresh" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

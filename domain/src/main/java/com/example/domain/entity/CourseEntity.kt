@@ -16,5 +16,6 @@ class CourseEntity (
     var visible: Boolean? = false,
     var displayOrder: Int? = 0,
     var createdAt: String? = "",
-    var updatedAt: String? = ""
+    var updatedAt: String? = "",
+    var topics: List<TopicEntity> = emptyList()
 )

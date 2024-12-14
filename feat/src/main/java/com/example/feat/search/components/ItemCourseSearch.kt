@@ -1,12 +1,12 @@
-package com.example.feat.home.components
+package com.example.feat.search.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -19,72 +19,74 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
 import com.example.domain.entity.CourseEntity
 import com.example.domain.mapper.toExperienceText
 import com.example.feat.R
 
 @Composable
-fun ItemCourse(
+fun ItemCourseSearch(
     course: CourseEntity,
-    onClick: (CourseEntity) -> Unit
+    modifier: Modifier
 ) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp
-    val itemCourseHeight = Constants.COURSE_ITEM_HEIGHT
-
     Box(
-        modifier = Modifier
-            .width((screenWidth * 0.4).dp)
-            .height(itemCourseHeight.dp)
+        modifier = modifier
             .shadow(elevation = 5.dp, shape = RoundedCornerShape(10.dp))
-            .background(Color.Gray)
-            .clickable { onClick(course) }
+            .background(Color.White)
+            .fillMaxWidth()
+            .padding(5.dp)
+            .clickable { }
     ) {
-        Box(
-            modifier = Modifier
-                .width((screenWidth * 0.4).dp)
-                .fillMaxHeight()
-                .clip(RoundedCornerShape(10.dp))
-        ) {
+        Row {
             AsyncImage(
                 model = course.imageUrl ?: "",
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier
+                    .clip(RoundedCornerShape(topStart = 10.dp, bottomStart = 10.dp))
+                    .width(130.dp)
+                    .height(130.dp)
+                    .background(Color.Gray)
             )
-        }
-        Column(
-            modifier = Modifier
-                .padding(10.dp)
-                .align(Alignment.BottomStart),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                text = course.name ?: "",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = DesignSystem.TITLE_SMALL_STYLE.copy(
-                    color = Color.White,
-                    fontWeight = FontWeight.SemiBold,
-                ),
-            )
-            Text(
-                text = course.description ?: "",
-                maxLines = 3,
-                style = DesignSystem.SUBTITLE_SMALL_STYLE.copy(
-                    color = Color.White,
+            Spacer(modifier = Modifier.width(10.dp))
+            Column(
+                modifier = Modifier.align(Alignment.CenterVertically),
+            ) {
+                Text(
+                    text = course.name ?: "",
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    style = DesignSystem.TITLE_SMALL_STYLE.copy(
+                        fontWeight = FontWeight.SemiBold,
+                    )
                 )
-            )
-            Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    text = course.description ?: "",
+                    maxLines = 4,
+                    style = DesignSystem.SUBTITLE_SMALL_STYLE
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Levels ",
+                        style = DesignSystem.TITLE_SMALL_STYLE.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            color = colorResource(id = R.color.primaryColor)
+                        )
+                    )
+                    Text(
+                        text = "${course.level} . ${course.topics.size} topics",
+                        style = DesignSystem.SUBTITLE_MEDIUM_STYLE
+                    )
+                }
+            }
         }
         Box(
             modifier = Modifier
