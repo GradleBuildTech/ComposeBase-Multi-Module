@@ -39,6 +39,7 @@ fun TutorsResponse.toDomain(): List<TutorEntity> {
 
 fun TutorsResponse.toFavoriteDomain(): TutorFavorites {
     return TutorFavorites(
+        count = this.tutors.count,
         tutors = this.tutors.rows.map {
             it.toEntity();
         },

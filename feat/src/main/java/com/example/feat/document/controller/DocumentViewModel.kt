@@ -44,7 +44,7 @@ class DocumentViewModel @Inject constructor(
     override suspend fun handleEvent(event: DocumentUiEvent) {
         when (event) {
             is DocumentUiEvent.AddFavoriteTutor -> addFavoriteTutor(event.tutorId)
-            else -> {}
+            is DocumentUiEvent.FetchTutors -> pageFetchTutorial()
         }
     }
 
@@ -91,8 +91,9 @@ class DocumentViewModel @Inject constructor(
 
     private fun updateStateWithTutors(either: Either<ExceptionState, Any>) {
         if (either.isRight()) {
-            val tutors = (either.rightValue() as TutorFavorites).tutors
-            val favoriteTutors = (either.rightValue() as TutorFavorites).favoriteTutors
+            val tutorResponse = either.rightValue() as TutorFavorites
+            val tutors = tutorResponse.tutors
+            val favoriteTutors = tutorResponse.favoriteTutors
 
             for (tutor in tutors) {
                 tutor.isFavorite = favoriteTutors.any { it.secondId == tutor.id }
@@ -103,10 +104,45 @@ class DocumentViewModel @Inject constructor(
                     tutors = tutors,
                     favoriteTutors = favoriteTutors,
                     isLoading = false,
+                    totalPage = tutorResponse.count
                 )
             }
         } else {
             setUiState { copy(isLoading = false) }
+        }
+    }
+
+    private fun pageFetchTutorial() {
+        if(uiState.value.isLoading) return
+        val currentPage = uiState.value.currentPage
+        val totalPage = uiState.value.totalPage
+        if((currentPage * TUTOR_LIMIT_ITEM) >= totalPage) return
+        viewModelScope.launch {
+            setUiState { copy(isLoading = true) }
+            if (currentPage < totalPage) {
+                documentUseCase.fetchTutors(
+                    paginationRequest = PaginationRequest(
+                        page = currentPage + 1,
+                        pageSize = TUTOR_LIMIT_ITEM,
+                    )
+                ).collect { either ->
+                    if (either.isRight()) {
+                        val tutorFavorites = either.rightValue() as TutorFavorites
+                        val tutors = tutorFavorites.tutors
+                        val favoriteTutors = tutorFavorites.favoriteTutors
+
+                        setUiState {
+                            copy(
+                                tutors = listOf(uiState.value.tutors, tutors).flatten(),
+                                favoriteTutors = favoriteTutors,
+                                currentPage = currentPage + 1,
+                                isLoading = false,
+                                totalPage = tutorFavorites.count
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
