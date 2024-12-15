@@ -37,10 +37,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.components.BottomSheet
 import com.example.core.components.RefreshableList
 import com.example.core.components.Skeleton
@@ -57,9 +55,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(
-    searchViewModel: SearchViewModel = hiltViewModel()
-) {
+fun SearchScreen(searchViewModel: SearchViewModel) {
     val uiState by searchViewModel.uiState.collectAsState()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
@@ -242,14 +238,4 @@ fun SearchBar(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun SearchScreenPreview(
-
-) {
-    SearchScreen(
-
-    )
 }

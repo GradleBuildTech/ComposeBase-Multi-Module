@@ -5,13 +5,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.feat.document.controller.DocumentViewModel
 import com.example.feat.home.controller.HomeViewModel
 import com.example.feat.main.controller.MainViewModel
+import com.example.feat.search.controller.SearchViewModel
 
 @Composable
 fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
     documentViewModel: DocumentViewModel = hiltViewModel(),
     homeViewModel: HomeViewModel = hiltViewModel(),
-    buildBody: @Composable (DocumentViewModel, HomeViewModel) -> Unit = { _, _ -> }
+    searchViewModel: SearchViewModel = hiltViewModel(),
+    buildBody: @Composable (DocumentViewModel, HomeViewModel, SearchViewModel) -> Unit = { _, _, _ -> }
 ) {
-    buildBody(documentViewModel, homeViewModel)
+    buildBody(documentViewModel, homeViewModel, searchViewModel)
 }

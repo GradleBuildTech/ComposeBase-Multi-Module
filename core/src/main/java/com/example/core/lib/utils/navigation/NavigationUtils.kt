@@ -19,6 +19,7 @@ val bottomNavigationTabs: List<NavigationBarItemModel> = listOf(
         screen = {},
     ),
     NavigationBarItemModel(
+        routeDestination = AppDecorator.SEARCH,
         label = Constants.SEARCH_TAB,
         idResourceIcon = DrawableConst.SEARCH_ICON,
         screen = {},
@@ -38,7 +39,7 @@ val bottomNavigationTabs: List<NavigationBarItemModel> = listOf(
 val bottomNavigationRoute: List<String> = listOf(
     AppDecorator.HOME,
     AppDecorator.DOCUMENT,
-    "",
+    AppDecorator.SEARCH,
     "",
     "",
 )

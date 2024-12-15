@@ -11,6 +11,7 @@ import com.example.composebase.ui.theme.ComposeBaseTheme
 import com.example.feat.document.DocumentScreen
 import com.example.feat.home.HomeScreen
 import com.example.feat.main.MainScreen
+import com.example.feat.search.SearchScreen
 import com.example.guard.auth.AuthGuardController
 import com.example.guard.auth.AuthStateData
 import com.example.navigation.AppNavigation
@@ -45,11 +46,12 @@ class SingleActivity: ComponentActivity() {
                     isAuthState = autState.value.state == AuthStateData.AUTH,
                     bottomNavigationWrapper = {
                         MainScreen {
-                            documentViewModel, homeViewModel ->
+                            documentViewModel, homeViewModel, searchViewModel ->
                             BottomAppNavigation(
                                 navigator = bottomNavigator,
                                 homeScreen = { HomeScreen(homeViewModel) },
-                                documentScreen = { DocumentScreen(documentViewModel) }
+                                documentScreen = { DocumentScreen(documentViewModel) },
+                                searchScreen = { SearchScreen(searchViewModel) }
                             )
                         }
                     }

@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.collectLatest
 fun BottomAppNavigation(
     navigator: Navigator,
     homeScreen: @Composable () -> Unit,
-    documentScreen: @Composable () -> Unit
+    documentScreen: @Composable () -> Unit,
+    searchScreen: @Composable () -> Unit
 ) {
     val navController = rememberNavController()
 
@@ -39,6 +40,7 @@ fun BottomAppNavigation(
             ) {
                 composable(Destination.home.route) { homeScreen() }
                 composable(Destination.document.route) { documentScreen() }
+                composable(Destination.search.route) { searchScreen() }
             }
         },
         onChangeTab = { destination ->
