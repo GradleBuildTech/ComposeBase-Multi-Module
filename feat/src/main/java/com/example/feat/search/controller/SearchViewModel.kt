@@ -146,7 +146,6 @@ class SearchViewModel @Inject constructor(
         setUiState {
             copy(
                 selectedContentCategory = event.contentCategory,
-
             )
         }
     }

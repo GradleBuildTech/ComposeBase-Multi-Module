@@ -129,6 +129,7 @@ fun SearchScreen(
                 sheetState = sheetState,
                 shape = RoundedCornerShape(DesignSystem.BOTTOM_SHEET_CORNER_RADIUS),
                 onDismiss = {
+                    searchViewModel.onEvent(SearchUiEvent.OnBottomSheetDismissed)
                     scope.launch { sheetState.hide() }
                         .invokeOnCompletion { isBottomSheetVisible.value = false }
                 }
@@ -138,6 +139,7 @@ fun SearchScreen(
                     onCategorySelected = {
                         searchViewModel.onEvent(SearchUiEvent.OnSelectedContentCategory(it))
                     },
+                    contentCategorySelected = uiState.selectedContentCategory,
                     onApplyFilter = {
                         scope.launch { sheetState.hide() }
                             .invokeOnCompletion { isBottomSheetVisible.value = false }
@@ -150,7 +152,7 @@ fun SearchScreen(
 }
 
 @Composable
-fun SearchScreenHeader() {
+private fun SearchScreenHeader() {
     Row(
         modifier = Modifier
             .padding(vertical = 15.dp, horizontal = 20.dp)
@@ -184,7 +186,7 @@ fun SearchScreenHeader() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(
+private fun SearchBar(
     searchController: MutableState<String>,
     scope: CoroutineScope,
     isBottomSheetVisible: MutableState<Boolean>,
