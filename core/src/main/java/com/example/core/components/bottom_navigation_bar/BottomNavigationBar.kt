@@ -95,6 +95,7 @@ fun BottomNavigationBar(
                 tabs = tabs,
                 modifier = Modifier,
                 currentIndex = currentIndex,
+                onItemClicked = onItemClicked,
                 bottomNavigationBarStyle = bottomNavigationStyle,
             )
 

@@ -6,4 +6,5 @@ object AppDecorator {
     const val MAIN = "main"
     const val DOCUMENT = "document"
     const val SEARCH = "search"
+    const val BOTTOM_WRAPPER = "bottom_wrapper"
 }

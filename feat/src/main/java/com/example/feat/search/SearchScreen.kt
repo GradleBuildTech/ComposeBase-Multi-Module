@@ -129,14 +129,12 @@ fun SearchScreen(
                 sheetState = sheetState,
                 shape = RoundedCornerShape(DesignSystem.BOTTOM_SHEET_CORNER_RADIUS),
                 onDismiss = {
-                    searchViewModel.onEvent(SearchUiEvent.OnBottomSheetDismissed)
                     scope.launch { sheetState.hide() }
                         .invokeOnCompletion { isBottomSheetVisible.value = false }
                 }
             ) {
                 ContentCategoriesBottomSheet(
                     contentCategories = uiState.contentCategories,
-                    contentCategorySelected = uiState.selectedContentCategory,
                     onCategorySelected = {
                         searchViewModel.onEvent(SearchUiEvent.OnSelectedContentCategory(it))
                     },
@@ -241,15 +239,4 @@ fun SearchBar(
             )
         }
     }
-}
-
-
-@Preview
-@Composable
-fun SearchScreenPreview(
-
-) {
-    SearchScreen(
-
-    )
 }

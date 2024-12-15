@@ -25,11 +25,11 @@ fun Timer(
     val countDownTimer = remember {
         object : CountDownTimer(millisInFuture - currentTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                timeData.value = millisUntilFinished
+                timeData.longValue = millisUntilFinished
             }
 
             override fun onFinish() {
-                timeData.value = 0
+                timeData.longValue = 0
             }
         }
     }
@@ -41,9 +41,9 @@ fun Timer(
         }
     }
 
-    val hours = timeData.value / 1000 / 3600
-    val minutes = timeData.value / 1000 % 3600 / 60
-    val seconds = timeData.value / 1000 % 60
+    val hours = timeData.longValue / 1000 / 3600
+    val minutes = timeData.longValue / 1000 % 3600 / 60
+    val seconds = timeData.longValue / 1000 % 60
 
     TimeRichText(header = header, hours = hours, minutes = minutes, seconds = seconds)
 }

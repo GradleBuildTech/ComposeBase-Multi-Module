@@ -5,7 +5,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.feat.document.DocumentScreen
 import com.example.feat.main.MainScreen
 import com.example.feat.search.SearchScreen
 import com.example.navigation.graph.DetailScreens
@@ -17,7 +16,8 @@ fun AppNavigation(
     navigator: Navigator,
     signInScreen: @Composable () -> Unit,
     detailScreensWithGraph: DetailScreens,
-    isAuthState: Boolean = false
+    isAuthState: Boolean = false,
+    bottomNavigationWrapper: @Composable () -> Unit
 ) {
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
@@ -53,8 +53,8 @@ fun AppNavigation(
         composable(Destination.main.route) {
             MainScreen()
         }
-        composable(Destination.document.route) {
-            DocumentScreen()
+        composable(Destination.bottomWrapper.route) {
+            bottomNavigationWrapper()
         }
         composable(Destination.search.route) {
             SearchScreen()

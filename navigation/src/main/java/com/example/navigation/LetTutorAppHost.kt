@@ -11,12 +11,12 @@ import com.example.feat.home.HomeScreen
 fun LetTutorAppHost(
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = Destination.home.route) {
-        composable(Destination.home.route) {
-            HomeScreen()
-        }
-        composable(Destination.document.route) {
-            DocumentScreen()
-        }
-    }
+//    NavHost(navController = navController, startDestination = Destination.home.route) {
+//        composable(Destination.home.route) {
+//            HomeScreen()
+//        }
+//        composable(Destination.document.route) {
+//            DocumentScreen()
+//        }
+//    }
 }

@@ -46,7 +46,7 @@ import com.example.feat.document.controller.DocumentViewModel
 
 @Composable
 fun DocumentScreen(
-    documentViewModel: DocumentViewModel = hiltViewModel()
+    documentViewModel: DocumentViewModel
 ) {
     val uiState by documentViewModel.uiState.collectAsState()
     val configuration = LocalConfiguration.current
@@ -172,8 +172,3 @@ fun DocumentScreen(
     }
 }
 
-@Composable
-@Preview
-fun DocumentScreenPreview() {
-    DocumentScreen()
-}

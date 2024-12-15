@@ -87,3 +87,5 @@ local.properties
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len
+/feat/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values
+/feat/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.s
