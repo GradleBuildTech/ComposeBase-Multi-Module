@@ -14,11 +14,28 @@ import com.example.core.components.bottom_navigation_bar.dataClass.NavigationBar
 import com.example.core.lib.utils.navigation.bottomNavigationRoute
 import com.example.core.lib.utils.navigation.bottomNavigationTabs
 
+/// Wrapper for the bottom navigation bar
+
+///How to use
+/// ```kotlin
+/// BottomNavigationWrapper(
+///     body = {
+///         // Your content here
+///     },
+///     currentDestination = currentDestination,
+///     onChangeTab = { destination ->
+///         navController.navigate(destination)
+///     }
+/// )
+/// ```
+
+
 @Composable
 fun BottomNavigationWrapper(
     body: @Composable () -> Unit,
     currentDestination: String,
-    onChangeTab: (String) -> Unit
+    onChangeTab: (String) -> Unit,
+    paddingValues: PaddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp)
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -30,7 +47,7 @@ fun BottomNavigationWrapper(
                 },
                 type = NavigationBarType.LABEL,
                 currentIndex = bottomNavigationRoute.indexOfFirst { it == currentDestination },
-                paddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp)
+                paddingValues = paddingValues
             )
         }
     ) { innerPadding ->
