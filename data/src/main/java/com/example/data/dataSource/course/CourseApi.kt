@@ -1,5 +1,6 @@
 package com.example.data.dataSource.course
 
+import com.example.data.model.response.course.ContentCategoryResponse
 import com.example.data.model.response.course.CoursesResponse
 import com.example.network.utils.ApiPath
 import retrofit2.Response
@@ -10,6 +11,11 @@ interface CourseApi {
     @GET(ApiPath.COURSE)
     suspend fun fetchCourses(
         @Query("page") page: Int,
-        @Query("perPage") pageSize: Int
+        @Query("perPage") pageSize: Int,
+        @Query("q") searchQuery: String? = null,
+        @Query("categoryId") contentCategoryId: String? = null,
     ): Response<CoursesResponse>
+
+    @GET(ApiPath.CONTENT_CATEGORY)
+    suspend fun fetchContentCategories(): Response<ContentCategoryResponse>
 }

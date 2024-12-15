@@ -1,14 +1,12 @@
 package com.example.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.feat.document.DocumentScreen
 import com.example.feat.main.MainScreen
+import com.example.feat.search.SearchScreen
 import com.example.navigation.graph.DetailScreens
 import com.example.navigation.graph.detailGraph
 import kotlinx.coroutines.flow.collectLatest
@@ -57,6 +55,9 @@ fun AppNavigation(
         }
         composable(Destination.bottomWrapper.route) {
             bottomNavigationWrapper()
+        }
+        composable(Destination.search.route) {
+            SearchScreen()
         }
     }
 }

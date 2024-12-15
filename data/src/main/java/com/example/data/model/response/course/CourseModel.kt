@@ -19,5 +19,6 @@ data class CourseModel(
     var visible : Boolean? = null,
     var displayOrder : Int? = null,
     var createdAt : String? = null,
-    var updatedAt : String? = null
+    var updatedAt : String? = null,
+    var topics: List<TopicModel>? = null
 )

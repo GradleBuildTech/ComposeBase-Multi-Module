@@ -12,6 +12,8 @@ import com.example.domain.usecase.document.DocumentUseCase
 import com.example.domain.usecase.document.DocumentUseCaseImpl
 import com.example.domain.usecase.home.HomeUseCase
 import com.example.domain.usecase.home.HomeUseCaseImpl
+import com.example.domain.usecase.search.SearchUseCase
+import com.example.domain.usecase.search.SearchUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,6 +63,18 @@ object UseCaseModule {
             bookingDataSource = bookingDataSource,
             userDataSource = userDataSource,
             tutorDataSource = tutorDataSource,
+            ioDispatcher = dispatcher
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUseCase(
+        courseDataSource: CourseDataSource,
+        dispatcher: CoroutineContext,
+    ): SearchUseCase {
+        return SearchUseCaseImpl(
+            courseDataSource = courseDataSource,
             ioDispatcher = dispatcher
         )
     }

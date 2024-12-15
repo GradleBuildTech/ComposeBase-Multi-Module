@@ -12,7 +12,6 @@ import com.example.domain.entity.BookingInfoEntity
 import com.example.domain.entity.TutorFavorites
 import com.example.domain.mapper.toDomain
 import com.example.domain.mapper.toFavoriteDomain
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -54,8 +53,10 @@ class DocumentUseCaseImpl @Inject constructor(
     override fun addFavoriteTutor(tutorId: String): Flow<Either<ExceptionState, Boolean>> = flow {
         val response = tutorDataSource.addFavoriteTutor(tutorId)
 
+        val failedResponseCode = 1.0
+
         val dataConvert = response.mapAndConverterToStateData {
-            it.result != 1.0
+            it.result != failedResponseCode
         }
 
         emit(dataConvert)

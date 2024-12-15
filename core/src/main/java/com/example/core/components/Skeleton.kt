@@ -38,3 +38,20 @@ fun Skeleton(
             .background(Color.LightGray)
     )
 }
+
+@Composable
+fun SkeletonList(
+    width: Double,
+    height: Double,
+    itemSize: Int = 5,
+){
+    VerticalList(
+        size = itemSize,
+        item = { _ ->
+            Skeleton(
+                width = width,
+                height = height,
+            )
+        },
+    )
+}

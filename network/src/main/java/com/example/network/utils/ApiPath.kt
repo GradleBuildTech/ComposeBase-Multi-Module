@@ -8,5 +8,6 @@ object ApiPath {
     const val BOOKING = "/booking"
     const val USER = "/user"
     const val CALL = "/call"
+    const val CONTENT_CATEGORY = "/content-category"
 
 }
