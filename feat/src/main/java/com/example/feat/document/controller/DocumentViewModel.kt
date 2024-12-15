@@ -10,10 +10,8 @@ import com.example.domain.entity.BookingInfoEntity
 import com.example.domain.entity.TutorFavorites
 import com.example.domain.usecase.document.DocumentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.launch
 import java.util.Date
-import java.util.concurrent.Future
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,7 +45,6 @@ class DocumentViewModel @Inject constructor(
         when (event) {
             is DocumentUiEvent.AddFavoriteTutor -> addFavoriteTutor(event.tutorId)
             is DocumentUiEvent.FetchTutors -> pageFetchTutorial()
-            else -> {}
         }
     }
 
@@ -94,7 +91,7 @@ class DocumentViewModel @Inject constructor(
 
     private fun updateStateWithTutors(either: Either<ExceptionState, Any>) {
         if (either.isRight()) {
-            val tutorResponse = (either.rightValue() as TutorFavorites)
+            val tutorResponse = either.rightValue() as TutorFavorites
             val tutors = tutorResponse.tutors
             val favoriteTutors = tutorResponse.favoriteTutors
 
@@ -130,8 +127,9 @@ class DocumentViewModel @Inject constructor(
                     )
                 ).collect { either ->
                     if (either.isRight()) {
-                        val tutors = (either.rightValue() as TutorFavorites).tutors
-                        val favoriteTutors = (either.rightValue() as TutorFavorites).favoriteTutors
+                        val tutorFavorites = either.rightValue() as TutorFavorites
+                        val tutors = tutorFavorites.tutors
+                        val favoriteTutors = tutorFavorites.favoriteTutors
 
                         setUiState {
                             copy(
@@ -139,7 +137,7 @@ class DocumentViewModel @Inject constructor(
                                 favoriteTutors = favoriteTutors,
                                 currentPage = currentPage + 1,
                                 isLoading = false,
-                                totalPage = totalPage
+                                totalPage = tutorFavorites.count
                             )
                         }
                     }

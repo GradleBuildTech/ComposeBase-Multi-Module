@@ -76,7 +76,7 @@ fun <T> DefaultPagination(
             coroutineScope.launch {
                 /// Scroll to the last item when loading
                 if (items.isNotEmpty()) {
-                    listState.scrollToItem(items.size + 1)
+                    listState.scrollToItem(items.size - 1 + (if(skeletonComponent != null) skeletonCountable else 1))
                 }
             }
         }
