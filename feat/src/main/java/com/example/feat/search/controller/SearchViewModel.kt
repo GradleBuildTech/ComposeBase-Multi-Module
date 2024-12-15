@@ -12,6 +12,7 @@ import com.example.domain.usecase.search.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.core.extensions.debounce as debounce
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -67,17 +68,38 @@ class SearchViewModel @Inject constructor(
             is SearchUiEvent.OnApplyFilter -> onApplyFilter()
             is SearchUiEvent.OnSearchSubmitted -> onSearchSubmitted(event)
             is SearchUiEvent.OnRefresh -> fetchCourse()
+            is SearchUiEvent.OnBottomSheetDismissed -> onBottomSheetDismissed()
         }
     }
 
-    private fun onSearchSubmitted(event: SearchUiEvent.OnSearchSubmitted) {
-        viewModelScope.launch {
-            setUiState { copy(searchText = event.searchText) }
-            fetchCourse()
+    private fun onBottomSheetDismissed() {
+        if(uiState.value.currentContentCategory != uiState.value.selectedContentCategory) {
+            setUiState { copy(selectedContentCategory = uiState.value.currentContentCategory) }
+            viewModelScope.launch {
+                fetchCourse()
+            }
         }
+    }
+
+    private val debouncedOnSearchSubmitted: (SearchUiEvent.OnSearchSubmitted) -> Unit =
+        debounce(
+            coroutineScope = viewModelScope
+        ) { event ->
+            // This block will only execute after the debounce delay
+            viewModelScope.launch {
+                setUiState { copy(searchText = event.searchText) }
+                fetchCourse()
+            }
+        }
+
+    // Function to handle the search submission
+    private fun onSearchSubmitted(event: SearchUiEvent.OnSearchSubmitted) {
+        debouncedOnSearchSubmitted(event)
     }
 
     private fun onApplyFilter() {
+        setUiState { copy(currentContentCategory = selectedContentCategory) }
+
         viewModelScope.launch {
             fetchCourse()
         }
@@ -112,22 +134,19 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun onSelectedContentCategory(event: SearchUiEvent.OnSelectedContentCategory) {
-        val contentCategories = uiState.value.contentCategories.toMutableList()
         val selectedContentCategory = uiState.value.selectedContentCategory
 
-        contentCategories.forEach {
-            if (it == selectedContentCategory) {
-                it.selected = false
-            } else {
-                it.selected = it == event.contentCategory
+        if (event.contentCategory == selectedContentCategory) {
+            setUiState {
+                copy(selectedContentCategory = null)
             }
-
+            return
         }
 
         setUiState {
             copy(
-                contentCategories = contentCategories,
-                selectedContentCategory = if (selectedContentCategory == event.contentCategory) null else event.contentCategory
+                selectedContentCategory = event.contentCategory,
+
             )
         }
     }

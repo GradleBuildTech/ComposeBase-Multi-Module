@@ -42,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.components.BottomSheet
+import com.example.core.components.NotFound
 import com.example.core.components.RefreshableList
-import com.example.core.components.Skeleton
-import com.example.core.components.VerticalList
+import com.example.core.components.SkeletonList
 import com.example.core.components.textField.SearchTextField
 import com.example.core.lib.constants.DesignSystem
 import com.example.feat.R
@@ -83,7 +83,11 @@ fun SearchScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            Column {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 SearchBar(
                     searchController = searchController,
                     scope = scope,
@@ -93,51 +97,46 @@ fun SearchScreen(
                 ) {
                     searchViewModel.onEvent(SearchUiEvent.OnSearchSubmitted(it))
                 }
-                if (uiState.isLoading)
-                    VerticalList(
-                        size = 5,
-                        item = { _ ->
-                            Skeleton(
-                                width = screenWidth.toDouble(),
-                                height = 150.0,
-                            )
-                        },
-                    )
-                if (uiState.courses.isNotEmpty())
-                    RefreshableList(
-                        size = uiState.courses.size,
-                        isLoading = uiState.isLoading,
-                        onRefresh = {
-                            searchViewModel.onEvent(SearchUiEvent.OnRefresh)
-                        },
-                        item = { index ->
-                            ItemCourseSearch(
-                                course = uiState.courses[index],
-                                modifier = Modifier,
-                            )
 
-                        },
-                    )
-                else
-                    Text(
-                        text = "No courses found",
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .align(Alignment.CenterHorizontally),
-                        style = DesignSystem.TITLE_SMALL_STYLE
-                    )
+                when {
+                    uiState.isLoading -> {
+                        SkeletonList(
+                            width = screenWidth.toDouble(),
+                            height = 150.0,
+                        )
+                    }
+                    uiState.courses.isNotEmpty() -> {
+                        RefreshableList(
+                            size = uiState.courses.size,
+                            onRefresh = {
+                                searchViewModel.onEvent(SearchUiEvent.OnRefresh)
+                            },
+                            item = { index ->
+                                ItemCourseSearch(
+                                    course = uiState.courses[index],
+                                    modifier = Modifier,
+                                )
+                            },
+                        )
+                    }
+                    else -> {
+                        NotFound(null)
+                    }
+                }
             }
             BottomSheet(
                 isBottomSheetVisible = isBottomSheetVisible.value,
                 sheetState = sheetState,
                 shape = RoundedCornerShape(DesignSystem.BOTTOM_SHEET_CORNER_RADIUS),
                 onDismiss = {
+                    searchViewModel.onEvent(SearchUiEvent.OnBottomSheetDismissed)
                     scope.launch { sheetState.hide() }
                         .invokeOnCompletion { isBottomSheetVisible.value = false }
                 }
             ) {
                 ContentCategoriesBottomSheet(
                     contentCategories = uiState.contentCategories,
+                    contentCategorySelected = uiState.selectedContentCategory,
                     onCategorySelected = {
                         searchViewModel.onEvent(SearchUiEvent.OnSelectedContentCategory(it))
                     },
@@ -243,6 +242,7 @@ fun SearchBar(
         }
     }
 }
+
 
 @Preview
 @Composable

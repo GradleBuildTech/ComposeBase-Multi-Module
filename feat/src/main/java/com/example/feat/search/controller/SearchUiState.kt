@@ -8,6 +8,7 @@ data class SearchUiState(
     val courses: List<CourseEntity> = emptyList(),
     val contentCategories: List<ContentCategoryEntity> = emptyList(),
     val selectedContentCategory : ContentCategoryEntity? = null,
+    val currentContentCategory : ContentCategoryEntity? = null,
     val searchText: String = "",
 ){
     override fun equals(other: Any?): Boolean {
@@ -25,6 +26,7 @@ data class SearchUiState(
         result = 31 * result + courses.hashCode()
         result = 31 * result + contentCategories.hashCode()
         result = 31 * result + selectedContentCategory.hashCode()
+        result = 31 * result + currentContentCategory.hashCode()
         result = 31 * result + searchText.hashCode()
         return result
     }

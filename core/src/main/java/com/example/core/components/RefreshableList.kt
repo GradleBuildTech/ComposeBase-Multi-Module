@@ -11,10 +11,9 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 fun RefreshableList(
     size: Int,
     onRefresh: () -> Unit,
-    isLoading: Boolean,
     item: @Composable (Int) -> Unit
 ) {
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isLoading)
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = false)
 
     SwipeRefresh(
         state = swipeRefreshState,

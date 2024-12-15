@@ -33,6 +33,7 @@ import java.util.Locale
 @Composable
 fun ContentCategoriesBottomSheet(
     contentCategories: List<ContentCategoryEntity>,
+    contentCategorySelected: ContentCategoryEntity? = null,
     onCategorySelected: (ContentCategoryEntity) -> Unit,
     onApplyFilter: () -> Unit,
 ) {
@@ -45,8 +46,8 @@ fun ContentCategoriesBottomSheet(
                 contentCategories.forEach { category ->
                     ContentCategoryChip(
                         category = category,
-                        selected = category.selected,
-                        onCategorySelected = onCategorySelected
+                        selected = category == contentCategorySelected,
+                        onCategorySelected = onCategorySelected,
                     )
                 }
             }

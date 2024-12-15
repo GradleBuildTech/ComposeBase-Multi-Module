@@ -7,4 +7,5 @@ sealed class SearchUiEvent {
     data object OnApplyFilter : SearchUiEvent()
     class OnSearchSubmitted(val searchText: String) : SearchUiEvent()
     data object OnRefresh : SearchUiEvent()
+    data object OnBottomSheetDismissed : SearchUiEvent()
 }

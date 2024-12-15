@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun VerticalList(
+    modifier: Modifier = Modifier,
+    verticalItemPadding : Dp = 10.dp,
+    horizontalItemPadding: Dp = 10.dp,
     size: Int,
     item: @Composable (Int) -> Unit
 ) {
@@ -19,13 +23,13 @@ fun VerticalList(
     ) {
         items(size + 1) { index ->
             if (index == size)
-                Spacer(modifier = Modifier) else
+                Spacer(modifier = modifier) else
                 Box(
-                    modifier = Modifier.padding(
-                        10.dp,
-                        if (index == 0) 10.dp else 0.dp,
-                        10.dp,
-                        10.dp,
+                    modifier = modifier.padding(
+                        horizontalItemPadding,
+                        if (index == 0) verticalItemPadding else 0.dp,
+                        horizontalItemPadding,
+                        verticalItemPadding,
                     )
                 ) {
                     item(index)
