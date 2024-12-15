@@ -8,6 +8,8 @@ data class DocumentUiState (
     val bookingInfo : BookingInfoEntity? = null,
     val isLoading: Boolean = false,
     val totalTime: Int = 0,
+    val currentPage: Int = 1,
+    val totalPage: Int = 0,
     val tutors: List<TutorEntity> = emptyList(),
     val favoriteTutors: List<TutorFavoriteEntity> = emptyList()
 ){
