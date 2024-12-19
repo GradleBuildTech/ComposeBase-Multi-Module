@@ -3,6 +3,7 @@ package com.example.data.dataSource.course
 import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.response.DataResponse
 import com.example.data.model.response.course.ContentCategoryResponse
+import com.example.data.model.response.course.CourseDetailResponse
 import com.example.data.model.response.course.CoursesResponse
 import com.example.network.extensions.handleCall
 import javax.inject.Inject
@@ -27,5 +28,9 @@ class CourseDataSourceImpl @Inject constructor(
 
     override suspend fun fetchContentCategories(): DataResponse<ContentCategoryResponse> {
         return handleCall { courseApi.fetchContentCategories() }
+    }
+
+    override suspend fun fetchCourseDetail(courseId: String): DataResponse<CourseDetailResponse> {
+        return handleCall { courseApi.fetchCourseDetail(courseId) }
     }
 }

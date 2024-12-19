@@ -33,7 +33,8 @@ import com.example.feat.R
 @Composable
 fun ItemCourseSearch(
     course: CourseEntity,
-    modifier: Modifier
+    modifier: Modifier,
+    onClicked: (CourseEntity) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -41,7 +42,9 @@ fun ItemCourseSearch(
             .background(Color.White)
             .fillMaxWidth()
             .padding(5.dp)
-            .clickable { }
+            .clickable {
+                onClicked(course)
+            }
     ) {
         Row {
             AsyncImage(

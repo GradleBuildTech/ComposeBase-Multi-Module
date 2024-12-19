@@ -25,6 +25,8 @@ toolsBuildGradleVersion = "8.1.1"
 coil = "2.7.0"
 accompanistFlowlayout = "0.19.0"
 accompanistSwipeRefresh = "0.27.0"
+accompanistCollapsingToolbar = "0.32.0"
+constraintlayoutComposeAndroid = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +65,8 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 accompanistFlowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 accompanistSwipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwipeRefresh" }
+accompanistCollapsingToolbar = { module = "com.google.accompanist:accompanist-collapsing-toolbar", version.ref = "accompanistCollapsingToolbar" }
+androidx-constraintlayout-compose-android = { group = "androidx.constraintlayout", name = "constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
