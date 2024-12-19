@@ -7,6 +7,8 @@ import com.example.core.lib.constants.Constants.COURSE_LIMIT_ITEM
 import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
+import com.example.core.navigation.AppDecorator
+import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
 import com.example.domain.usecase.search.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +19,7 @@ import com.example.core.extensions.debounce as debounce
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
+    private val navigationService: NavigationService
 ) : StateAndEventViewModel<SearchUiState, SearchUiEvent>(SearchUiState()) {
     init {
         loadInitialData(
@@ -69,7 +72,12 @@ class SearchViewModel @Inject constructor(
             is SearchUiEvent.OnSearchSubmitted -> onSearchSubmitted(event)
             is SearchUiEvent.OnRefresh -> fetchCourse()
             is SearchUiEvent.OnBottomSheetDismissed -> onBottomSheetDismissed()
+            is SearchUiEvent.OnClickCourseItem -> onClickCourseItem()
         }
+    }
+
+    private fun onClickCourseItem() {
+        navigationService.navigateTo(AppDecorator.COURSE_DETAIL)
     }
 
     private fun onBottomSheetDismissed() {

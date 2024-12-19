@@ -8,4 +8,5 @@ sealed class SearchUiEvent {
     class OnSearchSubmitted(val searchText: String) : SearchUiEvent()
     data object OnRefresh : SearchUiEvent()
     data object OnBottomSheetDismissed : SearchUiEvent()
+    data object OnClickCourseItem : SearchUiEvent()
 }

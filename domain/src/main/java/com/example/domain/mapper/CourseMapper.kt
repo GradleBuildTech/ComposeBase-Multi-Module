@@ -2,6 +2,7 @@ package com.example.domain.mapper
 
 import com.example.data.model.response.course.ContentCategoryModel
 import com.example.data.model.response.course.ContentCategoryResponse
+import com.example.data.model.response.course.CourseDetailResponse
 import com.example.data.model.response.course.CourseModel
 import com.example.data.model.response.course.CoursesResponse
 import com.example.data.model.response.course.TopicModel
@@ -62,6 +63,8 @@ fun CourseModel.toEntity(): CourseEntity {
         visible = this.visible,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
+        reason = this.reason,
+        purpose = this.purpose,
         topics = this.topics?.map {
             it.toEntity()
         } ?: emptyList()
@@ -78,4 +81,8 @@ fun CoursesResponse.toDomain(): List<CourseEntity> {
     return this.courses.rows.map {
         it.toEntity()
     }
+}
+
+fun CourseDetailResponse.toDomain(): CourseEntity {
+    return this.data.toEntity()
 }

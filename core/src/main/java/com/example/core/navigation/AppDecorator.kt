@@ -7,4 +7,6 @@ object AppDecorator {
     const val DOCUMENT = "document"
     const val SEARCH = "search"
     const val BOTTOM_WRAPPER = "bottom_wrapper"
+    const val COURSE_DETAIL = "course_detail"
+    const val COURSE_ID_ARGUMENT = "courseId"
 }

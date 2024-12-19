@@ -8,6 +8,8 @@ import com.example.data.dataSource.tutor.TutorDataSource
 import com.example.data.dataSource.user.UserDataSource
 import com.example.domain.usecase.auth.SignInUseCase
 import com.example.domain.usecase.auth.SignInUseCaseImpl
+import com.example.domain.usecase.course_detail.CourseDetailUseCase
+import com.example.domain.usecase.course_detail.CourseDetailUseCaseImpl
 import com.example.domain.usecase.document.DocumentUseCase
 import com.example.domain.usecase.document.DocumentUseCaseImpl
 import com.example.domain.usecase.home.HomeUseCase
@@ -74,6 +76,18 @@ object UseCaseModule {
         dispatcher: CoroutineContext,
     ): SearchUseCase {
         return SearchUseCaseImpl(
+            courseDataSource = courseDataSource,
+            ioDispatcher = dispatcher
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCourseDetailUseCase(
+        courseDataSource: CourseDataSource,
+        dispatcher: CoroutineContext,
+    ): CourseDetailUseCase {
+        return CourseDetailUseCaseImpl(
             courseDataSource = courseDataSource,
             ioDispatcher = dispatcher
         )

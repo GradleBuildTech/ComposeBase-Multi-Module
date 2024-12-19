@@ -5,6 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.core.navigation.AppDecorator
+import com.example.feat.course_detail.CourseDetailScreen
 import com.example.feat.main.MainScreen
 import com.example.feat.search.SearchScreen
 import com.example.navigation.graph.DetailScreens
@@ -58,6 +60,11 @@ fun AppNavigation(
         }
         composable(Destination.search.route) {
             SearchScreen()
+        }
+        composable(Destination.courseDetail.destination(AppDecorator.COURSE_ID_ARGUMENT)){
+            CourseDetailScreen(
+                courseId = Destination.courseDetail.objectParser(navController.currentBackStackEntry!!)
+            )
         }
     }
 }
