@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -51,7 +50,7 @@ fun CourseDetailScreen(
 ) {
     val lazyScrollState = rememberLazyListState()
     val uiState = courseDetailViewModel.uiState.collectAsState()
-    LaunchedEffect(Unit) {
+    LaunchedEffect(courseId) {
         courseDetailViewModel.onEvent(CourseDetailUiEvent.FetchCourseDetail(courseId))
     }
     val scaffoldBackgroundColor = MaterialTheme.colorScheme.background
@@ -70,18 +69,15 @@ fun CourseDetailScreen(
             }
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(
-                    top = paddingValues.calculateTopPadding(),
-                    start = 20.dp,
-                    end = 20.dp,
-                    bottom = 0.dp
-                )
-        ) {
-            LazyColumn(
+        LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(
+                        top = paddingValues.calculateTopPadding(),
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = 0.dp
+                    )
                     .animateContentSize(),
                 state = lazyScrollState
             ) {
@@ -140,7 +136,6 @@ fun CourseDetailScreen(
                     }
                 }
             }
-        }
     }
 }
 

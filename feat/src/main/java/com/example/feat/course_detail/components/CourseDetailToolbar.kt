@@ -30,8 +30,8 @@ import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import coil.compose.AsyncImage
-import com.example.feat.R
 import com.example.core.lib.constants.DesignSystem
+import com.example.feat.R
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -45,7 +45,8 @@ fun CourseDetailToolbar(
     val screenHeight = configuration.screenHeightDp
 
     val motionScene = remember {
-        context.resources.openRawResource(R.raw.collapse_toolbar).readBytes().decodeToString()
+        context.resources.openRawResource(R.raw.collapse_toolbar).bufferedReader()
+            .use { it.readText() }
     }
 
     val isExpanded by remember {
@@ -72,7 +73,7 @@ fun CourseDetailToolbar(
             .background(color = colorResource(id = R.color.primaryColor))
             .height(motionHeight)
     ) {
-        if (backgroundImageUrl != null && isExpanded) {
+        if (!backgroundImageUrl.isNullOrBlank() && isExpanded) {
             AsyncImage(
                 model = backgroundImageUrl,
                 contentDescription = null,
@@ -102,14 +103,14 @@ fun CourseDetailToolbar(
         Text(
             text = title ?: "",
             modifier = Modifier.layoutId("title"),
-            style = if (!isExpanded) DesignSystem.TITLE_SMALL_STYLE.copy(
+            style = if (isExpanded) DesignSystem.TITLE_LARGE_STYLE.copy(
+                color = colorResource(id = R.color.primaryColor),
+                fontSize = 25.sp
+            ) else
+                DesignSystem.TITLE_SMALL_STYLE.copy(
                 color = Color.White,
                 fontSize = 20.sp
-            ) else
-                DesignSystem.TITLE_LARGE_STYLE.copy(
-                    color = colorResource(id = R.color.primaryColor),
-                    fontSize = 25.sp
-                ),
+                )
         )
     }
 }
