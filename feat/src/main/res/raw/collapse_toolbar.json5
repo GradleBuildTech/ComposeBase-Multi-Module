@@ -1,0 +1,131 @@
+{
+  "ConstraintSets": {
+    "start": {
+      "backgroundImage": {
+        "width": "spread",
+        "height": "spread",
+        "start": [
+          "parent",
+          "start"
+        ],
+        "end": [
+          "parent",
+          "end"
+        ],
+        "top": [
+          "parent",
+          "top"
+        ],
+        "bottom": [
+          "parent",
+          "bottom"
+        ],
+        "custom": {
+          "backgroundColor": "#FF0000",
+          "alpha": 1
+        }
+      },
+      "backButton": {
+        "width": 40,
+        "height": 40,
+        "start": [
+          "parent",
+          "start",
+          16
+        ],
+        "top": [
+          "parent",
+          "top",
+          16
+        ]
+      },
+      "title": {
+        "width": "wrap",
+        "height": "wrap",
+        "start": [
+          "parent",
+          "start",
+          20
+        ],
+        "top": [
+          "backgroundImage",
+          "bottom",
+          16
+        ]
+      }
+    },
+    "end": {
+      "backgroundImage": {
+        "width": "spread",
+        "height": 56,
+        "start": [
+          "parent",
+          "start"
+        ],
+        "end": [
+          "parent",
+          "end"
+        ],
+        "top": [
+          "parent",
+          "top"
+        ],
+        "custom": {
+          "backgroundColor": "#ff36a0f6",
+          "alpha": 0
+        }
+      },
+      "backButton": {
+        "width": 40,
+        "height": 40,
+        "start": [
+          "parent",
+          "start",
+          8
+        ],
+        "top": [
+          "parent",
+          "top",
+          8
+        ]
+      },
+      "title": {
+        "width": "wrap",
+        "height": "wrap",
+        "start": [
+          "backButton",
+          "end",
+          8
+        ],
+        "top": [
+          "parent",
+          "top",
+          16
+        ]
+      }
+    }
+  },
+  "Transitions": {
+    "default": {
+      "from": "start",
+      "to": "end",
+      "pathMotionArc": "startVertical",
+      "duration": 300,
+      "KeyFrames": {
+        "KeyAttributes": [
+          {
+            "target": "backgroundImage",
+            "frames": [
+              50,
+              100
+            ],
+            "alpha": [
+              1,
+              0
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

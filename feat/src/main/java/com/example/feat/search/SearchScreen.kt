@@ -115,7 +115,9 @@ fun SearchScreen(
                                 ItemCourseSearch(
                                     course = uiState.courses[index],
                                     modifier = Modifier,
-                                )
+                                ){
+                                    searchViewModel.onEvent(SearchUiEvent.OnClickCourseItem)
+                                }
                             },
                         )
                     }
