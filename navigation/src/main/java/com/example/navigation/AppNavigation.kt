@@ -24,10 +24,11 @@ fun AppNavigation(
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
         navigator.actions.collectLatest {
-            when(it) {
+            when (it) {
                 is Navigator.NavigationActions.Navigate -> {
                     navController.navigate(it.destination, builder = it.navOptions)
                 }
+
                 is Navigator.NavigationActions.Back -> {
                     navController.popBackStack()
                 }
@@ -61,7 +62,7 @@ fun AppNavigation(
         composable(Destination.search.route) {
             SearchScreen()
         }
-        composable(Destination.courseDetail.destination(AppDecorator.COURSE_ID_ARGUMENT)){
+        composable(Destination.courseDetail.route, arguments = Destination.courseDetail.arguments) {
             CourseDetailScreen(
                 courseId = Destination.courseDetail.objectParser(navController.currentBackStackEntry!!)
             )

@@ -38,7 +38,8 @@ import com.example.feat.R
 fun CourseDetailToolbar(
     lazyScrollState: LazyListState,
     backgroundImageUrl: String? = null,
-    title: String? = null
+    title: String? = null,
+    backPreviousScreen: () -> Unit
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -90,7 +91,7 @@ fun CourseDetailToolbar(
         }
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = backPreviousScreen,
             modifier = Modifier.layoutId("backButton")
         ) {
             Icon(

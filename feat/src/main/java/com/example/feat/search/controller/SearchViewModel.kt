@@ -72,12 +72,17 @@ class SearchViewModel @Inject constructor(
             is SearchUiEvent.OnSearchSubmitted -> onSearchSubmitted(event)
             is SearchUiEvent.OnRefresh -> fetchCourse()
             is SearchUiEvent.OnBottomSheetDismissed -> onBottomSheetDismissed()
-            is SearchUiEvent.OnClickCourseItem -> onClickCourseItem()
+            is SearchUiEvent.OnClickCourseItem -> onClickCourseItem(event.courseId)
+            is SearchUiEvent.OnBackPreviousScreen -> onBackPreviousScreen()
         }
     }
 
-    private fun onClickCourseItem() {
-        navigationService.navigateTo(AppDecorator.COURSE_DETAIL)
+    private fun onClickCourseItem(courseId: String) {
+        navigationService.navigateTo("${AppDecorator.COURSE_DETAIL}/$courseId")
+    }
+
+    private fun onBackPreviousScreen() {
+        navigationService.goBack()
     }
 
     private fun onBottomSheetDismissed() {

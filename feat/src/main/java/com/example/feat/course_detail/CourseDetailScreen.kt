@@ -65,78 +65,81 @@ fun CourseDetailScreen(
                 CourseDetailToolbar(
                     lazyScrollState = lazyScrollState,
                     title = uiState.value.courseDetail?.name ?: "",
+                    backPreviousScreen = {
+                        courseDetailViewModel.onEvent(CourseDetailUiEvent.OnBackPreviousScreen)
+                    },
                     backgroundImageUrl = uiState.value.courseDetail?.imageUrl ?: "",
                 )
             }
         }
     ) { paddingValues ->
         LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        top = paddingValues.calculateTopPadding(),
-                        start = 20.dp,
-                        end = 20.dp,
-                        bottom = 0.dp
-                    )
-                    .animateContentSize(),
-                state = lazyScrollState
-            ) {
-                when (uiState.value.courseDetail) {
-                    null -> {
-                        item { CourseDetailLoading() }
-                    }
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = paddingValues.calculateTopPadding(),
+                    start = 20.dp,
+                    end = 20.dp,
+                    bottom = 0.dp
+                )
+                .animateContentSize(),
+            state = lazyScrollState
+        ) {
+            when (uiState.value.courseDetail) {
+                null -> {
+                    item { CourseDetailLoading() }
+                }
 
-                    else -> {
-                        item {
-                            Spacer(modifier = Modifier.height(45.dp))
-                            Text(
-                                text = uiState.value.courseDetail?.description ?: "",
-                                style = DesignSystem.SUBTITLE_MEDIUM_STYLE
+                else -> {
+                    item {
+                        Spacer(modifier = Modifier.height(45.dp))
+                        Text(
+                            text = uiState.value.courseDetail?.description ?: "",
+                            style = DesignSystem.SUBTITLE_MEDIUM_STYLE
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text = "Overview",
+                            style = DesignSystem.TITLE_LARGE_STYLE
+                        )
+                        Spacer(modifier = Modifier.height(5.dp))
+                        OverviewField(
+                            title = "Why take this course?",
+                            content = uiState.value.courseDetail?.reason ?: "",
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        OverviewField(
+                            title = "What will you be able to do?",
+                            content = uiState.value.courseDetail?.purpose ?: "",
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = "Experience level",
+                            style = DesignSystem.TITLE_LARGE_STYLE
+                        )
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(
+                            text = uiState.value.courseDetail?.level?.toExperienceText() ?: "",
+                            style = DesignSystem.SUBTITLE_MEDIUM_STYLE.copy(
+                                color = colorResource(id = R.color.hintColor)
                             )
-                            Spacer(modifier = Modifier.height(20.dp))
-                            Text(
-                                text = "Overview",
-                                style = DesignSystem.TITLE_LARGE_STYLE
-                            )
-                            Spacer(modifier = Modifier.height(5.dp))
-                            OverviewField(
-                                title = "Why take this course?",
-                                content = uiState.value.courseDetail?.reason ?: "",
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            OverviewField(
-                                title = "What will you be able to do?",
-                                content = uiState.value.courseDetail?.purpose ?: "",
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Text(
-                                text = "Experience level",
-                                style = DesignSystem.TITLE_LARGE_STYLE
-                            )
-                            Spacer(modifier = Modifier.height(5.dp))
-                            Text(
-                                text = uiState.value.courseDetail?.level?.toExperienceText() ?: "",
-                                style = DesignSystem.SUBTITLE_MEDIUM_STYLE.copy(
-                                    color = colorResource(id = R.color.hintColor)
-                                )
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            BoxTime(
-                                createdTime = uiState.value.courseDetail?.createdAt ?: "",
-                                updatedTime = uiState.value.courseDetail?.updatedAt ?: ""
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Text(
-                                text = "All levels",
-                                style = DesignSystem.TITLE_LARGE_STYLE
-                            )
-                            Spacer(modifier = Modifier.height(10.dp))
-                            ListLevels(topics = uiState.value.courseDetail?.topics ?: emptyList())
-                        }
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        BoxTime(
+                            createdTime = uiState.value.courseDetail?.createdAt ?: "",
+                            updatedTime = uiState.value.courseDetail?.updatedAt ?: ""
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = "All levels",
+                            style = DesignSystem.TITLE_LARGE_STYLE
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        ListLevels(topics = uiState.value.courseDetail?.topics ?: emptyList())
                     }
                 }
             }
+        }
     }
 }
 
