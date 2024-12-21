@@ -1,5 +1,6 @@
 package com.example.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
@@ -19,7 +20,7 @@ fun AppNavigation(
     signInScreen: @Composable () -> Unit,
     detailScreensWithGraph: DetailScreens,
     isAuthState: Boolean = false,
-    bottomNavigationWrapper: @Composable () -> Unit
+    bottomNavigationWrapper: @Composable (String?) -> Unit
 ) {
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
@@ -27,6 +28,7 @@ fun AppNavigation(
             when (it) {
                 is Navigator.NavigationActions.Navigate -> {
                     navController.navigate(it.destination, builder = it.navOptions)
+                    Log.d("AppNavigation", "Navigate to ${it.destination}")
                 }
 
                 is Navigator.NavigationActions.Back -> {
@@ -57,7 +59,7 @@ fun AppNavigation(
             MainScreen()
         }
         composable(Destination.bottomWrapper.route) {
-            bottomNavigationWrapper()
+            bottomNavigationWrapper(navController.currentBackStackEntry?.destination?.route)
         }
         composable(Destination.search.route) {
             SearchScreen()
