@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -234,26 +235,30 @@ private fun BoxTime(
             Column {
                 Text(
                     text = "Created At", style = DesignSystem.SUBTITLE_LARGE_STYLE.copy(
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.White
                     )
                 )
                 Text(
                     text = createdTime.toEEEEDDMMYYYY(),
                     style = DesignSystem.SUBTITLE_MEDIUM_STYLE.copy(
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
                     )
                 )
             }
             Column {
                 Text(
                     text = "Updated At", style = DesignSystem.SUBTITLE_LARGE_STYLE.copy(
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.White
                     )
                 )
                 Text(
                     text = updatedTime.toEEEEDDMMYYYY(),
                     style = DesignSystem.SUBTITLE_MEDIUM_STYLE.copy(
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = Color.White
                     )
                 )
             }
