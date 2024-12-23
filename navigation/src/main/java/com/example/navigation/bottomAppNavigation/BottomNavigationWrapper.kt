@@ -34,7 +34,7 @@ import com.example.core.lib.utils.navigation.bottomNavigationTabs
 fun BottomNavigationWrapper(
     body: @Composable () -> Unit,
     currentDestination: String,
-    onChangeTab: (String) -> Unit,
+    onChangeTab: (String, Int) -> Unit,
     paddingValues: PaddingValues = PaddingValues(20.dp, 10.dp, 20.dp, 15.dp)
 ) {
     Scaffold(
@@ -43,7 +43,7 @@ fun BottomNavigationWrapper(
             BottomNavigationBar(
                 tabs = bottomNavigationTabs,
                 onItemClicked = { index ->
-                    onChangeTab(bottomNavigationRoute[index])
+                    onChangeTab(bottomNavigationRoute[index], index)
                 },
                 type = NavigationBarType.LABEL,
                 currentIndex = bottomNavigationRoute.indexOfFirst { it == currentDestination },

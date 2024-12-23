@@ -1,15 +1,12 @@
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.feat.course_detail.CourseDetailScreen
+import com.example.core.lib.utils.navigation.bottomNavigationRoute
+import com.example.core.lib.utils.navigation.bottomNavigationTabs
 import com.example.navigation.Destination
-import com.example.navigation.Navigator
 import com.example.navigation.bottomAppNavigation.BottomNavigationWrapper
-import kotlinx.coroutines.flow.collectLatest
 
 /// BottomAppNavigation is a composable that wraps the BottomNavigationWrapper composable and NavHost composable.
 /// It is responsible for handling the navigation actions and updating the current destination.
@@ -23,47 +20,33 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun BottomAppNavigation(
     ///Bottom navigation composable function that takes a
-    navigator: Navigator,
-
+    initialRoute: String? = null,
     ///Define the homeScreen, documentScreen, and searchScreen composable functions as parameters.
     homeScreen: @Composable () -> Unit,
     documentScreen: @Composable () -> Unit,
     searchScreen: @Composable () -> Unit
 ) {
-    val navController = rememberNavController()
 
-    ///Define a rememberDestination mutableState variable to store the current destination.
-    val rememberDestination = remember { mutableStateOf(Destination.home.route) }
+    val rememberDestination = remember { mutableStateOf(initialRoute ?: Destination.home.route) }
 
-    LaunchedEffect(Unit) {
-        navigator.actions.collectLatest {
-            when (it) {
-                is Navigator.NavigationActions.Navigate -> {
-                    navController.navigate(it.destination, builder = it.navOptions)
-                }
-
-                is Navigator.NavigationActions.Back -> {
-                    navController.popBackStack()
-                }
-            }
-        }
-    }
+    val state = rememberPagerState(initialPage = 0, pageCount = { bottomNavigationTabs.size })
 
     BottomNavigationWrapper(
-        currentDestination = rememberDestination.value,
+        currentDestination = bottomNavigationRoute[state.currentPage],
         body = {
-            NavHost(
-                navController = navController,
-                startDestination = Destination.home.route
-            ) {
-                composable(Destination.home.route) { homeScreen() }
-                composable(Destination.document.route) { documentScreen() }
-                composable(Destination.search.route) { searchScreen() }
+            HorizontalPager(state = state) { page ->
+                when (bottomNavigationRoute[page]) {
+                    Destination.home.route -> homeScreen()
+                    Destination.document.route -> documentScreen()
+                    Destination.search.route -> searchScreen()
+                }
             }
         },
-        onChangeTab = { destination ->
-            rememberDestination.value = destination
-            navController.navigate(destination)
+        onChangeTab = { route, pageIndex ->
+            if (state.currentPage != pageIndex) {
+                rememberDestination.value = route
+                state.requestScrollToPage(pageIndex)
+            }
         }
 
     )

@@ -4,9 +4,10 @@ import com.example.domain.entity.ContentCategoryEntity
 
 sealed class SearchUiEvent {
     class OnSelectedContentCategory(val contentCategory: ContentCategoryEntity) : SearchUiEvent()
-    data object OnApplyFilter : SearchUiEvent()
     class OnSearchSubmitted(val searchText: String) : SearchUiEvent()
+    class OnClickCourseItem(val courseId: String) : SearchUiEvent()
+    data object OnApplyFilter : SearchUiEvent()
     data object OnRefresh : SearchUiEvent()
     data object OnBottomSheetDismissed : SearchUiEvent()
-    data object OnClickCourseItem : SearchUiEvent()
+    data object OnBackPreviousScreen : SearchUiEvent()
 }

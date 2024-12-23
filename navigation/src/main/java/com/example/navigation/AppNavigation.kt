@@ -1,5 +1,6 @@
 package com.example.navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
@@ -19,15 +20,17 @@ fun AppNavigation(
     signInScreen: @Composable () -> Unit,
     detailScreensWithGraph: DetailScreens,
     isAuthState: Boolean = false,
-    bottomNavigationWrapper: @Composable () -> Unit
+    bottomNavigationWrapper: @Composable (String?) -> Unit
 ) {
     val navController = rememberNavController()
     LaunchedEffect(Unit) {
         navigator.actions.collectLatest {
-            when(it) {
+            when (it) {
                 is Navigator.NavigationActions.Navigate -> {
                     navController.navigate(it.destination, builder = it.navOptions)
+                    Log.d("AppNavigation", "Navigate to ${it.destination}")
                 }
+
                 is Navigator.NavigationActions.Back -> {
                     navController.popBackStack()
                 }
@@ -56,12 +59,12 @@ fun AppNavigation(
             MainScreen()
         }
         composable(Destination.bottomWrapper.route) {
-            bottomNavigationWrapper()
+            bottomNavigationWrapper(navController.currentBackStackEntry?.destination?.route)
         }
         composable(Destination.search.route) {
             SearchScreen()
         }
-        composable(Destination.courseDetail.destination(AppDecorator.COURSE_ID_ARGUMENT)){
+        composable(Destination.courseDetail.route, arguments = Destination.courseDetail.arguments) {
             CourseDetailScreen(
                 courseId = Destination.courseDetail.objectParser(navController.currentBackStackEntry!!)
             )

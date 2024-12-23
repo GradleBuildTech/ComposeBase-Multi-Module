@@ -49,6 +49,6 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun navigateToMain() {
-        navigationService.navigateTo("${AppDecorator.COURSE_DETAIL}/964bed84-6450-49ee-92d5-e8c565864bd9")
+        navigationService.navigateTo(AppDecorator.BOTTOM_WRAPPER)
     }
 }

@@ -25,8 +25,6 @@ class SingleActivity: ComponentActivity() {
     @Inject
     lateinit var navigator: Navigator
 
-    @Inject
-    lateinit var bottomNavigator: Navigator
 
     @Inject
     lateinit var authGuardController: AuthGuardController
@@ -48,7 +46,6 @@ class SingleActivity: ComponentActivity() {
                         MainScreen {
                             documentViewModel, homeViewModel, searchViewModel ->
                             BottomAppNavigation(
-                                navigator = bottomNavigator,
                                 homeScreen = { HomeScreen(homeViewModel) },
                                 documentScreen = { DocumentScreen(documentViewModel) },
                                 searchScreen = { SearchScreen(searchViewModel) }
