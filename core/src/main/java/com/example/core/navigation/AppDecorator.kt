@@ -9,4 +9,7 @@ object AppDecorator {
     const val BOTTOM_WRAPPER = "bottom_wrapper"
     const val COURSE_DETAIL = "course_detail"
     const val COURSE_ID_ARGUMENT = "courseId"
+
+    const val TUTOR_DETAIL = "tutor_detail"
+    const val TUTOR_ID_ARGUMENT = "tutorId"
 }

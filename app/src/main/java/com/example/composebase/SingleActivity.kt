@@ -12,6 +12,7 @@ import com.example.feat.document.DocumentScreen
 import com.example.feat.home.HomeScreen
 import com.example.feat.main.MainScreen
 import com.example.feat.search.SearchScreen
+import com.example.feat.tutorDetail.TutorDetailScreen
 import com.example.guard.auth.AuthGuardController
 import com.example.guard.auth.AuthStateData
 import com.example.navigation.AppNavigation
@@ -41,6 +42,9 @@ class SingleActivity: ComponentActivity() {
                         detailMain = { Text(text ="Detail main") },
                         detailSearch = { Text(text = "Detail search") }
                     ),
+                    tutorDetailScreen = { tutorId ->
+                         TutorDetailScreen(tutorId)
+                    },
                     isAuthState = autState.value.state == AuthStateData.AUTH,
                     bottomNavigationWrapper = {
                         MainScreen {

@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.collectLatest
 fun AppNavigation(
     navigator: Navigator,
     signInScreen: @Composable () -> Unit,
+    tutorDetailScreen: @Composable (String) -> Unit,
     detailScreensWithGraph: DetailScreens,
     isAuthState: Boolean = false,
     bottomNavigationWrapper: @Composable (String?) -> Unit
@@ -67,6 +68,11 @@ fun AppNavigation(
         composable(Destination.courseDetail.route, arguments = Destination.courseDetail.arguments) {
             CourseDetailScreen(
                 courseId = Destination.courseDetail.objectParser(navController.currentBackStackEntry!!)
+            )
+        }
+        composable(Destination.tutorDetail.route, arguments = Destination.tutorDetail.arguments) {
+            tutorDetailScreen(
+                Destination.tutorDetail.objectParser(navController.currentBackStackEntry!!)
             )
         }
     }

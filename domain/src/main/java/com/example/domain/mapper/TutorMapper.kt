@@ -48,3 +48,7 @@ fun TutorsResponse.toFavoriteDomain(): TutorFavorites {
         }
     )
 }
+
+fun TutorModel.toDomain(): TutorEntity {
+    return this.toEntity()
+}

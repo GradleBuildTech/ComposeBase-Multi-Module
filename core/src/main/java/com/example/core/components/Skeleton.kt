@@ -2,6 +2,7 @@ package com.example.core.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -12,10 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.core.extensions.shimmerLoading
 
 @Composable
 fun Skeleton(
-    width: Double,
+    modifier: Modifier = Modifier,
+    width: Double? = null,
     height: Double,
     leftPadding: Double = 0.0,
     rightPadding: Double = 0.0,
@@ -25,8 +28,8 @@ fun Skeleton(
     isCircleShape: Boolean = false,
 ) {
     Box(
-        modifier = Modifier
-            .width(width.dp)
+        modifier =
+        (if (width != null) modifier.width(width.dp) else modifier.fillMaxWidth())
             .height(height.dp)
             .padding(
                 start = leftPadding.dp,
@@ -35,7 +38,8 @@ fun Skeleton(
                 bottom = bottomPadding.dp
             )
             .clip(if (isCircleShape) CircleShape else RoundedCornerShape(cornerRadius.dp))
-            .background(Color.LightGray)
+            .background(Color.LightGray.copy(alpha = 0.5f))
+            .shimmerLoading()
     )
 }
 
@@ -44,7 +48,7 @@ fun SkeletonList(
     width: Double,
     height: Double,
     itemSize: Int = 5,
-){
+) {
     VerticalList(
         size = itemSize,
         item = { _ ->

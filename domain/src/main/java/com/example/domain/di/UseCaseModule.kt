@@ -16,6 +16,8 @@ import com.example.domain.usecase.home.HomeUseCase
 import com.example.domain.usecase.home.HomeUseCaseImpl
 import com.example.domain.usecase.search.SearchUseCase
 import com.example.domain.usecase.search.SearchUseCaseImpl
+import com.example.domain.usecase.tutorDetail.TutorDetailUseCase
+import com.example.domain.usecase.tutorDetail.TutorDetailUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -89,6 +91,18 @@ object UseCaseModule {
     ): CourseDetailUseCase {
         return CourseDetailUseCaseImpl(
             courseDataSource = courseDataSource,
+            ioDispatcher = dispatcher
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideTutorDetailUseCase(
+        tutorDataSource: TutorDataSource,
+        dispatcher: CoroutineContext,
+    ): TutorDetailUseCase {
+        return TutorDetailUseCaseImpl(
+            tutorDataSource = tutorDataSource,
             ioDispatcher = dispatcher
         )
     }

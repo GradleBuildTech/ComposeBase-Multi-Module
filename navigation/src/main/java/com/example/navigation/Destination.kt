@@ -7,9 +7,9 @@ import com.example.navigation.screens.Home
 import com.example.navigation.screens.Main
 import com.example.navigation.screens.Search
 import com.example.navigation.screens.SignIn
+import com.example.navigation.screens.TutorDetail
 
-object
-Destination {
+object Destination {
     val signIn = SignIn
     val home = Home
     val main = Main
@@ -17,4 +17,5 @@ Destination {
     val search = Search
     val bottomWrapper = BottomWrapper
     val courseDetail = CourseDetail
+    val tutorDetail = TutorDetail
 }

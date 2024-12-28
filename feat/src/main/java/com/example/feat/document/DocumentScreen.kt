@@ -70,6 +70,9 @@ fun DocumentScreen(
             },
             startPeriodTimestamp = uiState.bookingInfo?.scheduleDetailEntity?.endPeriodTimestamp ?: 0L,
             totalTime = uiState.totalTime,
+            onClickTutor = { tutor ->
+                documentViewModel.onEvent(DocumentUiEvent.OpenTutorDetail(tutor.id))
+            }
         )
     }
 }
@@ -84,6 +87,7 @@ private fun BuildBody(
     totalTime: Int = 0,
     onFetchTutors: () -> Unit,
     onAddFavoriteTutor: (String) -> Unit,
+    onClickTutor: (TutorEntity) -> Unit,
 ) {
     Column(modifier = modifier) {
         if (isLoading && tutors.isEmpty()) {
@@ -108,7 +112,7 @@ private fun BuildBody(
                             TutorCardView(
                                 modifier = Modifier.padding(horizontal = 10.dp),
                                 tutor = item,
-                                onClick = { _ -> },
+                                onClick = onClickTutor,
                                 onClickFavorite = { tutor ->
                                     onAddFavoriteTutor(tutor.id)
                                 }
