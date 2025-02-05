@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TutorModel(
-    var id : String,
+    var id : String? = null,
     var level : String? = null,
     var email : String? = null,
     var google : String? = null,

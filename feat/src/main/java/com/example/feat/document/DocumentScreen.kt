@@ -71,7 +71,10 @@ fun DocumentScreen(
             startPeriodTimestamp = uiState.bookingInfo?.scheduleDetailEntity?.endPeriodTimestamp ?: 0L,
             totalTime = uiState.totalTime,
             onClickTutor = { tutor ->
-                documentViewModel.onEvent(DocumentUiEvent.OpenTutorDetail(tutor.id))
+                val userId = tutor.userId
+                if(userId.isNullOrEmpty().not()) {
+                    documentViewModel.onEvent(DocumentUiEvent.OpenTutorDetail(userId!!))
+                }
             }
         )
     }

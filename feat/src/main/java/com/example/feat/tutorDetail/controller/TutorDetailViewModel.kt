@@ -16,7 +16,7 @@ class TutorDetailViewModel @Inject constructor(
     TutorDetailUiState()
 ) {
     override suspend fun handleEvent(event: TutorDetailUiEvent) {
-        when(event) {
+        when (event) {
             is TutorDetailUiEvent.FetchTutorDetail -> fetchTutorDetail(event.tutorId)
             is TutorDetailUiEvent.OnBackPreviousScreen -> onBackPreviousScreen()
         }
@@ -28,6 +28,8 @@ class TutorDetailViewModel @Inject constructor(
             tutorDetailUseCase.getTutorDetail(tutorId).collect { either ->
                 if (either.isRight()) {
                     setUiState { copy(tutorDetail = either.rightValue()) }
+                } else {
+                    setUiState { copy(errorMessage = either.leftValue()?.errorMessage) }
                 }
                 setUiState { copy(isLoading = false) }
             }

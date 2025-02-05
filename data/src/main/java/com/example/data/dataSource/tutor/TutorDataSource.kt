@@ -4,6 +4,7 @@ import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.response.DataResponse
 import com.example.data.model.response.tutor.AddFavoriteTutorResponse
 import com.example.data.model.response.tutor.TutorDetailResponse
+import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
 
 interface TutorDataSource {
@@ -16,5 +17,5 @@ interface TutorDataSource {
 
     suspend fun getTutorDetail(
         tutorId: String,
-    ): DataResponse<TutorDetailResponse>
+    ): DataResponse<TutorModel>
 }

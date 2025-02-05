@@ -9,7 +9,7 @@ import com.example.domain.entity.TutorFavorites
 
 fun TutorModel.toEntity() : TutorEntity {
     return TutorEntity(
-        id = this.id,
+        id = this.id ?: "",
         name = this.name,
         email = this.email,
         bio = this.bio,
@@ -18,6 +18,7 @@ fun TutorModel.toEntity() : TutorEntity {
         country = this.country,
         rating = this.rating,
         specialties = this.specialties,
+        userId = this.userId,
     );
 }
 

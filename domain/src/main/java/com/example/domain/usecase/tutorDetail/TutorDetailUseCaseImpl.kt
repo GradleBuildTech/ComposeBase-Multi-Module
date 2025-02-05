@@ -20,7 +20,7 @@ class TutorDetailUseCaseImpl @Inject constructor(
     override fun getTutorDetail(tutorId: String): Flow<Either<ExceptionState, TutorEntity?>> =
         flow {
             val response = tutorDataSource.getTutorDetail(tutorId)
-            val dataConvert = response.mapAndConverterToStateData { it.data.toDomain() }
+            val dataConvert = response.mapAndConverterToStateData { it.toDomain() }
             emit(dataConvert)
         }
 }

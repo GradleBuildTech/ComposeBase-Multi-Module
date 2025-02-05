@@ -26,5 +26,5 @@ interface TutorApi {
     @GET("${ApiPath.TUTOR}/{id}")
     suspend fun fetchTutorDetail(
         @Path("id") id: String
-    ): Response<TutorDetailResponse>
+    ): Response<TutorModel>
 }
