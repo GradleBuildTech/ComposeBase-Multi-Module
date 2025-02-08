@@ -66,7 +66,7 @@ fun TutorDetailScreen(
             .background(color = Color.White.copy(alpha = 0.5f)),
         topBar = {
             BuildTopAppBar(
-                modifier = Modifier.padding(vertical = 15.dp, horizontal = 20.dp),
+                modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp),
                 onBack = { tutorDetailViewModel.onEvent(TutorDetailUiEvent.OnBackPreviousScreen) }
             )
         }

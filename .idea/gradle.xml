@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/local" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/room" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
