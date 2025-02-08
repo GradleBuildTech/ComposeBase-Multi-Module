@@ -9,7 +9,7 @@ import com.example.data.dataSource.booking.BookingDataSource
 import com.example.data.dataSource.tutor.TutorDataSource
 import com.example.data.dataSource.user.UserDataSource
 import com.example.domain.entity.BookingInfoEntity
-import com.example.domain.entity.TutorFavorites
+import com.example.domain.entity.tutor.TutorFavorites
 import com.example.domain.mapper.toDomain
 import com.example.domain.mapper.toFavoriteDomain
 import kotlinx.coroutines.flow.Flow

@@ -4,11 +4,13 @@ import com.example.data.model.response.course.ContentCategoryModel
 import com.example.data.model.response.course.ContentCategoryResponse
 import com.example.data.model.response.course.CourseDetailResponse
 import com.example.data.model.response.course.CourseModel
+import com.example.data.model.response.course.CoursePreviewModel
 import com.example.data.model.response.course.CoursesResponse
 import com.example.data.model.response.course.TopicModel
 import com.example.domain.entity.ContentCategoryEntity
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.TopicEntity
+import com.example.domain.entity.course.CoursePreview
 
 fun String.toExperienceText(): String {
     return when (this) {
@@ -70,6 +72,14 @@ fun CourseModel.toEntity(): CourseEntity {
         } ?: emptyList()
     )
 }
+
+fun CoursePreviewModel.toEntity(): CoursePreview {
+    return CoursePreview(
+        courseId = this.courseId,
+        name = this.name
+    )
+}
+
 
 fun ContentCategoryResponse.toDomain(): List<ContentCategoryEntity> {
     return this.rows.reversed().map {

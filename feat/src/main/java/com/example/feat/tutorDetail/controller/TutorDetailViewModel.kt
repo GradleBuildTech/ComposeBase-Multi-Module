@@ -23,6 +23,8 @@ class TutorDetailViewModel @Inject constructor(
     }
 
     private fun fetchTutorDetail(tutorId: String) {
+        if(uiState.value.isLoading) return
+        if(uiState.value.tutorDetail != null) return
         setUiState { copy(isLoading = true) }
         viewModelScope.launch {
             tutorDetailUseCase.getTutorDetail(tutorId).collect { either ->

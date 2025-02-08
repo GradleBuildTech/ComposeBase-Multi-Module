@@ -4,7 +4,7 @@ import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
 import com.example.domain.entity.ContentCategoryEntity
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import kotlinx.coroutines.flow.Flow
 
 interface SearchUseCase {

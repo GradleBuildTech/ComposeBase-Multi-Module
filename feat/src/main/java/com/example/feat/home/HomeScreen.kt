@@ -23,15 +23,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
-import com.example.domain.entity.CourseEntity
-import com.example.domain.entity.EBookEntity
-import com.example.domain.entity.TutorEntity
 import com.example.feat.R
 import com.example.feat.home.components.HomeBanner
 import com.example.feat.home.components.HorizontalItemView

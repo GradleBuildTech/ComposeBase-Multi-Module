@@ -1,9 +1,8 @@
 package com.example.data.dataSource.tutor
 
 import com.example.data.model.response.tutor.AddFavoriteTutorResponse
-import com.example.data.model.response.tutor.TutorDetailResponse
-import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
+import com.example.data.model.response.tutor.detail.TutorDetailModel
 import com.example.network.utils.ApiPath
 import retrofit2.Response
 import retrofit2.http.Body
@@ -26,5 +25,5 @@ interface TutorApi {
     @GET("${ApiPath.TUTOR}/{id}")
     suspend fun fetchTutorDetail(
         @Path("id") id: String
-    ): Response<TutorModel>
+    ): Response<TutorDetailModel>
 }

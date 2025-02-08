@@ -1,5 +1,7 @@
 package com.example.domain.entity
 
+import com.example.domain.entity.tutor.TutorEntity
+
 data class ScheduleInfoEntity(
     var id: String,
     var tutorId: String,

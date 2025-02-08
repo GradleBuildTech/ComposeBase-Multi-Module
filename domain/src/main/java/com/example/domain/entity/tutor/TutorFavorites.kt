@@ -1,4 +1,4 @@
-package com.example.domain.entity
+package com.example.domain.entity.tutor
 
 data class TutorFavorites(
     var count: Int,

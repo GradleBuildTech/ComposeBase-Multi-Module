@@ -9,7 +9,7 @@ import com.example.core.navigation.AppDecorator
 import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
 import com.example.domain.entity.BookingInfoEntity
-import com.example.domain.entity.TutorFavorites
+import com.example.domain.entity.tutor.TutorFavorites
 import com.example.domain.usecase.document.DocumentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

@@ -5,7 +5,7 @@ import com.example.core.models.response.mapper.mapAndConverterToStateData
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
 import com.example.data.dataSource.course.CourseDataSource
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.mapper.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

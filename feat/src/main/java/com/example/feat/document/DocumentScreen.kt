@@ -37,7 +37,7 @@ import com.example.core.components.Skeleton
 import com.example.core.components.VerticalList
 import com.example.core.components.pagination.DefaultPagination
 import com.example.core.lib.constants.DesignSystem
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import com.example.feat.R
 import com.example.feat.document.components.TimeRichText
 import com.example.feat.document.components.Timer

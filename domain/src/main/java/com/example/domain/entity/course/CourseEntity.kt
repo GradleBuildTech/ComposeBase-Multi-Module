@@ -1,4 +1,6 @@
-package com.example.domain.entity
+package com.example.domain.entity.course
+
+import com.example.domain.entity.TopicEntity
 
 class CourseEntity (
     var id: String = "",

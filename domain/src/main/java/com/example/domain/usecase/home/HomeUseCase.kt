@@ -3,9 +3,9 @@ package com.example.domain.usecase.home
 import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.EBookEntity
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import kotlinx.coroutines.flow.Flow
 
 interface HomeUseCase {

@@ -1,4 +1,4 @@
-package com.example.domain.entity
+package com.example.domain.entity.tutor
 
 data class TutorFavoriteEntity(
     var id: String,

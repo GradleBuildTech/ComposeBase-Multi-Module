@@ -8,9 +8,9 @@ import com.example.core.models.stateData.ExceptionState
 import com.example.data.dataSource.course.CourseDataSource
 import com.example.data.dataSource.eBook.EBookDataSource
 import com.example.data.dataSource.tutor.TutorDataSource
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.EBookEntity
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import com.example.domain.mapper.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
