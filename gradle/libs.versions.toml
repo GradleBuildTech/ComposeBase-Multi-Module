@@ -19,6 +19,7 @@ activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 appcompat = "1.6.1"
 material = "1.10.0"
+room = "2.6.1"
 kotlinCompilerExtensionVersion = "1.5.1"
 kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
@@ -68,6 +69,10 @@ accompanistSwipeRefresh = { module = "com.google.accompanist:accompanist-swipere
 accompanistCollapsingToolbar = { module = "com.google.accompanist:accompanist-collapsing-toolbar", version.ref = "accompanistCollapsingToolbar" }
 androidx-constraintlayout-compose-android = { group = "androidx.constraintlayout", name = "constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
 
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 #noinspection SimilarGradleDependency
@@ -83,6 +88,7 @@ localNameSpace = { id = "com.example.local" }
 featureNameSpace = { id = "com.example.feat" }
 domainNameSpace = { id = "com.example.domain" }
 dataaNameSpace = { id = "com.example.data" }
+roomNameSpace = { id = "com.example.room" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }
