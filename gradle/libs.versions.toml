@@ -89,6 +89,7 @@ featureNameSpace = { id = "com.example.feat" }
 domainNameSpace = { id = "com.example.domain" }
 dataaNameSpace = { id = "com.example.data" }
 roomNameSpace = { id = "com.example.room" }
+room = { id = "androidx.room", version.ref = "room" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }

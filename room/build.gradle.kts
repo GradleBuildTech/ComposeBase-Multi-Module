@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlinAndroid)
+//    alias(libs.plugins.room)
     id(libs.plugins.ksp.get().toString())
 }
 
@@ -34,8 +35,14 @@ android {
 
 dependencies {
     implementation(libs.room.runtime)
+
     ksp(libs.room.compiler)
     annotationProcessor(libs.room.compiler)
+
+
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

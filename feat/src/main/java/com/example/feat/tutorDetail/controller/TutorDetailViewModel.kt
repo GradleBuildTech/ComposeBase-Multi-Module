@@ -41,4 +41,5 @@ class TutorDetailViewModel @Inject constructor(
     private fun onBackPreviousScreen() {
         navigationService.goBack()
     }
+
 }
