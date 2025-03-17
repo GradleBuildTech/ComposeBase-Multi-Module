@@ -13,6 +13,9 @@ interface SearchUseCase {
         searchQuery: String? = null,
         contentCategoryId: String? = null,
     ): Flow<Either<ExceptionState, List<CourseEntity>>>
+
     fun fetchContentCategories(
     ): Flow<Either<ExceptionState, List<ContentCategoryEntity>>>
+
+    suspend fun updateLocalCourse(course: List<CourseEntity>)
 }

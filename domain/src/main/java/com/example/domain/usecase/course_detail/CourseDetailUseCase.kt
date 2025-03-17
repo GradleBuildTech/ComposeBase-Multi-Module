@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CourseDetailUseCase {
     fun fetchCourseDetail(id: String) : Flow<Either<ExceptionState, CourseEntity?>>
+
+    suspend fun updateLocalCourse(course: List<CourseEntity>)
 }

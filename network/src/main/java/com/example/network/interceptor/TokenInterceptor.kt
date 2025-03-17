@@ -31,6 +31,7 @@ class TokenInterceptor(
     /// It will call the refresh token api and get the new token
     /// If the response is successful, it will set the new token and refresh token in the local storage
     /// @return new token
+
     private suspend fun refreshTokenCall(): String? {
         val refreshToken = tokenLocalService.getRefreshToken() ?: return null
         if (refreshToken.isEmpty()) return null
@@ -49,7 +50,6 @@ class TokenInterceptor(
             val newRefreshToken = response.body()?.refreshToken ?: ""
             tokenLocalService.setToken(
                 accessToken = newToken,
-
                 refreshToken = newRefreshToken
             )
             return newToken

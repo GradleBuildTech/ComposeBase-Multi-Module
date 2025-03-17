@@ -9,6 +9,8 @@ import com.example.data.dataSource.course.CourseDataSource
 import com.example.domain.entity.ContentCategoryEntity
 import com.example.domain.entity.course.CourseEntity
 import com.example.domain.mapper.toDomain
+import com.example.domain.mapper.toRoomCourseEntity
+import com.example.room.dao.CourseDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -16,6 +18,7 @@ import kotlin.coroutines.CoroutineContext
 
 class SearchUseCaseImpl @Inject constructor(
     private val courseDataSource: CourseDataSource,
+    private val courseDao: CourseDao,
     @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : SearchUseCase {
     override fun fetchCourses(
@@ -43,4 +46,8 @@ class SearchUseCaseImpl @Inject constructor(
             }
             emit(dataConvert)
         }
+
+    override suspend fun updateLocalCourse(course: List<CourseEntity>) {
+        courseDao.insertAll(course.map { it.toRoomCourseEntity() })
+    }
 }

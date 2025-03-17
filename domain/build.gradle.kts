@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(project(":data"))
     implementation(project(":core"))
+    implementation(project(":room"))
 
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.core)

@@ -18,6 +18,7 @@ import com.example.domain.usecase.search.SearchUseCase
 import com.example.domain.usecase.search.SearchUseCaseImpl
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCase
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCaseImpl
+import com.example.room.dao.CourseDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +46,7 @@ object UseCaseModule {
         tutorDataSource: TutorDataSource,
         courseDataSource: CourseDataSource,
         eBookDataSource: EBookDataSource,
+        courseDao: CourseDao,
         dispatcher: CoroutineContext,
     ) : HomeUseCase {
         return HomeUseCaseImpl(
@@ -52,6 +54,7 @@ object UseCaseModule {
             courseDataSource = courseDataSource,
             eBookDataSource = eBookDataSource,
             ioDispatcher = dispatcher,
+            courseDao = courseDao
         )
     }
 
@@ -76,10 +79,12 @@ object UseCaseModule {
     fun provideSearchUseCase(
         courseDataSource: CourseDataSource,
         dispatcher: CoroutineContext,
+        courseDao: CourseDao,
     ): SearchUseCase {
         return SearchUseCaseImpl(
             courseDataSource = courseDataSource,
-            ioDispatcher = dispatcher
+            ioDispatcher = dispatcher,
+            courseDao = courseDao
         )
     }
 
@@ -87,11 +92,13 @@ object UseCaseModule {
     @Singleton
     fun provideCourseDetailUseCase(
         courseDataSource: CourseDataSource,
+        courseDao: CourseDao,
         dispatcher: CoroutineContext,
     ): CourseDetailUseCase {
         return CourseDetailUseCaseImpl(
             courseDataSource = courseDataSource,
-            ioDispatcher = dispatcher
+            ioDispatcher = dispatcher,
+            courseDao = courseDao
         )
     }
 

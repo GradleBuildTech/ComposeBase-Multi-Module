@@ -20,4 +20,6 @@ interface HomeUseCase {
     fun fetchEBooks(
         paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<EBookEntity>>>
+
+    suspend fun updateLocalCourse(course: List<CourseEntity>)
 }
