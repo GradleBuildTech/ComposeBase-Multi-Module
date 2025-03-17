@@ -1,7 +1,7 @@
 package com.example.feat.search.controller
 
 import com.example.domain.entity.ContentCategoryEntity
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 
 data class SearchUiState(
     val isLoading: Boolean = false,

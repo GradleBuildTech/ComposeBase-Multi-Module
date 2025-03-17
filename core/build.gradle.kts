@@ -65,6 +65,9 @@ dependencies {
     //Navigation
     implementation(libs.compose.navigation)
 
+    //Exoplayer
+
+
     //moshi
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)

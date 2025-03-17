@@ -5,9 +5,11 @@ import com.example.core.lib.constants.Constants.TUTOR_LIMIT_ITEM
 import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
+import com.example.core.navigation.AppDecorator
+import com.example.core.navigation.NavigationService
 import com.example.core.presentation.StateAndEventViewModel
 import com.example.domain.entity.BookingInfoEntity
-import com.example.domain.entity.TutorFavorites
+import com.example.domain.entity.tutor.TutorFavorites
 import com.example.domain.usecase.document.DocumentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DocumentViewModel @Inject constructor(
     private val documentUseCase: DocumentUseCase,
+    private val navigationService : NavigationService,
 ) : StateAndEventViewModel<DocumentUiState, DocumentUiEvent>(initialState = DocumentUiState()) {
     init {
         loadInitialData(
@@ -45,7 +48,12 @@ class DocumentViewModel @Inject constructor(
         when (event) {
             is DocumentUiEvent.AddFavoriteTutor -> addFavoriteTutor(event.tutorId)
             is DocumentUiEvent.FetchTutors -> pageFetchTutorial()
+            is DocumentUiEvent.OpenTutorDetail -> openTutorDetail(event.tutorId)
         }
+    }
+
+    private fun openTutorDetail(tutorId: String) {
+        navigationService.navigateTo("${AppDecorator.TUTOR_DETAIL}/$tutorId")
     }
 
     private fun addFavoriteTutor(tutorId: String) {

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.core.lib.constants.Constants
 import com.example.core.lib.constants.DesignSystem
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import com.example.feat.R
 import java.util.Locale
 
@@ -40,7 +40,7 @@ import java.util.Locale
 fun ItemTutor(
     tutor: TutorEntity,
     onClick: (TutorEntity) -> Unit
-){
+) {
     val configuration = LocalConfiguration.current
     val itemTutorHeight = Constants.TUTOR_ITEM_HEIGHT
     val screenWidth = configuration.screenWidthDp
@@ -79,7 +79,7 @@ fun ItemTutor(
                         style = DesignSystem.TITLE_SMALL_STYLE,
                     )
                     // Replace with your custom RatingWidget
-                    Text(text = "${tutor.rating ?: 0.0}",)
+                    Text(text = "${tutor.rating ?: 0.0}")
                 }
             }
             Text(
@@ -87,7 +87,8 @@ fun ItemTutor(
                 maxLines = 5,
                 style = DesignSystem.SUBTITLE_SMALL_STYLE,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier
+                    .align(Alignment.Start)
                     .weight(2f)
             )
             HorizontalDivider(
@@ -105,7 +106,7 @@ fun ItemTutor(
                         .background(colorResource(id = R.color.primaryColor))
                         .padding(5.dp)
                         .weight(5f)
-                ){
+                ) {
                     Text(
                         text = tutor.level?.lowercase(Locale.ROOT) ?: "Unknown",
                         style = TextStyle(

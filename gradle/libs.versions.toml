@@ -19,9 +19,11 @@ activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 appcompat = "1.6.1"
 material = "1.10.0"
+room = "2.6.1"
 kotlinCompilerExtensionVersion = "1.5.1"
 kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
+media3 = "1.5.1"
 coil = "2.7.0"
 accompanistFlowlayout = "0.19.0"
 accompanistSwipeRefresh = "0.27.0"
@@ -44,6 +46,12 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+## Media3 ExoPlayer
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
+androidx-media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3" }
+androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
+
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 hilt-core = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
@@ -68,6 +76,12 @@ accompanistSwipeRefresh = { module = "com.google.accompanist:accompanist-swipere
 accompanistCollapsingToolbar = { module = "com.google.accompanist:accompanist-collapsing-toolbar", version.ref = "accompanistCollapsingToolbar" }
 androidx-constraintlayout-compose-android = { group = "androidx.constraintlayout", name = "constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
 
+## Room
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
+
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 #noinspection SimilarGradleDependency
@@ -83,6 +97,8 @@ localNameSpace = { id = "com.example.local" }
 featureNameSpace = { id = "com.example.feat" }
 domainNameSpace = { id = "com.example.domain" }
 dataaNameSpace = { id = "com.example.data" }
+roomNameSpace = { id = "com.example.room" }
+room = { id = "androidx.room", version.ref = "room" }
 
 
 daggerHilt = { id = "com.google.dagger.hilt.android" }

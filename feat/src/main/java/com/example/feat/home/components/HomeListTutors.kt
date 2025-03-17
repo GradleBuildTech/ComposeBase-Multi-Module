@@ -13,7 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.components.HeadingTitle
 import com.example.core.components.HorizontalList
 import com.example.core.lib.constants.Constants
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import com.example.feat.home.controller.HomeViewModel
 
 @Composable

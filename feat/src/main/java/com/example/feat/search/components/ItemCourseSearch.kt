@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.core.lib.constants.DesignSystem
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.mapper.toExperienceText
 import com.example.feat.R
 

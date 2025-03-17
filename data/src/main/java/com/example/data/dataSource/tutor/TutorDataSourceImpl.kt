@@ -4,6 +4,7 @@ import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.response.DataResponse
 import com.example.data.model.response.tutor.AddFavoriteTutorResponse
 import com.example.data.model.response.tutor.TutorsResponse
+import com.example.data.model.response.tutor.detail.TutorDetailModel
 import com.example.network.extensions.handleCall
 import javax.inject.Inject
 
@@ -18,5 +19,9 @@ class TutorDataSourceImpl @Inject constructor(
 
     override suspend fun addFavoriteTutor(tutorId: String): DataResponse<AddFavoriteTutorResponse> {
         return handleCall { tutorApi.addFavoriteTutor(mapOf("tutorId" to tutorId)) }
+    }
+
+    override suspend fun getTutorDetail(tutorId: String): DataResponse<TutorDetailModel> {
+        return handleCall { tutorApi.fetchTutorDetail(id = tutorId) }
     }
 }

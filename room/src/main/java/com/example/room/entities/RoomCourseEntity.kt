@@ -1,7 +1,11 @@
-package com.example.domain.entity
+package com.example.room.entities
 
-class CourseEntity (
-    var id: String = "",
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "course")
+data class RoomCourseEntity(
+    @PrimaryKey val id: String,
     var name: String? = "",
     var description: String? = "",
     var imageUrl: String? = "",
@@ -16,6 +20,5 @@ class CourseEntity (
     var visible: Boolean? = false,
     var displayOrder: Int? = 0,
     var createdAt: String? = "",
-    var updatedAt: String? = "",
-    var topics: List<TopicEntity> = emptyList()
+    var updatedAt: String? = ""
 )

@@ -1,8 +1,8 @@
 package com.example.feat.document.controller
 
 import com.example.domain.entity.BookingInfoEntity
-import com.example.domain.entity.TutorEntity
-import com.example.domain.entity.TutorFavoriteEntity
+import com.example.domain.entity.tutor.TutorEntity
+import com.example.domain.entity.tutor.TutorFavoriteEntity
 
 data class DocumentUiState (
     val bookingInfo : BookingInfoEntity? = null,

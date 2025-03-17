@@ -37,7 +37,7 @@ import com.example.core.components.Skeleton
 import com.example.core.components.VerticalList
 import com.example.core.components.pagination.DefaultPagination
 import com.example.core.lib.constants.DesignSystem
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 import com.example.feat.R
 import com.example.feat.document.components.TimeRichText
 import com.example.feat.document.components.Timer
@@ -70,6 +70,12 @@ fun DocumentScreen(
             },
             startPeriodTimestamp = uiState.bookingInfo?.scheduleDetailEntity?.endPeriodTimestamp ?: 0L,
             totalTime = uiState.totalTime,
+            onClickTutor = { tutor ->
+                val userId = tutor.userId
+                if(userId.isNullOrEmpty().not()) {
+                    documentViewModel.onEvent(DocumentUiEvent.OpenTutorDetail(userId!!))
+                }
+            }
         )
     }
 }
@@ -84,6 +90,7 @@ private fun BuildBody(
     totalTime: Int = 0,
     onFetchTutors: () -> Unit,
     onAddFavoriteTutor: (String) -> Unit,
+    onClickTutor: (TutorEntity) -> Unit,
 ) {
     Column(modifier = modifier) {
         if (isLoading && tutors.isEmpty()) {
@@ -108,7 +115,7 @@ private fun BuildBody(
                             TutorCardView(
                                 modifier = Modifier.padding(horizontal = 10.dp),
                                 tutor = item,
-                                onClick = { _ -> },
+                                onClick = onClickTutor,
                                 onClickFavorite = { tutor ->
                                     onAddFavoriteTutor(tutor.id)
                                 }

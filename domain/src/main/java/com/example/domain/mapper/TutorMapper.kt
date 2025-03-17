@@ -3,13 +3,17 @@ package com.example.domain.mapper
 import com.example.data.model.response.tutor.TutorFavoriteModel
 import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
-import com.example.domain.entity.TutorEntity
-import com.example.domain.entity.TutorFavoriteEntity
-import com.example.domain.entity.TutorFavorites
+import com.example.data.model.response.tutor.detail.TutorDetailModel
+import com.example.data.model.response.tutor.detail.TutorUserDetailModel
+import com.example.domain.entity.tutor.TutorEntity
+import com.example.domain.entity.tutor.TutorFavoriteEntity
+import com.example.domain.entity.tutor.TutorFavorites
+import com.example.domain.entity.tutor.detail.TutorDetail
+import com.example.domain.entity.tutor.detail.TutorUserDetail
 
-fun TutorModel.toEntity() : TutorEntity {
+fun TutorModel.toEntity(): TutorEntity {
     return TutorEntity(
-        id = this.id,
+        id = this.id ?: "",
         name = this.name,
         email = this.email,
         bio = this.bio,
@@ -18,7 +22,48 @@ fun TutorModel.toEntity() : TutorEntity {
         country = this.country,
         rating = this.rating,
         specialties = this.specialties,
-    );
+        userId = this.userId,
+    )
+}
+
+fun TutorDetailModel.toEntity(): TutorDetail {
+    return TutorDetail(
+        video = this.video ?: "",
+        bio = this.bio ?: "",
+        education = this.education ?: "",
+        experience = this.experience ?: "",
+        profession = this.profession ?: "",
+        accent = this.accent ?: "",
+        targetStudent = this.targetStudent ?: "",
+        interests = this.interests ?: "",
+        languages = this.languages ?: "",
+        specialties = this.specialties ?: "",
+        rating = this.rating ?: 0.0,
+        avgRating = this.avgRating ?: 0.0,
+        totalFeedback = this.totalFeedback ?: 0,
+        isNative = this.isNative ?: false,
+        isFavorite = this.isFavorite ?: false,
+        youtubeVideoId = this.youtubeVideoId ?: "",
+        user = this.user?.toEntity()
+    )
+}
+
+fun TutorUserDetailModel.toEntity(): TutorUserDetail {
+    return TutorUserDetail(
+        id = this.id ?: "",
+        level = this.level ?: "",
+        avatar = this.avatar ?: "",
+        name = this.name ?: "",
+        country = this.country ?: "",
+        language = this.language ?: "",
+        isPublicRecord = this.isPublicRecord ?: false,
+        caredByStaffId = this.caredByStaffId ?: "",
+        studentGroupId = this.studentGroupId ?: "",
+        zaloUserId = this.zaloUserId ?: "",
+        courses = this.courses?.map {
+            it.toEntity()
+        } ?: listOf()
+    )
 }
 
 fun TutorFavoriteModel.toEntity(): TutorFavoriteEntity {
@@ -47,4 +92,8 @@ fun TutorsResponse.toFavoriteDomain(): TutorFavorites {
             it.toEntity();
         }
     )
+}
+
+fun TutorModel.toDomain(): TutorEntity {
+    return this.toEntity()
 }

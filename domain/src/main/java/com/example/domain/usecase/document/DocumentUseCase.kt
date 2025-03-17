@@ -4,7 +4,7 @@ import com.example.core.models.pagination.PaginationRequest
 import com.example.core.models.stateData.Either
 import com.example.core.models.stateData.ExceptionState
 import com.example.domain.entity.BookingInfoEntity
-import com.example.domain.entity.TutorFavorites
+import com.example.domain.entity.tutor.TutorFavorites
 import kotlinx.coroutines.flow.Flow
 
 interface DocumentUseCase {

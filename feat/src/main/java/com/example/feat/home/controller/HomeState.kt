@@ -1,8 +1,8 @@
 package com.example.feat.home.controller
 
-import com.example.domain.entity.CourseEntity
+import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.EBookEntity
-import com.example.domain.entity.TutorEntity
+import com.example.domain.entity.tutor.TutorEntity
 
 
 data class HomeState(
