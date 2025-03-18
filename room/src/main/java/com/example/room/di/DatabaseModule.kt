@@ -2,7 +2,7 @@ package com.example.room.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.room.AppCourseDatabase
+import com.example.room.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,11 @@ import javax.inject.Singleton
 internal object DatabaseModule {
     @Provides
     @Singleton
-    fun provideAppCourseDatabase(
+    fun provideAppDatabase(
         @ApplicationContext context: Context
-    ): AppCourseDatabase = Room.databaseBuilder(
+    ): AppDatabase = Room.databaseBuilder(
         context = context,
-        AppCourseDatabase::class.java,
-        "course_database"
+        AppDatabase::class.java,
+        "database"
     ).build()
 }
