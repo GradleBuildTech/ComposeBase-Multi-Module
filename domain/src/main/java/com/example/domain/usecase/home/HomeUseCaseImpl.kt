@@ -12,9 +12,12 @@ import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.EBookEntity
 import com.example.domain.entity.tutor.TutorEntity
 import com.example.domain.mapper.fromRoomCourseEntity
+import com.example.domain.mapper.fromRoomTutorEntity
 import com.example.domain.mapper.toDomain
 import com.example.domain.mapper.toRoomCourseEntity
+import com.example.domain.mapper.toRoomTutorEntity
 import com.example.room.dao.CourseDao
+import com.example.room.dao.TutorDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -27,16 +30,25 @@ class HomeUseCaseImpl @Inject constructor(
     private val courseDataSource: CourseDataSource,
     private val eBookDataSource: EBookDataSource,
     private val courseDao: CourseDao,
+    private val tutorDao: TutorDao,
 ) : HomeUseCase {
     override fun fetchTutors(
         paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<TutorEntity>>> =
         flow {
-            val response = tutorDataSource.fetchTutors(paginationRequest = paginationRequest)
-            val dataConvert = response.mapAndConverterToStateData {
-                it.toDomain()
+            val getLocalTutor = tutorDao.getAll()
+            if(getLocalTutor.isEmpty()) {
+                val response = tutorDataSource.fetchTutors(paginationRequest = paginationRequest)
+                val dataConvert = response.mapAndConverterToStateData {
+                    it.toDomain()
+                }
+                if(dataConvert.isRight() && dataConvert.rightValue() != null) {
+                    updateLocalTutor(dataConvert.rightValue()!!)
+                }
+                emit(dataConvert)
+            } else {
+                emit(Either.Right(getLocalTutor.map { it.fromRoomTutorEntity() }))
             }
-            emit(dataConvert)
         }
 
     override fun fetchRecommendedCourses(
@@ -71,6 +83,10 @@ class HomeUseCaseImpl @Inject constructor(
 
     override suspend fun updateLocalCourse(course: List<CourseEntity>) {
         courseDao.insertAll(course.map { it.toRoomCourseEntity() })
+    }
+
+    override suspend fun updateLocalTutor(tutor: List<TutorEntity>) {
+        tutorDao.insertAll(tutor.map { it.toRoomTutorEntity() })
     }
 
 }

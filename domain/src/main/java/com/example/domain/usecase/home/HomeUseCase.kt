@@ -22,4 +22,6 @@ interface HomeUseCase {
     ): Flow<Either<ExceptionState, List<EBookEntity>>>
 
     suspend fun updateLocalCourse(course: List<CourseEntity>)
+
+    suspend fun updateLocalTutor(tutor: List<TutorEntity>)
 }
