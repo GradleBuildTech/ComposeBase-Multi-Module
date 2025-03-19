@@ -12,11 +12,14 @@ import com.example.domain.entity.course.CourseEntity
 import com.example.domain.entity.EBookEntity
 import com.example.domain.entity.tutor.TutorEntity
 import com.example.domain.mapper.fromRoomCourseEntity
+import com.example.domain.mapper.fromRoomEBookEntity
 import com.example.domain.mapper.fromRoomTutorEntity
 import com.example.domain.mapper.toDomain
 import com.example.domain.mapper.toRoomCourseEntity
+import com.example.domain.mapper.toRoomEBookEntity
 import com.example.domain.mapper.toRoomTutorEntity
 import com.example.room.dao.CourseDao
+import com.example.room.dao.EBookDao
 import com.example.room.dao.TutorDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -31,6 +34,7 @@ class HomeUseCaseImpl @Inject constructor(
     private val eBookDataSource: EBookDataSource,
     private val courseDao: CourseDao,
     private val tutorDao: TutorDao,
+    private val eBookDao: EBookDao,
 ) : HomeUseCase {
     override fun fetchTutors(
         paginationRequest: PaginationRequest
@@ -74,11 +78,19 @@ class HomeUseCaseImpl @Inject constructor(
         paginationRequest: PaginationRequest
     ): Flow<Either<ExceptionState, List<EBookEntity>>> =
         flow {
-            val response = eBookDataSource.fetchEBooks(paginationRequest = paginationRequest)
-            val dataConvert = response.mapAndConverterToStateData {
-                it.toDomain()
+            val getLocalEBook = eBookDao.getAll()
+            if(getLocalEBook.isEmpty()) {
+                val response = eBookDataSource.fetchEBooks(paginationRequest = paginationRequest)
+                val dataConvert = response.mapAndConverterToStateData {
+                    it.toDomain()
+                }
+                if(dataConvert.isRight() && dataConvert.rightValue() != null) {
+                    updateLocalEBook(dataConvert.rightValue()!!)
+                }
+                emit(dataConvert)
+            } else {
+                emit(Either.Right(getLocalEBook.map { it.fromRoomEBookEntity() }))
             }
-            emit(dataConvert)
         }
 
     override suspend fun updateLocalCourse(course: List<CourseEntity>) {
@@ -87,6 +99,10 @@ class HomeUseCaseImpl @Inject constructor(
 
     override suspend fun updateLocalTutor(tutor: List<TutorEntity>) {
         tutorDao.insertAll(tutor.map { it.toRoomTutorEntity() })
+    }
+
+    override suspend fun updateLocalEBook(eBook: List<EBookEntity>) {
+        eBookDao.insertAll(eBook.map { it.toRoomEBookEntity() })
     }
 
 }

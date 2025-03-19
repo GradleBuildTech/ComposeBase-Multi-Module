@@ -24,4 +24,6 @@ interface HomeUseCase {
     suspend fun updateLocalCourse(course: List<CourseEntity>)
 
     suspend fun updateLocalTutor(tutor: List<TutorEntity>)
+
+    suspend fun updateLocalEBook(eBook: List<EBookEntity>)
 }
