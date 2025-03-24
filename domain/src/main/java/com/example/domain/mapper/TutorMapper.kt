@@ -1,5 +1,6 @@
 package com.example.domain.mapper
 
+import com.example.core.extensions.convertToDate
 import com.example.data.model.response.tutor.TutorFavoriteModel
 import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
@@ -11,6 +12,7 @@ import com.example.domain.entity.tutor.TutorFavorites
 import com.example.domain.entity.tutor.detail.TutorDetail
 import com.example.domain.entity.tutor.detail.TutorUserDetail
 import com.example.room.entities.RoomTutorEntity
+import java.util.Date
 
 fun TutorModel.toEntity(): TutorEntity {
     return TutorEntity(
@@ -112,7 +114,7 @@ fun RoomTutorEntity.fromRoomTutorEntity(): TutorEntity {
         country = this.country,
         phone = this.phone,
         language = this.language,
-        birthDay = this.birthDay,
+        birthDay = this.birthDay?.convertToDate(),
         requestPassword = this.requestPassword,
         isActivated = this.isActivated,
         isPhoneActivated = this.isPhoneActivated,
@@ -123,8 +125,8 @@ fun RoomTutorEntity.fromRoomTutorEntity(): TutorEntity {
         canSendMessage = this.canSendMessage,
         isPublicRecord = this.isPublicRecord,
         caredByStaffId = this.caredByStaffId,
-        createdAt = this.createdAt,
-        updatedAt = this.updatedAt,
+        createdAt = this.createdAt?.convertToDate(),
+        updatedAt = this.updatedAt?.convertToDate(),
         deletedAt = this.deletedAt,
         studentGroupId = this.studentGroupId,
         userId = this.userId,
@@ -160,7 +162,7 @@ fun TutorEntity.toRoomTutorEntity(): RoomTutorEntity {
         country = this.country,
         phone = this.phone,
         language = this.language,
-        birthDay = this.birthDay,
+        birthDay = this.birthDay?.time,
         requestPassword = this.requestPassword,
         isActivated = this.isActivated,
         isPhoneActivated = this.isPhoneActivated,
@@ -171,8 +173,8 @@ fun TutorEntity.toRoomTutorEntity(): RoomTutorEntity {
         canSendMessage = this.canSendMessage,
         isPublicRecord = this.isPublicRecord,
         caredByStaffId = this.caredByStaffId,
-        createdAt = this.createdAt,
-        updatedAt = this.updatedAt,
+        createdAt = this.createdAt?.time,
+        updatedAt = this.updatedAt?.time,
         deletedAt = this.deletedAt,
         studentGroupId = this.studentGroupId,
         userId = this.userId,

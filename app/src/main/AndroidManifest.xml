@@ -16,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeBase"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge" />
+
         <activity
             android:name=".SingleActivity"
             android:exported="true">

@@ -67,7 +67,6 @@ dependencies {
 
     //Exoplayer
 
-
     //moshi
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)

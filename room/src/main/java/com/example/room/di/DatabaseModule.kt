@@ -23,4 +23,16 @@ internal object DatabaseModule {
         AppDatabase::class.java,
         "database"
     ).build()
+
+    @Provides
+    @Singleton
+    fun provideCourseDao(appDatabase: AppDatabase) = appDatabase.courseDao()
+
+    @Provides
+    @Singleton
+    fun provideTutorDao(appDatabase: AppDatabase) = appDatabase.tutorDao()
+
+    @Provides
+    @Singleton
+    fun provideEBookDao(appDatabase: AppDatabase) = appDatabase.eBookDao()
 }

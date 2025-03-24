@@ -20,6 +20,7 @@ composeBom = "2024.04.01"
 appcompat = "1.6.1"
 material = "1.10.0"
 room = "2.6.1"
+startUp = "1.1.0"
 kotlinCompilerExtensionVersion = "1.5.1"
 kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
@@ -80,7 +81,8 @@ androidx-constraintlayout-compose-android = { group = "androidx.constraintlayout
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
-
+## Start up
+startUp-runime = { module = "androidx.startup:startup-runtime", version.ref = "startUp" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

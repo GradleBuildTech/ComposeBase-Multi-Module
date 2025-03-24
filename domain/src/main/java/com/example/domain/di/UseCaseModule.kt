@@ -19,6 +19,8 @@ import com.example.domain.usecase.search.SearchUseCaseImpl
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCase
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCaseImpl
 import com.example.room.dao.CourseDao
+import com.example.room.dao.EBookDao
+import com.example.room.dao.TutorDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +49,8 @@ object UseCaseModule {
         courseDataSource: CourseDataSource,
         eBookDataSource: EBookDataSource,
         courseDao: CourseDao,
+        tutorDao: TutorDao,
+        eBookDao: EBookDao,
         dispatcher: CoroutineContext,
     ) : HomeUseCase {
         return HomeUseCaseImpl(
@@ -54,7 +58,9 @@ object UseCaseModule {
             courseDataSource = courseDataSource,
             eBookDataSource = eBookDataSource,
             ioDispatcher = dispatcher,
-            courseDao = courseDao
+            courseDao = courseDao,
+            tutorDao = tutorDao,
+            eBookDao = eBookDao
         )
     }
 
