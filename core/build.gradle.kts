@@ -81,5 +81,5 @@ dependencies {
     // Refresh layout
     implementation(libs.accompanistSwipeRefresh)
 
-
+    implementation(libs.startUp.runime)
 }
