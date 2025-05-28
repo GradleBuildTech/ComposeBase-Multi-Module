@@ -18,9 +18,9 @@ import com.example.domain.usecase.search.SearchUseCase
 import com.example.domain.usecase.search.SearchUseCaseImpl
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCase
 import com.example.domain.usecase.tutorDetail.TutorDetailUseCaseImpl
-import com.example.room.dao.CourseDao
-import com.example.room.dao.EBookDao
-import com.example.room.dao.TutorDao
+//import com.example.room.dao.CourseDao
+//import com.example.room.dao.EBookDao
+//import com.example.room.dao.TutorDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,9 +48,9 @@ object UseCaseModule {
         tutorDataSource: TutorDataSource,
         courseDataSource: CourseDataSource,
         eBookDataSource: EBookDataSource,
-        courseDao: CourseDao,
-        tutorDao: TutorDao,
-        eBookDao: EBookDao,
+//        courseDao: CourseDao,
+//        tutorDao: TutorDao,
+//        eBookDao: EBookDao,
         dispatcher: CoroutineContext,
     ) : HomeUseCase {
         return HomeUseCaseImpl(
@@ -58,9 +58,9 @@ object UseCaseModule {
             courseDataSource = courseDataSource,
             eBookDataSource = eBookDataSource,
             ioDispatcher = dispatcher,
-            courseDao = courseDao,
-            tutorDao = tutorDao,
-            eBookDao = eBookDao
+//            courseDao = courseDao,
+//            tutorDao = tutorDao,
+//            eBookDao = eBookDao
         )
     }
 
@@ -85,12 +85,12 @@ object UseCaseModule {
     fun provideSearchUseCase(
         courseDataSource: CourseDataSource,
         dispatcher: CoroutineContext,
-        courseDao: CourseDao,
+//        courseDao: CourseDao,
     ): SearchUseCase {
         return SearchUseCaseImpl(
             courseDataSource = courseDataSource,
             ioDispatcher = dispatcher,
-            courseDao = courseDao
+//            courseDao = courseDao
         )
     }
 
@@ -98,13 +98,13 @@ object UseCaseModule {
     @Singleton
     fun provideCourseDetailUseCase(
         courseDataSource: CourseDataSource,
-        courseDao: CourseDao,
+//        courseDao: CourseDao,
         dispatcher: CoroutineContext,
     ): CourseDetailUseCase {
         return CourseDetailUseCaseImpl(
             courseDataSource = courseDataSource,
             ioDispatcher = dispatcher,
-            courseDao = courseDao
+//            courseDao = courseDao
         )
     }
 
