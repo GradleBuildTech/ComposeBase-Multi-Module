@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
 
     //Hilt
     ksp(libs.hilt.compiler)

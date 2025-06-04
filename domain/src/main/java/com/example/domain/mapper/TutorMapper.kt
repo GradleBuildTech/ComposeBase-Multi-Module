@@ -1,6 +1,6 @@
 package com.example.domain.mapper
 
-//import com.example.core.extensions.convertToDate
+import com.example.core.extensions.convertToDate
 import com.example.data.model.response.tutor.TutorFavoriteModel
 import com.example.data.model.response.tutor.TutorModel
 import com.example.data.model.response.tutor.TutorsResponse
@@ -11,8 +11,7 @@ import com.example.domain.entity.tutor.TutorFavoriteEntity
 import com.example.domain.entity.tutor.TutorFavorites
 import com.example.domain.entity.tutor.detail.TutorDetail
 import com.example.domain.entity.tutor.detail.TutorUserDetail
-//import com.example.room.entities.RoomTutorEntity
-//import java.util.Date
+import com.example.local.room.entities.RoomTutorEntity
 
 fun TutorModel.toEntity(): TutorEntity {
     return TutorEntity(
@@ -100,99 +99,99 @@ fun TutorsResponse.toFavoriteDomain(): TutorFavorites {
 fun TutorModel.toDomain(): TutorEntity {
     return this.toEntity()
 }
-//
-//fun RoomTutorEntity.fromRoomTutorEntity(): TutorEntity {
-//    return TutorEntity(
-//        id = this.id,
-//        level = this.level,
-//        email = this.email,
-//        google = this.google,
-//        facebook = this.facebook,
-//        apple = this.apple,
-//        avatar = this.avatar,
-//        name = this.name,
-//        country = this.country,
-//        phone = this.phone,
-//        language = this.language,
-//        birthDay = this.birthDay?.convertToDate(),
-//        requestPassword = this.requestPassword,
-//        isActivated = this.isActivated,
-//        isPhoneActivated = this.isPhoneActivated,
-//        requireNote = this.requireNote,
-//        timezone = this.timezone,
-//        phoneAuth = this.phoneAuth,
-//        isPhoneAuthActivated = this.isPhoneAuthActivated,
-//        canSendMessage = this.canSendMessage,
-//        isPublicRecord = this.isPublicRecord,
-//        caredByStaffId = this.caredByStaffId,
-//        createdAt = this.createdAt?.convertToDate(),
-//        updatedAt = this.updatedAt?.convertToDate(),
-//        deletedAt = this.deletedAt,
-//        studentGroupId = this.studentGroupId,
-//        userId = this.userId,
-//        video = this.video,
-//        bio = this.bio,
-//        education = this.education,
-//        experience = this.experience,
-//        profession = this.profession,
-//        accent = this.accent,
-//        targetStudent = this.targetStudent,
-//        interests = this.interests,
-//        languages = this.languages,
-//        specialties = this.specialties,
-//        resume = this.resume,
-//        rating = this.rating,
-//        isNative = this.isNative,
-//        price = this.price,
-//        isOnline = this.isOnline,
-//        isFavorite = this.isFavorite,
-//    )
-//}
-//
-//fun TutorEntity.toRoomTutorEntity(): RoomTutorEntity {
-//    return RoomTutorEntity(
-//        id = this.id,
-//        level = this.level,
-//        email = this.email,
-//        google = this.google,
-//        facebook = this.facebook,
-//        apple = this.apple,
-//        avatar = this.avatar,
-//        name = this.name,
-//        country = this.country,
-//        phone = this.phone,
-//        language = this.language,
-//        birthDay = this.birthDay?.time,
-//        requestPassword = this.requestPassword,
-//        isActivated = this.isActivated,
-//        isPhoneActivated = this.isPhoneActivated,
-//        requireNote = this.requireNote,
-//        timezone = this.timezone,
-//        phoneAuth = this.phoneAuth,
-//        isPhoneAuthActivated = this.isPhoneAuthActivated,
-//        canSendMessage = this.canSendMessage,
-//        isPublicRecord = this.isPublicRecord,
-//        caredByStaffId = this.caredByStaffId,
-//        createdAt = this.createdAt?.time,
-//        updatedAt = this.updatedAt?.time,
-//        deletedAt = this.deletedAt,
-//        studentGroupId = this.studentGroupId,
-//        userId = this.userId,
-//        video = this.video,
-//        bio = this.bio,
-//        education = this.education,
-//        experience = this.experience,
-//        profession = this.profession,
-//        accent = this.accent,
-//        targetStudent = this.targetStudent,
-//        interests = this.interests,
-//        languages = this.languages,
-//        specialties = this.specialties,
-//        resume = this.resume,
-//        rating = this.rating,
-//        isNative = this.isNative,
-//        price = this.price,
-//        isOnline = this.isOnline,
-//        isFavorite = this.isFavorite,
-//    )
-//}
+
+fun RoomTutorEntity.fromRoomTutorEntity(): TutorEntity {
+    return TutorEntity(
+        id = this.id,
+        level = this.level,
+        email = this.email,
+        google = this.google,
+        facebook = this.facebook,
+        apple = this.apple,
+        avatar = this.avatar,
+        name = this.name,
+        country = this.country,
+        phone = this.phone,
+        language = this.language,
+        birthDay = this.birthDay?.convertToDate(),
+        requestPassword = this.requestPassword,
+        isActivated = this.isActivated,
+        isPhoneActivated = this.isPhoneActivated,
+        requireNote = this.requireNote,
+        timezone = this.timezone,
+        phoneAuth = this.phoneAuth,
+        isPhoneAuthActivated = this.isPhoneAuthActivated,
+        canSendMessage = this.canSendMessage,
+        isPublicRecord = this.isPublicRecord,
+        caredByStaffId = this.caredByStaffId,
+        createdAt = this.createdAt?.convertToDate(),
+        updatedAt = this.updatedAt?.convertToDate(),
+        deletedAt = this.deletedAt,
+        studentGroupId = this.studentGroupId,
+        userId = this.userId,
+        video = this.video,
+        bio = this.bio,
+        education = this.education,
+        experience = this.experience,
+        profession = this.profession,
+        accent = this.accent,
+        targetStudent = this.targetStudent,
+        interests = this.interests,
+        languages = this.languages,
+        specialties = this.specialties,
+        resume = this.resume,
+        rating = this.rating,
+        isNative = this.isNative,
+        price = this.price,
+        isOnline = this.isOnline,
+        isFavorite = this.isFavorite,
+    )
+}
+
+fun TutorEntity.toRoomTutorEntity(): RoomTutorEntity {
+    return RoomTutorEntity(
+        id = this.id,
+        level = this.level,
+        email = this.email,
+        google = this.google,
+        facebook = this.facebook,
+        apple = this.apple,
+        avatar = this.avatar,
+        name = this.name,
+        country = this.country,
+        phone = this.phone,
+        language = this.language,
+        birthDay = this.birthDay?.time,
+        requestPassword = this.requestPassword,
+        isActivated = this.isActivated,
+        isPhoneActivated = this.isPhoneActivated,
+        requireNote = this.requireNote,
+        timezone = this.timezone,
+        phoneAuth = this.phoneAuth,
+        isPhoneAuthActivated = this.isPhoneAuthActivated,
+        canSendMessage = this.canSendMessage,
+        isPublicRecord = this.isPublicRecord,
+        caredByStaffId = this.caredByStaffId,
+        createdAt = this.createdAt?.time,
+        updatedAt = this.updatedAt?.time,
+        deletedAt = this.deletedAt,
+        studentGroupId = this.studentGroupId,
+        userId = this.userId,
+        video = this.video,
+        bio = this.bio,
+        education = this.education,
+        experience = this.experience,
+        profession = this.profession,
+        accent = this.accent,
+        targetStudent = this.targetStudent,
+        interests = this.interests,
+        languages = this.languages,
+        specialties = this.specialties,
+        resume = this.resume,
+        rating = this.rating,
+        isNative = this.isNative,
+        price = this.price,
+        isOnline = this.isOnline,
+        isFavorite = this.isFavorite,
+    )
+}

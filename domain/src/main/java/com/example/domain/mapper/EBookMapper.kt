@@ -3,8 +3,8 @@ package com.example.domain.mapper
 import com.example.data.model.response.eBook.EBookModel
 import com.example.data.model.response.eBook.EBooksResponse
 import com.example.domain.entity.EBookEntity
-//import com.example.room.entities.RoomCourseEntity
-//import com.example.room.entities.RoomEBookEntity
+import com.example.local.room.entities.RoomEBookEntity
+
 
 fun EBookModel.toEntity(): EBookEntity {
     return EBookEntity(
@@ -22,24 +22,24 @@ fun EBooksResponse.toDomain(): List<EBookEntity> {
     }
 }
 
-//fun EBookEntity.toRoomEBookEntity(): RoomEBookEntity {
-//    return RoomEBookEntity(
-//        id = this.id,
-//        name = this.name,
-//        description = this.description,
-//        imageUrl = this.imageUrl,
-//        level = this.level,
-//    )
-//}
-//
-//
-//fun RoomEBookEntity.fromRoomEBookEntity(): EBookEntity {
-//    return EBookEntity(
-//        id = this.id,
-//        name = this.name,
-//        description = this.description,
-//        imageUrl = this.imageUrl,
-//        level = this.level,
-//    )
-//}
-//
+fun EBookEntity.toRoomEBookEntity(): RoomEBookEntity {
+    return RoomEBookEntity(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        imageUrl = this.imageUrl,
+        level = this.level,
+    )
+}
+
+
+fun RoomEBookEntity.fromRoomEBookEntity(): EBookEntity {
+    return EBookEntity(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        imageUrl = this.imageUrl,
+        level = this.level,
+    )
+}
+

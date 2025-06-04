@@ -9,6 +9,7 @@ import com.example.domain.entity.tutor.detail.TutorDetail
 import com.example.domain.mapper.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -22,5 +23,5 @@ class TutorDetailUseCaseImpl @Inject constructor(
             val response = tutorDataSource.getTutorDetail(tutorId)
             val dataConvert = response.mapAndConverterToStateData { it.toEntity() }
             emit(dataConvert)
-        }
+        }.flowOn(ioDispatcher)
 }

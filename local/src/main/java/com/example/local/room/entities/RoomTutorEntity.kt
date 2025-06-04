@@ -1,0 +1,52 @@
+package com.example.local.room.entities
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.Date
+
+@Entity(tableName = "tutor")
+data class RoomTutorEntity(
+    @PrimaryKey val id: String,
+    var level : String? = "",
+    var email : String? = "",
+    var google : String? = "",
+    var facebook : String? = "",
+    var apple : String? = "",
+    var avatar : String? = "",
+    var name : String? = "",
+    var country : String? = "",
+    var phone : String? = "",
+    var language : String? = "",
+    var birthDay : Long? = null,
+    var requestPassword : Boolean? = false,
+    var isActivated : Boolean? = false,
+    var isPhoneActivated : Boolean? = false,
+    var requireNote : String? = "",
+    var timezone : Int? = 0,
+    var phoneAuth : String? = "",
+    var isPhoneAuthActivated : Boolean? = false,
+    var canSendMessage : Boolean? = false,
+    var isPublicRecord : Boolean? = false,
+    var caredByStaffId : String? = "",
+    var createdAt : Long? = null,
+    var updatedAt : Long? = null,
+    var deletedAt : String? = "",
+    var studentGroupId : String? = "",
+    var userId : String? = "",
+    var video : String? = "",
+    var bio : String? = "",
+    var education : String? = "",
+    var experience : String? = "",
+    var profession : String? = "",
+    var accent : String? = "",
+    var targetStudent : String? = "",
+    var interests : String? = "",
+    var languages : String? = "",
+    var specialties : String? = "",
+    var resume : String? = "",
+    var rating : Double?    = 0.0,
+    var isNative : Boolean? = false,
+    var price : Double? = 0.0,
+    var isOnline : Boolean? = false,
+    var isFavorite : Boolean? = false,
+)
