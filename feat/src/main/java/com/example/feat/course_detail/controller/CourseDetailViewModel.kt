@@ -24,7 +24,7 @@ class CourseDetailViewModel @Inject constructor(
         navigationService.goBack()
     }
 
-    private suspend fun fetchCourseDetail(id: String) {
+    private fun fetchCourseDetail(id: String) {
         setUiState { copy(isLoading = true) }
         viewModelScope.launch {
             courseDetailUseCase.fetchCourseDetail(id).collect { either ->
