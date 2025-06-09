@@ -61,7 +61,6 @@ class TokenInterceptor(
     /// This function is not clean because it has a lot of responsibilities
     /// It should be refactored to have only one responsibility
 
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 

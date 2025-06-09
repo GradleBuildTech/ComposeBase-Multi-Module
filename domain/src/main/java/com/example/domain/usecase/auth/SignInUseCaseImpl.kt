@@ -10,6 +10,7 @@ import com.example.domain.mapper.toDomain
 import com.example.domain.model.Token
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -28,5 +29,5 @@ class SignInUseCaseImpl @Inject constructor(
             )
             val dataConvert = response.mapAndConverterToStateData { it.token?.toDomain() }
             emit(dataConvert)
-        }
+        }.flowOn(ioDispatcher)
 }
