@@ -32,16 +32,18 @@ import kotlin.coroutines.CoroutineContext
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
+
     @Provides
     @Singleton
-    fun provideIODispatcher(): CoroutineContext {
-        return Dispatchers.IO
-    }
+    fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
+
     @Provides
     @Singleton
-    fun providesSignInUseCase(dataSource: AuthDataSource, dispatcher: CoroutineContext) : SignInUseCase {
-        return SignInUseCaseImpl(authDataSource = dataSource, ioDispatcher = dispatcher)
-    }
+    fun provideSignInUseCase(
+        authDataSource: AuthDataSource,
+        dispatcher: CoroutineContext
+    ): SignInUseCase = SignInUseCaseImpl(authDataSource, dispatcher)
+
     @Provides
     @Singleton
     fun provideHomeUseCase(
@@ -51,72 +53,62 @@ object UseCaseModule {
         courseDao: CourseDao,
         tutorDao: TutorDao,
         eBookDao: EBookDao,
-        dispatcher: CoroutineContext,
-    ) : HomeUseCase {
-        return HomeUseCaseImpl(
-            tutorDataSource = tutorDataSource,
-            courseDataSource = courseDataSource,
-            eBookDataSource = eBookDataSource,
-            ioDispatcher = dispatcher,
-            courseDao = courseDao,
-            tutorDao = tutorDao,
-            eBookDao = eBookDao
-        )
-    }
+        dispatcher: CoroutineContext
+    ): HomeUseCase = HomeUseCaseImpl(
+        tutorDataSource = tutorDataSource,
+        courseDataSource = courseDataSource,
+        eBookDataSource = eBookDataSource,
+        ioDispatcher = dispatcher,
+        courseDao = courseDao,
+        tutorDao = tutorDao,
+        eBookDao = eBookDao
+    )
 
     @Provides
     @Singleton
-    fun provideBookingUseCase(
+    fun provideDocumentUseCase(
         bookingDataSource: BookingDataSource,
         dispatcher: CoroutineContext,
         userDataSource: UserDataSource,
-        tutorDataSource: TutorDataSource,
-    ): DocumentUseCase {
-        return DocumentUseCaseImpl(
-            bookingDataSource = bookingDataSource,
-            userDataSource = userDataSource,
-            tutorDataSource = tutorDataSource,
-            ioDispatcher = dispatcher
-        )
-    }
+        tutorDataSource: TutorDataSource
+    ): DocumentUseCase = DocumentUseCaseImpl(
+        bookingDataSource = bookingDataSource,
+        userDataSource = userDataSource,
+        tutorDataSource = tutorDataSource,
+        ioDispatcher = dispatcher
+    )
 
     @Provides
     @Singleton
     fun provideSearchUseCase(
         courseDataSource: CourseDataSource,
         dispatcher: CoroutineContext,
-        courseDao: CourseDao,
-    ): SearchUseCase {
-        return SearchUseCaseImpl(
-            courseDataSource = courseDataSource,
-            ioDispatcher = dispatcher,
-            courseDao = courseDao
-        )
-    }
+        courseDao: CourseDao
+    ): SearchUseCase = SearchUseCaseImpl(
+        courseDataSource = courseDataSource,
+        ioDispatcher = dispatcher,
+        courseDao = courseDao
+    )
 
     @Provides
     @Singleton
     fun provideCourseDetailUseCase(
         courseDataSource: CourseDataSource,
         courseDao: CourseDao,
-        dispatcher: CoroutineContext,
-    ): CourseDetailUseCase {
-        return CourseDetailUseCaseImpl(
-            courseDataSource = courseDataSource,
-            ioDispatcher = dispatcher,
-            courseDao = courseDao
-        )
-    }
+        dispatcher: CoroutineContext
+    ): CourseDetailUseCase = CourseDetailUseCaseImpl(
+        courseDataSource = courseDataSource,
+        ioDispatcher = dispatcher,
+        courseDao = courseDao
+    )
 
     @Provides
     @Singleton
     fun provideTutorDetailUseCase(
         tutorDataSource: TutorDataSource,
-        dispatcher: CoroutineContext,
-    ): TutorDetailUseCase {
-        return TutorDetailUseCaseImpl(
-            tutorDataSource = tutorDataSource,
-            ioDispatcher = dispatcher
-        )
-    }
+        dispatcher: CoroutineContext
+    ): TutorDetailUseCase = TutorDetailUseCaseImpl(
+        tutorDataSource = tutorDataSource,
+        ioDispatcher = dispatcher
+    )
 }

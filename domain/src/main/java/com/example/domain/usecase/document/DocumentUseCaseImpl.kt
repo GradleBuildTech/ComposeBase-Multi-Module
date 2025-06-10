@@ -14,6 +14,7 @@ import com.example.domain.mapper.toDomain
 import com.example.domain.mapper.toFavoriteDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -30,7 +31,7 @@ class DocumentUseCaseImpl @Inject constructor(
                 it.toDomain()
             }
             emit(dataConvert)
-        }
+        }.flowOn(ioDispatcher)
 
     override fun fetchTotalTime(): Flow<Either<ExceptionState, Int>> =
         flow {
@@ -39,7 +40,7 @@ class DocumentUseCaseImpl @Inject constructor(
                 it.toDomain()
             }
             emit(dataConvert)
-        }
+        }.flowOn(ioDispatcher)
 
     override fun fetchTutors(paginationRequest: PaginationRequest): Flow<Either<ExceptionState, TutorFavorites>> =
         flow {
@@ -48,7 +49,7 @@ class DocumentUseCaseImpl @Inject constructor(
                 it.toFavoriteDomain()
             }
             emit(dataConvert)
-        }
+        }.flowOn(ioDispatcher)
 
     override fun addFavoriteTutor(tutorId: String): Flow<Either<ExceptionState, Boolean>> = flow {
         val response = tutorDataSource.addFavoriteTutor(tutorId)
