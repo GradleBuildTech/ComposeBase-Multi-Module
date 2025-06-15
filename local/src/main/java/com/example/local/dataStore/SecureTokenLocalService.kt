@@ -1,53 +1,50 @@
 package com.example.local.dataStore
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
+import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
+import javax.inject.Inject
+import javax.inject.Singleton
+import androidx.core.content.edit
 
-class SecureTokenLocalService(context: Context) {
-    private val sharedPreferences = context.getSharedPreferences("secure_prefs", Context.MODE_PRIVATE)
-    // Constants for token keys and Android Keystore
-    private val keyAlias = "token_key"
-    // Android Keystore provider and transformation
-    // This is a placeholder; actual implementation would require using KeyGenerator
-    private val provider = "AndroidKeyStore"
-
-    private val keyAccessToken = "access_token"
-
-    private val ivAccessToken = "iv_access_token"
-
-    private val keyRefreshToken = "refresh_token"
-
-    private val ivRefreshToken = "iv_refresh_token"
-
-    private val transform = "${KeyProperties.KEY_ALGORITHM_AES}/${KeyProperties.BLOCK_MODE_CBC}/${KeyProperties.ENCRYPTION_PADDING_PKCS7}"
-
-    init {
-        generateKeyIfNotExist()
+@Singleton
+class SecureTokenLocalService @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
+    companion object {
+        private const val PREFS_NAME = "secure_token_prefs"
+        private const val KEY_ACCESS_TOKEN = "access_token"
+        private const val KEY_REFRESH_TOKEN = "refresh_token"
+        private const val KEY_IV_ACCESS = "access_token_iv"
+        private const val KEY_IV_REFRESH = "refresh_token_iv"
+        private const val KEY_ALIAS = "token_key"
+        private const val PROVIDER = "AndroidKeyStore"
+        private const val TRANSFORMATION = "${KeyProperties.KEY_ALGORITHM_AES}/${KeyProperties.BLOCK_MODE_CBC}/${KeyProperties.ENCRYPTION_PADDING_PKCS7}"
     }
 
+    private val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    private fun generateKeyIfNotExist() {
-        // Implementation to generate a key in the Android Keystore
-        // This is a placeholder; actual implementation would require using KeyGenerator
+    init {
+        generateKeyIfNotExists()
+    }
+
+    private fun generateKeyIfNotExists() {
         try {
-            val keyStore = KeyStore.getInstance(provider)
-            keyStore.load(null)
-            if (!keyStore.containsAlias(keyAlias)) {
-                val keyGenerator = KeyGenerator.getInstance(
-                    KeyProperties.KEY_ALGORITHM_AES, provider // Init  aes algorithm with Android Keystore to encrypt/decrypt tokens
-                )
+            val keyStore = KeyStore.getInstance(PROVIDER).apply { load(null) }
+            if (!keyStore.containsAlias(KEY_ALIAS)) {
+                val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, PROVIDER)
                 keyGenerator.init(
                     KeyGenParameterSpec.Builder(
-                        keyAlias,
+                        KEY_ALIAS,
                         KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
                     )
                         .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
@@ -58,88 +55,81 @@ class SecureTokenLocalService(context: Context) {
                 keyGenerator.generateKey()
             }
         } catch (e: Exception) {
-            e.printStackTrace()
-            // Handle key generation error
-            throw RuntimeException("Failed to generate key for secure token storage", e)
+            throw RuntimeException("Failed to generate key", e)
         }
     }
 
-    // Function to set the access token securely
     private fun encryptToken(token: String): Pair<String, String>? {
-        try {
-            val keyStore = KeyStore.getInstance(provider)
-            keyStore.load(null)
-            val secretKey = keyStore.getKey(keyAlias, null) ?: return null
-
-            // Use Cipher to encrypt the token
-            val cipher = Cipher.getInstance(transform)
+        return try {
+            val keyStore = KeyStore.getInstance(PROVIDER).apply { load(null) }
+            val secretKey = keyStore.getKey(KEY_ALIAS, null) as? SecretKey ?: return null
+            val cipher = Cipher.getInstance(TRANSFORMATION)
             cipher.init(Cipher.ENCRYPT_MODE, secretKey)
-            val encryptedToken = cipher.doFinal(token.toByteArray(Charsets.UTF_8))
-            // Store the encrypted token and IV in SharedPreferences
-            return Pair(
-                Base64.encodeToString(encryptedToken, Base64.DEFAULT),
+            val encryptedBytes = cipher.doFinal(token.toByteArray(Charsets.UTF_8))
+            Pair(
+                Base64.encodeToString(encryptedBytes, Base64.DEFAULT),
                 Base64.encodeToString(cipher.iv, Base64.DEFAULT)
             )
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return null
-        }
-    }
-
-    // Function to get the access token securely
-    private fun decryptToken(encryptedToken: String, iv: String): String? {
-        return try {
-            val keyStore = KeyStore.getInstance(provider).apply { load(null) }
-            val secretKey = keyStore.getKey(keyAlias, null) ?: return null
-
-            // Use Cipher to decrypt the token
-            val cipher = Cipher.getInstance(transform)
-            val ivBytes = Base64.decode(iv, Base64.DEFAULT)
-            cipher.init(Cipher.DECRYPT_MODE, secretKey,IvParameterSpec(ivBytes))
-            val decryptedToken = cipher.doFinal(Base64.decode(encryptedToken, Base64.DEFAULT))
-            String(decryptedToken, Charsets.UTF_8)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (_: Exception) {
             null
         }
     }
 
-    //Save token
-    suspend fun saveToken(accessToken: String, refreshToken: String): SharedPreferences.Editor? = withContext(Dispatchers.IO) {
-        val encryptedData = encryptToken(accessToken)
-        val encryptedRefreshData = encryptToken(refreshToken)
-        if (encryptedData != null) {
-            sharedPreferences.edit().apply {
-                // Save encrypted access token and IV
-                putString(keyAccessToken, encryptedData.first)
-                putString(ivAccessToken, encryptedData.second)
-                // Save encrypted refresh token and IV
-                putString(keyRefreshToken, encryptedRefreshData?.first)
-                putString(ivRefreshToken, encryptedRefreshData?.second)
-                apply()
-            }
-        } else {
-            throw RuntimeException("Failed to encrypt access token")
+    private fun decryptToken(encryptedToken: String, iv: String): String? {
+        return try {
+            val keyStore = KeyStore.getInstance(PROVIDER).apply { load(null) }
+            val secretKey = keyStore.getKey(KEY_ALIAS, null) as? SecretKey ?: return null
+            val cipher = Cipher.getInstance(TRANSFORMATION)
+            val ivBytes = Base64.decode(iv, Base64.DEFAULT)
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, IvParameterSpec(ivBytes))
+            val decryptedBytes = cipher.doFinal(Base64.decode(encryptedToken, Base64.DEFAULT))
+            String(decryptedBytes, Charsets.UTF_8)
+        } catch (_: Exception) {
+            null
         }
     }
 
-    //Get token
-     fun getAccessToken(): String?  {
-        val encryptedToken = sharedPreferences.getString(keyAccessToken, null)
-        val iv = sharedPreferences.getString(ivAccessToken, null)
-        if (encryptedToken != null && iv != null) {
-            return decryptToken(encryptedToken, iv)
+    suspend fun saveToken(accessToken: String) = withContext(Dispatchers.IO) {
+        val encryptedPair = encryptToken(accessToken) ?: throw RuntimeException("Encryption failed")
+        sharedPreferences.edit {
+            putString(KEY_ACCESS_TOKEN, encryptedPair.first)
+                .putString(KEY_IV_ACCESS, encryptedPair.second)
         }
-        return null
     }
 
-    //Get refresh token
-    suspend fun getRefreshToken(): String? = withContext(Dispatchers.IO) {
-        val encryptedToken = sharedPreferences.getString(keyRefreshToken, null)
-        val iv = sharedPreferences.getString(ivRefreshToken, null)
-        if (encryptedToken != null && iv != null) {
+    fun getAccessTokenSync(): String? {
+        val encryptedToken = sharedPreferences.getString(KEY_ACCESS_TOKEN, null)
+        val iv = sharedPreferences.getString(KEY_IV_ACCESS, null)
+        return if (encryptedToken != null && iv != null) {
             decryptToken(encryptedToken, iv)
+        } else {
+            null
         }
-        return@withContext null
+    }
+
+    suspend fun getAccessToken(): String? = withContext(Dispatchers.IO) {
+        getAccessTokenSync()
+    }
+
+    suspend fun saveRefreshToken(refreshToken: String) = withContext(Dispatchers.IO) {
+        val encryptedPair = encryptToken(refreshToken) ?: throw RuntimeException("Encryption failed")
+        sharedPreferences.edit {
+            putString(KEY_REFRESH_TOKEN, encryptedPair.first)
+                .putString(KEY_IV_REFRESH, encryptedPair.second)
+        }
+    }
+
+    fun getRefreshTokenSync(): String? {
+        val encryptedToken = sharedPreferences.getString(KEY_REFRESH_TOKEN, null)
+        val iv = sharedPreferences.getString(KEY_IV_REFRESH, null)
+        return if (encryptedToken != null && iv != null) {
+            decryptToken(encryptedToken, iv)
+        } else {
+            null
+        }
+    }
+
+    suspend fun getRefreshToken(): String? = withContext(Dispatchers.IO) {
+        getRefreshTokenSync()
     }
 }

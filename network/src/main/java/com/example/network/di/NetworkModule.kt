@@ -5,6 +5,7 @@ import com.example.core.models.moshi.MyStandardJsonAdapters
 import com.example.local.dataStore.SecureTokenLocalService
 import com.example.network.BuildConfig
 import com.example.network.interceptor.TokenInterceptor
+import com.example.network.token.RefreshTokenApi
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.Duration
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -95,8 +97,15 @@ internal object NetworkModule {
     @Provides
     fun provideTokenInterceptor(
         secureTokenLocalService: SecureTokenLocalService,
-        moshi: Moshi
+        moshi: Moshi,
+        @Named("RefreshRetrofit") refreshRetrofit: Retrofit
     ): TokenInterceptor {
-        return TokenInterceptor(secureTokenLocalService, moshi)
+        return TokenInterceptor(secureTokenLocalService, moshi, refreshRetrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRefreshTokenApi(@Named("RefreshRetrofit") retrofit: Retrofit): RefreshTokenApi {
+        return retrofit.create(RefreshTokenApi::class.java)
     }
 }
