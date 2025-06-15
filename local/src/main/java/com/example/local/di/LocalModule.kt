@@ -2,6 +2,7 @@ package com.example.local.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.local.dataStore.SecureTokenLocalService
 import com.example.local.dataStore.TokenLocalService
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,14 @@ class LocalModule {
     @Singleton
     fun providesTokenLocalService(sharedPreferences: SharedPreferences): TokenLocalService {
         return TokenLocalService(sharedPreferences)
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesSecureTokenLocalService(
+        @ApplicationContext context: Context
+    ): SecureTokenLocalService {
+        return SecureTokenLocalService(context)
     }
 }

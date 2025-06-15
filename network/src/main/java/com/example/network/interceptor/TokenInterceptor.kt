@@ -1,5 +1,6 @@
 package com.example.network.interceptor
 
+import com.example.local.dataStore.SecureTokenLocalService
 import com.example.local.dataStore.TokenLocalService
 import com.example.network.BuildConfig
 import com.example.network.token.RefreshTokenApi
@@ -21,7 +22,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /// @constructor Create empty Token interceptor
 
 class TokenInterceptor(
-    private val tokenLocalService: TokenLocalService,
+    private val secureTokenLocalService: SecureTokenLocalService,
     private val moshi: Moshi
 //    private val retrofit: Retrofit
 ) : Interceptor {
@@ -33,7 +34,7 @@ class TokenInterceptor(
     /// @return new token
 
     private suspend fun refreshTokenCall(): String? {
-        val refreshToken = tokenLocalService.getRefreshToken() ?: return null
+        val refreshToken = secureTokenLocalService.getRefreshToken() ?: return null
         if (refreshToken.isEmpty()) return null
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
@@ -48,10 +49,10 @@ class TokenInterceptor(
         if (response.isSuccessful) {
             val newToken = response.body()?.accessToken ?: ""
             val newRefreshToken = response.body()?.refreshToken ?: ""
-            tokenLocalService.setToken(
+           secureTokenLocalService.saveToken(
                 accessToken = newToken,
                 refreshToken = newRefreshToken
-            )
+           )
             return newToken
         }
         return refreshToken
@@ -64,7 +65,7 @@ class TokenInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
-        val token = tokenLocalService.getAccessToken() ?: return chain.proceed(original)
+        val token = secureTokenLocalService.getAccessToken() ?: return chain.proceed(original)
         val request = original.newBuilder()
             .header("Authorization", "Bearer $token")
             .build()

@@ -26,6 +26,7 @@ kotlinGradlePluginVersion = "1.8.20"
 toolsBuildGradleVersion = "8.1.1"
 media3 = "1.5.1"
 coil = "2.7.0"
+security = "1.0.0"
 accompanistFlowlayout = "0.19.0"
 accompanistSwipeRefresh = "0.27.0"
 accompanistCollapsingToolbar = "0.32.0"
@@ -83,6 +84,9 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 ## Start up
 startUp-runime = { module = "androidx.startup:startup-runtime", version.ref = "startUp" }
+
+# Security
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "security" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

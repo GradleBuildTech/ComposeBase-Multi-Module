@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.security.crypto)
 
     //Hilt
     ksp(libs.hilt.compiler)

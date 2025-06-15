@@ -2,7 +2,7 @@ package com.example.network.di
 
 import com.example.core.models.moshi.MyKotlinJsonAdapterFactory
 import com.example.core.models.moshi.MyStandardJsonAdapters
-import com.example.local.dataStore.TokenLocalService
+import com.example.local.dataStore.SecureTokenLocalService
 import com.example.network.BuildConfig
 import com.example.network.interceptor.TokenInterceptor
 import com.squareup.moshi.Moshi
@@ -94,9 +94,9 @@ internal object NetworkModule {
     @Singleton
     @Provides
     fun provideTokenInterceptor(
-        tokenLocalService: TokenLocalService,
+        secureTokenLocalService: SecureTokenLocalService,
         moshi: Moshi
     ): TokenInterceptor {
-        return TokenInterceptor(tokenLocalService, moshi)
+        return TokenInterceptor(secureTokenLocalService, moshi)
     }
 }
