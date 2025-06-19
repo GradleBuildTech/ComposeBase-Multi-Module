@@ -13,10 +13,14 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.inject.Inject
-import javax.inject.Singleton
 import androidx.core.content.edit
 
-@Singleton
+/*
+* SecureTokenLocalService.kt
+* This file is part of the ComposeBase project.
+* Created by HungNguyenMinh on 18/6/2025.
+* This service provides secure storage and retrieval of access and refresh tokens using Android's Keystore system.
+* */
 class SecureTokenLocalService @Inject constructor(
     @ApplicationContext private val context: Context
 ) {

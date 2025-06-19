@@ -20,92 +20,84 @@ import java.time.Duration
 import javax.inject.Named
 import javax.inject.Singleton
 
-
-///✨===============================================
-///[NetworkModule] provides the [Retrofit] instance.
-///This is used to provide the [Retrofit] instance in the [NetworkModule].
-///✨===============================================
-
 @Module
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
 
-    ///[headerInterceptor] is an [Interceptor] that adds the header to the request.
-    ///This is used to add the header to the request.
-    /// Example: Content-Type: application/json,
-    /// Special Auth => Implement in TokenInterceptor
-    private val _headerInterceptor = Interceptor { chain ->
+    // 💌 Interceptor to add headers
+    private val headerInterceptor = Interceptor { chain ->
         val original = chain.request()
-
         val request = original.newBuilder()
             .header("Content-Type", "application/json")
             .method(original.method, original.body)
             .build()
-
         chain.proceed(request)
     }
 
-    ///[provideRetrofit] provides the [Retrofit] instance.
+    // 🧠 Moshi - JSON converter with custom adapters
     @Singleton
     @Provides
-    fun provideRetrofit(moshi: Moshi, providesHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
-            .baseUrl(BuildConfig.API_URL)
-            .client(providesHttpClient)
-            .build()
-    }
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(MyKotlinJsonAdapterFactory())
+        .add(MyStandardJsonAdapters.FACTORY)
+        .build()
 
-    ///[providesHttpClient] provides the [OkHttpClient] instance.
+    // 🔍 Logging interceptor
     @Singleton
     @Provides
-    fun providesHttpClient(
-        tokenInterceptor: TokenInterceptor,
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(_headerInterceptor)
-            .addInterceptor(tokenInterceptor)
-            .addNetworkInterceptor(loggingInterceptor)
-            .connectTimeout(Duration.ofSeconds(30))
-            .readTimeout(Duration.ofSeconds(30))
-            .build()
-    }
-
-    ///[moshi] provides the [Moshi] instance.
-    ///This is used to provide the [Moshi] instance. => Code converter
-    @Singleton
-    @Provides
-    fun moshi(): Moshi {
-        return Moshi.Builder()
-            .add(MyKotlinJsonAdapterFactory())
-            .add(MyStandardJsonAdapters.FACTORY)
-            .build()
-    }
-
-    ///[providesLoggingInterceptor] provides the [HttpLoggingInterceptor] instance.
-    @Singleton
-    @Provides
-    fun providesLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-    }
 
-    ///[provideTokenInterceptor] provides the [TokenInterceptor] instance.
+    // 🚀 Main Retrofit instance for api
+    @Singleton
+    @Provides
+    fun provideRetrofit(
+        moshi: Moshi,
+        okHttpClient: OkHttpClient
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.API_URL)
+        .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+        .client(okHttpClient)
+        .build()
+
+    // 🔄 Retrofit for refreshing tokens
+    @Singleton
+    @Provides
+    @Named("RefreshRetrofit")
+    fun provideRefreshRetrofit(moshi: Moshi): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.API_URL) // Nếu khác domain, đổi chỗ này nhaa
+        .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
+        .build()
+
+    // 🔐 OkHttpClient: with header and token interceptors
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        tokenInterceptor: TokenInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(headerInterceptor)
+        .addInterceptor(tokenInterceptor)
+        .addNetworkInterceptor(loggingInterceptor)
+        .connectTimeout(Duration.ofSeconds(30))
+        .readTimeout(Duration.ofSeconds(30))
+        .build()
+
+    // 🔁 API for refreshing tokens
+    @Singleton
+    @Provides
+    fun provideRefreshTokenApi(
+        @Named("RefreshRetrofit") retrofit: Retrofit
+    ): RefreshTokenApi = retrofit.create(RefreshTokenApi::class.java)
+
+    // 🛡️ TokenInterceptor với DI
     @Singleton
     @Provides
     fun provideTokenInterceptor(
         secureTokenLocalService: SecureTokenLocalService,
         moshi: Moshi,
         @Named("RefreshRetrofit") refreshRetrofit: Retrofit
-    ): TokenInterceptor {
-        return TokenInterceptor(secureTokenLocalService, moshi, refreshRetrofit)
-    }
-
-    @Provides
-    @Singleton
-    fun provideRefreshTokenApi(@Named("RefreshRetrofit") retrofit: Retrofit): RefreshTokenApi {
-        return retrofit.create(RefreshTokenApi::class.java)
-    }
+    ): TokenInterceptor = TokenInterceptor(secureTokenLocalService, moshi, refreshRetrofit)
 }

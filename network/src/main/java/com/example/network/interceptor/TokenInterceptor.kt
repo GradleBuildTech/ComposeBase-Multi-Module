@@ -111,7 +111,7 @@ class TokenInterceptor @Inject constructor(
             } else {
                 null
             }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
